@@ -1,0 +1,335 @@
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(45deg, #3498db, #e74c3c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    color: #34495e;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    font-size: 1.8em;
+    position: relative;
+}
+
+h2::before {
+    content: "🎮";
+    margin-right: 10px;
+}
+
+h3 {
+    color: #2980b9;
+    margin-top: 25px;
+    font-size: 1.3em;
+}
+
+.meta-info {
+    background: #ecf0f1;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 5px solid #3498db;
+}
+
+.meta-info strong {
+    color: #2c3e50;
+}
+
+.game-overview {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 10px 20px rgba(116, 185, 255, 0.3);
+}
+
+.intro-section {
+    background: linear-gradient(135deg, #fd79a8, #e84393);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 10px 20px rgba(253, 121, 168, 0.3);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+th {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #e3f2fd;
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+.features-table td:first-child {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+.pro-tips {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 10px 20px rgba(252, 182, 159, 0.3);
+}
+
+.pro-tips p {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 8px;
+    border-left: 4px solid #e17055;
+}
+
+.technical-details {
+    background: #2d3436;
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.technical-details table {
+    background: transparent;
+}
+
+.technical-details td {
+    color: white;
+    border-bottom: 1px solid #636e72;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 30px 0;
+    box-shadow: 0 15px 30px rgba(0, 184, 148, 0.4);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.gameplay-section {
+    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 10px 20px rgba(162, 155, 254, 0.3);
+}
+
+.highlight-box {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 5px solid #fdcb6e;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+    }
+    
+    table {
+        font-size: 0.9em;
+    }
+    
+    th, td {
+        padding: 8px;
+    }
+}
+
+.emoji-large {
+    font-size: 1.5em;
+    margin-right: 8px;
+}
+
+.section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border: none;
+    margin: 30px 0;
+    border-radius: 2px;
+}
+</style>
+
+<div class="container">
+
+# Stickman Run - Free Online Endless Runner Game
+
+<div class="meta-info">
+<strong>Meta Title:</strong> Stickman Run Free Online - Play Now! (47 characters)<br>
+<strong>Meta Description:</strong> Play Stickman Run free online! Fast-paced endless runner with dynamic obstacles, upgrades & offline play. No downloads needed. Start running now! (154 characters)
+</div>
+
+<div class="game-overview">
+<h2>🎮 Game Overview</h2>
+<p>Stickman Run is a thrilling 2D endless runner game that combines fast-paced action with simple yet addictive gameplay mechanics. Navigate through challenging obstacle courses as your stick figure character automatically runs forward through dynamically generated levels. Experience somewhat clunky animations with a dynamic difficulty level that increases as you progress through the game. Master the art of timing perfect jumps, slides, and rolls while collecting coins and power-ups. The objective is to keep running as long as possible without hitting any obstacles or falling into gaps. This browser-based runner game offers endless entertainment with no download requirements and cross-platform compatibility.</p>
+</div>
+
+<hr class="section-divider">
+
+<h2>🎯 How to Play</h2>
+
+| Action | Control | Description |
+|--------|---------|-------------|
+| Move Left | Left Arrow Key / A | Switch to left lane to avoid obstacles |
+| Move Right | Right Arrow Key / D | Switch to right lane to dodge barriers |
+| Jump | Up Arrow Key / W / Spacebar | Jump over small obstacles and gaps |
+| Slide/Roll | Down Arrow Key / S | Roll under objects and low barriers |
+| Double Jump | Double Tap Up Key | Perform enhanced jump for higher obstacles |
+| Pause | P Key / ESC | Temporarily stop gameplay |
+
+<hr class="section-divider">
+
+<div class="intro-section">
+<h2>🚀 INTRO</h2>
+<p>Play Stickman Run free online and dive into the most addictive endless running experience! This browser-based stickman game delivers non-stop action with its simple one-finger controls and progressively challenging gameplay. Stickman Run is playable online as an HTML5 game, therefore no download is necessary.</p>
+
+<p>Experience the rush of endless running as you navigate through obstacle-filled environments, collect valuable coins, and unlock exciting character upgrades. The minimalist stick figure graphics combined with fluid animations create an engaging visual experience that keeps players coming back for more. This game is rendered in mobile-friendly HTML5, so it offers cross-device gameplay.</p>
+
+<p>What makes this runner game truly addictive is its perfect balance of accessibility and challenge. Anyone can start playing immediately, but mastering the advanced techniques and achieving high scores requires skill, timing, and strategic thinking. The endless nature means there's always one more run to attempt, one more score to beat, and one more milestone to reach.</p>
+</div>
+
+<hr class="section-divider">
+
+<h2>✨ FEATURES LIST</h2>
+
+<table class="features-table">
+|---------|---------|
+| ✅ **Free-to-Play Online** | No cost, no downloads - instant browser gameplay |
+| ✅ **Cross-Platform Compatible** | Play on desktop, mobile, tablet seamlessly |
+| ✅ **Offline Mode Available** | Enjoy gameplay anytime, anywhere without internet |
+| ✅ **Dynamic Difficulty Scaling** | Progressive challenge that adapts to skill level |
+| ✅ **Character Customization** | Unlock cosmetic items and customize your stickman |
+| ✅ **Upgrade System** | Enhance character abilities with every run |
+| ✅ **Leaderboard Competition** | Compete with players and climb rankings |
+| ✅ **Responsive HTML5 Technology** | Smooth 60FPS performance across all devices |
+
+<hr class="section-divider">
+
+<div class="pro-tips">
+<h2>💡 PRO TIPS</h2>
+
+<p><span class="emoji-large">🎯</span><strong>Beginner Strategy:</strong> Start by focusing on basic obstacle avoidance rather than coin collection. Learn the rhythm of jumping and sliding before attempting advanced maneuvers. Practice lane switching in safe areas to build muscle memory for emergency situations.</p>
+
+<p><span class="emoji-large">🏆</span><strong>Advanced Techniques:</strong> Master the double-jump timing for complex obstacle combinations. Use the down key to perform rolls under objects - this technique is crucial for maintaining speed through tight spaces. Chain movements smoothly for maximum efficiency.</p>
+
+<p><span class="emoji-large">💡</span><strong>Secret Coin Farming:</strong> Prioritize collecting coins during easier sections to maximize upgrade potential. Some obstacles hide bonus coin trails - look for alternative paths that offer risk-reward opportunities for experienced players.</p>
+
+<p><span class="emoji-large">⚡</span><strong>Speed Optimization:</strong> Maintain momentum by minimizing unnecessary movements. Plan your route 2-3 obstacles ahead and execute precise inputs. Hold your finger on the right side for long jumps when covering larger gaps.</p>
+
+<p><span class="emoji-large">🛡️</span><strong>Survival Mastery:</strong> Focus on consistent performance over risky coin grabs. Build your upgrade foundation through steady, safe runs before attempting high-risk, high-reward strategies for maximum longevity.</p>
+</div>
+
+<hr class="section-divider">
+
+<div class="technical-details">
+<h2>⚙️ Technical Details</h2>
+
+<table>
+|---------------|---------|
+| **Platform** | Web Browser (HTML5), Android, iOS |
+| **Release Date** | 2023 |
+| **Developer** | Shima |
+| **Genre** | Endless Runner, Arcade, Action |
+| **Game Mode** | Single-player |
+| **File Size** | Browser-based (No download) |
+| **Age Rating** | All Ages |
+| **Language Support** | Multi-language |
+| **Graphics** | 2D Stick Figure Animation |
+| **Sound** | Background Music & Sound Effects |
+
+<hr class="section-divider">
+
+<div class="gameplay-section">
+<h2>🎮 Gameplay Mechanics & Strategy</h2>
+
+<p>Stickman Running features a simple endless running game where you run down any of 3 different lanes. The core mechanics revolve around timing-based obstacle avoidance, where players must react quickly to oncoming barriers, spikes, and gaps. The three-lane system provides strategic depth, as players must constantly evaluate which lane offers the safest passage.</p>
+
+<p>The endless runner format ensures that no two runs are identical, with procedurally generated obstacles creating fresh challenges. The dynamic gameplay ensures that each run is unique, offering new challenges and experiences. As progression increases, obstacle density and speed ramp up, demanding faster reflexes and better pattern recognition.</p>
+
+<p>Character progression adds a persistent advancement system where upgrade your Stickman with every Run and unlock unique Skills. This creates a compelling loop where each attempt contributes to long-term character development, encouraging repeated play sessions.</p>
+
+<p>The monetization model focuses on cosmetic upgrades and convenience features rather than pay-to-win mechanics. With the Runner Coins you can unlock new cosmetic Items in the Shop and equip your Stickman, allowing players to personalize their experience while maintaining competitive balance.</p>
+</div>
+
+<hr class="section-divider">
+
+<div class="cta-section">
+<h2>🎯 Ready to Play?</h2>
+<p><strong>Ready to test your reflexes and achieve the ultimate high score? Play Stickman Run now and join millions of players in this addictive endless running adventure! Click to start your epic stickman journey today!</strong></p>
+</div>
+
+</div>
