@@ -14,11 +14,183 @@
   <meta name="robots" content="noindex,nofollow" />
   <!-- Dark Mode JS -->
   <script src="/js/darkMode.bundle.js"></script>
+<style>/* 1. Responsive Game Area (iframe/game container) */
+.sc-1t2vga5-0.edLqUo,
+.sc-1nfyi8d-0.cToZbD,
+.sc-1nfyi8d-1.kmawNJ,
+.sc-1nfyi8d-2.ljHJwR,
+.sc-1nfyi8d-3.iIUrNJ,
+#game-container,
+#game-arena,
+.game-iframe-container {
+  width: 100%;
+  max-width: 700px;
+  min-width: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
+@media (max-width: 900px) {
+  .sc-1t2vga5-0.edLqUo,
+  .sc-1nfyi8d-0.cToZbD,
+  .sc-1nfyi8d-1.kmawNJ,
+  .sc-1nfyi8d-2.ljHJwR,
+  .sc-1nfyi8d-3.iIUrNJ,
+  #game-container,
+  #game-arena,
+  .game-iframe-container {
+    max-width: 100vw;
+    min-width: 0;
+    padding: 0;
+  }
+}
+
+/* 2. Responsive Ad Blocks */
+.sc-tbf0fc-1.joJxfp,
+.sc-tbf0fc-1.iZddyZ {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.sc-tbf0fc-3.jzKgDP,
+.sc-tbf0fc-3.jzKgDP > div,
+.sc-tbf0fc-3.jzKgDP iframe,
+.sc-tbf0fc-3.jzKgDP ins {
+  width: 100% !important;
+  max-width: 100%;
+  height: auto !important;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .sc-tbf0fc-1.joJxfp,
+  .sc-tbf0fc-1.iZddyZ {
+    width: 100% !important;
+    min-width: 0;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+  .sc-tbf0fc-3.jzKgDP {
+    width: 100% !important;
+    min-width: 0;
+    height: auto !important;
+  }
+  .sc-tbf0fc-3.jzKgDP > div,
+  .sc-tbf0fc-3.jzKgDP iframe,
+  .sc-tbf0fc-3.jzKgDP ins {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0;
+  }
+  .sc-tbf0fc-2.flYexE,
+  .sc-tbf0fc-2.jtzqHS {
+    position: static;
+    transform: none;
+    margin: 8px 0 0 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+/* 6. Utility: Prevent horizontal scroll */
+.relative.mx-auto.max-w-\[90rem\].py-20,
+.relative.mx-auto.max-w-\[90rem\].py-20 * {
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: auto;
+}
+
+/* 7. Optional: Make splash image and play button responsive */
+.talpa-splash-top > div > div[style*="--thumb"] {
+  width: 120px !important;
+  height: 120px !important;
+  max-width: 90vw;
+  margin: 0 auto 16px auto;
+}
+@media (max-width: 600px) {
+  .talpa-splash-top > div > div[style*="--thumb"] {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .talpa-splash-top button {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 1em !important;
+    padding: 8px 0 !important;
+  }
+}
+
+/* 8. Responsive spacing for .bprtKa grid (game/ad layout) */
+@media (max-width: 900px) {
+  .bprtKa {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    grid-gap: 12px !important;
+    padding: 0 4px !important;
+  }
+}
+
+/* 9. Responsive for .sc-1thi3bz-0.jKLIEp (game info bar) */
+@media (max-width: 700px) {
+  .sc-1thi3bz-0.jKLIEp {
+    flex-direction: column !important;
+    padding: 8px 0 !important;
+    gap: 8px !important;
+  }
+  .sc-1ercfrx-1.kVnwop {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .sc-1ercfrx-4.kiEtEc {
+    font-size: 1em !important;
+    padding: 0 !important;
+  }
+}
+
+/* 10. Responsive for .talpa-splash-bottom, .talpa-splash-title, .talpa-splash-consent */
+@media (max-width: 700px) {
+  .talpa-splash-bottom > .talpa-splash-title,
+  .talpa-splash-bottom > .talpa-splash-consent {
+    font-size: 1em !important;
+    padding: 8px !important;
+  }
+}/* Completely remove ad grid items and collapse grid on mobile */
+@media (max-width: 700px) {
+  /* Hide all ad grid items */
+  .sc-tbf0fc-0.gKdPGs,
+  .sc-al88rd-8,
+  .sc-al88rd-9,
+  .sc-al88rd-10 {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    visibility: hidden !important;
+  }
+  /* Make grid container a block so it doesn't reserve columns */
+  .bprtKa {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+    grid-gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}</style>
   <!-- Favicons -->
   <link rel="shortcut icon" href="/img/favicon.png" />
   <link rel="stylesheet" href="/css/grid.css" />
-
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7889675448259925"
+    crossorigin="anonymous"></script>
 </head>
 
 <body class="dark:bg-jacarta-900 font-body text-jacarta-500 overflow-x-hidden" itemscope
@@ -336,7 +508,7 @@
               d="M3.189 2.94L4.383.391a.682.682 0 0 1 1.234 0L6.811 2.94h2.506c.6 0 .908.72.492 1.154L7.912 6.071l.78 3.078a.682.682 0 0 1-1.001.758L5 8.357l-2.691 1.55a.682.682 0 0 1-1-.758l.779-3.078L.19 4.093a.682.682 0 0 1 .492-1.154h2.506z">
             </path>
           </symbol>
-        </svg><br><br>
+        </svg>
         <h1
           class="text-jacarta-700 font-display flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5"
           style="text-align: center; text-decoration: underline; font-family:serif; font-size: 30px;">Lorem ipsum dolor
@@ -354,102 +526,156 @@
         <div class="sc-10l37ae-0 jlJlGR">
           <div class="sc-1o65d6p-0 bprtKa">
             <div class="sc-al88rd-7 eOoRZV">
-              <div style="display: flex; justify-content: center; align-items: flex-start; gap: 32px;">
-                <div id="game-container" class="sc-1t2vga5-0 edLqUo">
-                  <div class="sc-1nfyi8d-0 cToZbD">
-                    <div class="sc-1nfyi8d-1 kmawNJ">
-                      <div class="sc-1nfyi8d-2 ljHJwR">
-                        <div class="sc-1nfyi8d-3 iIUrNJ" id="game-arena"
-                          data-url="https://eggy-car.github.io/game12/traffic-mania/">
-                          <!-- <iframe id="game-element" allowfullscreen="" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write" name="gameFrame" scrolling="no" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads" src="acb.html"></iframe> -->
-                          <div class="game-iframe-container" id="loadgame">
+              <div id="game-container" class="sc-1t2vga5-0 edLqUo">
+                <div class="sc-1nfyi8d-0 cToZbD">
+                  <div class="sc-1nfyi8d-1 kmawNJ">
+                    <div class="sc-1nfyi8d-2 ljHJwR">
+                      <div class="sc-1nfyi8d-3 iIUrNJ" id="game-arena"
+                        data-url="https://eggy-car.github.io/game12/traffic-mania/">
+                        <!-- <iframe id="game-element" allowfullscreen="" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write" name="gameFrame" scrolling="no" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads" src="acb.html"></iframe> -->
+                        <div class="game-iframe-container" id="loadgame">
 
 
-                            <div class="talpa-splash-container" style="background: var(--color2);">
-                              <div class="talpa-splash-top">
-                                <div>
-                                  <div style="--thumb:url(https://webglmath.github.io/traffic-mania/logo.png)"
-                                    alt="Traffic mania"></div><button id="play-btn" onclick="playGame()"
-                                    class="bg-accent shadow-accent-volume hover:bg-accent-dark w-36 rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
-                                    Play
-                                  </button>
-                                  <div class="talpa-loader" style="display: none;">Loading...</div>
-                                </div>
+                          <div class="talpa-splash-container" style="background: var(--color2);">
+                            <div class="talpa-splash-top">
+                              <div>
+                                <div style="--thumb:url(https://webglmath.github.io/traffic-mania/logo.png)"
+                                  alt="Traffic mania"></div><button id="play-btn" onclick="playGame()"
+                                  class="bg-accent shadow-accent-volume hover:bg-accent-dark w-36 rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
+                                  Play
+                                </button>
+                                <div class="talpa-loader" style="display: none;">Loading...</div>
                               </div>
-                              <div class="talpa-splash-bottom"></div>
                             </div>
+                            <div class="talpa-splash-bottom"></div>
                           </div>
                         </div>
                       </div>
-                      <div class="sc-1thi3bz-0 jKLIEp">
-                        <div class="sc-1thi3bz-7 fGkxHt">
-                          <img alt="Traffic mania" src="https://webglmath.github.io/traffic-mania/logo.png"
-                            decoding="async" class="sc-1ercfrx-1 kVnwop">
-                          <div class="sc-1ercfrx-2 dWoUha">
-                            <div class="sc-1ercfrx-3 iAEuVe">
-                              <h1 class="sc-1ercfrx-4 kiEtEc">Traffic mania</h1>
-                            </div>
+                    </div>
+                    <div class="sc-1thi3bz-0 jKLIEp">
+                      <div class="sc-1thi3bz-7 fGkxHt">
+                        <img alt="Traffic mania" src="https://webglmath.github.io/traffic-mania/logo.png"
+                          decoding="async" class="sc-1ercfrx-1 kVnwop">
+                        <div class="sc-1ercfrx-2 dWoUha">
+                          <div class="sc-1ercfrx-3 iAEuVe">
+                            <h1 class="sc-1ercfrx-4 kiEtEc">Traffic mania</h1>
                           </div>
                         </div>
-                        <div style="display: contents;">
-                          <button class="sc-1wag0ht-6 bowXgQ">
-                            <div class="sc-1wag0ht-5 kRNrUr" onclick="open_fullscreen()">
-                              <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"
-                                class="sc-1wag0ht-0 kQYXwq">
-                                <use xlink:href="#enterFullscreenIcon"></use>
-                              </svg>
-                            </div>
-                            <div class="sc-1wag0ht-1 jfVzqh">
-                              <span class="sc-1wag0ht-2 sc-1wag0ht-3 gqxDAV aeeAa"></span>
-                              <span class="sc-1wag0ht-2 sc-1wag0ht-4 gqxDAV kIpmiY"
-                                onclick="open_fullscreen()">Fullscreen</span>
-                            </div>
-                          </button>
-                        </div>
+                      </div>
+                      <div style="display: contents;">
+                        <button class="sc-1wag0ht-6 bowXgQ">
+                          <div class="sc-1wag0ht-5 kRNrUr" onclick="open_fullscreen()">
+                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" class="sc-1wag0ht-0 kQYXwq">
+                              <use xlink:href="#enterFullscreenIcon"></use>
+                            </svg>
+                          </div>
+                          <div class="sc-1wag0ht-1 jfVzqh">
+                            <span class="sc-1wag0ht-2 sc-1wag0ht-3 gqxDAV aeeAa"></span>
+                            <span class="sc-1wag0ht-2 sc-1wag0ht-4 gqxDAV kIpmiY"
+                              onclick="open_fullscreen()">Fullscreen</span>
+                          </div>
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="min-width:320px; max-width:380px; background:#f8fafc; border-radius:12px; box-shadow:0 2px 8px #0001; padding:20px;">
-                  <h3 style="font-size:20px; margin-bottom:12px; color:#222; font-weight:bold;">How to Play</h3>
-                  <table style="width:100%; border-collapse: collapse; text-align:left; font-family:Arial, sans-serif;">
-                    <thead style="background:#f2f2f2;">
-                      <tr>
-                        <th style="padding:8px;">Action</th>
-                        <th style="padding:8px;">Control</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td style="padding:8px;">Aim</td>
-                        <td style="padding:8px;">Mouse Movement</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:8px;">Power</td>
-                        <td style="padding:8px;">Click + Hold</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:8px;">Shoot</td>
-                        <td style="padding:8px;">Release Mouse</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:8px;">Curve</td>
-                        <td style="padding:8px;">Drag Curved Motion</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- END How to Play Table -->
               </div>
-              <!-- FLEX CONTAINER END -->
+            </div>
+            <div class="sc-tbf0fc-0 gKdPGs sc-al88rd-8 jLkOBn">
+              <div width="728" height="90" class="sc-tbf0fc-1 joJxfp">
+                <div style="height: 90px; width: 728px; overflow: hidden;" class="sc-tbf0fc-3 jzKgDP">
+                  <div style="height: 90px; width: 728px; overflow: hidden;">
+                    <script type="text/javascript">
+                      atOptions = {
+                        'key': '68addf398320629ca8dd71230168971f',
+                        'format': 'iframe',
+                        'height': 90,
+                        'width': 728,
+                        'params': {}
+                      };
+                    </script>
+                    <script type="text/javascript"
+                      src="//www.highperformanceformat.com/68addf398320629ca8dd71230168971f/invoke.js"></script>
+                  </div>
+                </div>
+                <div width="728" height="90" class="sc-tbf0fc-2 flYexE">Advertisement</div>
+              </div>
+            </div>
+            <div class="sc-tbf0fc-0 gKdPGs sc-al88rd-9 kBFpxV">
+              <div width="300" height="250" class="sc-tbf0fc-1 iZddyZ">
+                <div style="height: 250px; width: 300px; overflow: hidden;" class="sc-tbf0fc-3 jzKgDP">
+                  <div style="height: 250px; width: 300px; overflow: hidden;">
+                    <script type="text/javascript">
+                      atOptions = {
+                        'key': '048820f22125e906b3f0cb6d8915f39c',
+                        'format': 'iframe',
+                        'height': 250,
+                        'width': 300,
+                        'params': {}
+                      };
+                    </script>
+                    <script type="text/javascript"
+                      src="//www.highperformanceformat.com/048820f22125e906b3f0cb6d8915f39c/invoke.js"></script>
+                  </div>
+                </div>
+                <div width="300" height="250" class="sc-tbf0fc-2 jtzqHS">Advertisement</div>
+              </div>
+            </div>
+            <div class="sc-tbf0fc-0 gKdPGs sc-al88rd-10 jqewXp">
+              <div width="160" height="600" class="sc-tbf0fc-1 iZddyZ">
+                <div style="height: 600px; width: 160px; overflow: hidden;" class="sc-tbf0fc-3 jzKgDP">
+                  <div style="height: 600px; width: 160px; overflow: hidden;">
+                    <!-- Eggy 160 600 -->
+                    <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px"
+                      data-ad-client="ca-pub-7889675448259925" data-ad-slot="7598580926"></ins>
+                    <script>
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                  </div>
+                </div>
+                <div width="160" height="600" class="sc-tbf0fc-2 jtzqHS">Advertisement</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
 
+    <div class="dark:bg-jacarta-800 page-footer bg-white content1">
+      <h2 class="text-jacarta-700 font-display py-3.5 text-lg dark:text-white lg:px-5"
+        style="font-size: 24px; font-weight: bold;">How to Play</h2><br>
+      <table style="width:100%; border-collapse: collapse; text-align:left; font-family:Arial, sans-serif;">
+        <thead style="background:#f2f2f2;">
+          <tr>
+            <th style="padding:10px;">Action</th>
+            <th style="padding:10px;">Control</th>
+            <th style="padding:10px;">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:10px;">Aim</td>
+            <td style="padding:10px;">Mouse Movement</td>
+            <td style="padding:10px;">Drag to aim your shot direction</td>
+          </tr>
+          <tr>
+            <td style="padding:10px;">Power</td>
+            <td style="padding:10px;">Click + Hold</td>
+            <td style="padding:10px;">Hold to adjust shot power</td>
+          </tr>
+          <tr>
+            <td style="padding:10px;">Shoot</td>
+            <td style="padding:10px;">Release Mouse</td>
+            <td style="padding:10px;">Release to take the kick</td>
+          </tr>
+          <tr>
+            <td style="padding:10px;">Curve</td>
+            <td style="padding:10px;">Drag Curved Motion</td>
+            <td style="padding:10px;">Swipe with curve to bend the ball</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><br><br><br><br>
 
     <div id="games-list"></div>
     <script>
@@ -730,6 +956,7 @@
       starts here!
     </p>
   </div>
+  </main>
   <!-- Footer -->
   <footer class="dark:bg-jacarta-800 page-footer bg-white">
     <div class="container">
@@ -812,9 +1039,8 @@
   </footer>
 
   <!-- JS Scripts -->
-  <script src="/js/app.bu   ndle.js"></script>
+  <script src="/js/app.bundle.js"></script>
   <script src="/js/play.js?v=4"></script>
-
 </body>
 
 </html>
