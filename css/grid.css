@@ -2837,3 +2837,86 @@ h2 {
             background-position: 0 50%;
           }
         }
+
+/* 1. Responsive Game Area (iframe/game container) */
+.sc-1t2vga5-0.edLqUo,
+.sc-1nfyi8d-0.cToZbD,
+.sc-1nfyi8d-1.kmawNJ,
+.sc-1nfyi8d-2.ljHJwR,
+.sc-1nfyi8d-3.iIUrNJ,
+#game-container,
+#game-arena,
+.game-iframe-container {
+  width: 100%;
+  max-width: 700px;
+  min-width: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .sc-1t2vga5-0.edLqUo,
+  .sc-1nfyi8d-0.cToZbD,
+  .sc-1nfyi8d-1.kmawNJ,
+  .sc-1nfyi8d-2.ljHJwR,
+  .sc-1nfyi8d-3.iIUrNJ,
+  #game-container,
+  #game-arena,
+  .game-iframe-container {
+    max-width: 100vw;
+    min-width: 0;
+    padding: 0;
+  }
+}
+/* 6. Utility: Prevent horizontal scroll */
+.relative.mx-auto.max-w-\[90rem\].py-20,
+.relative.mx-auto.max-w-\[90rem\].py-20 * {
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: auto;
+}
+
+/* 7. Optional: Make splash image and play button responsive */
+.talpa-splash-top > div > div[style*="--thumb"] {
+  width: 120px !important;
+  height: 120px !important;
+  max-width: 90vw;
+  margin: 0 auto 16px auto;
+}
+@media (max-width: 600px) {
+  .talpa-splash-top > div > div[style*="--thumb"] {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .talpa-splash-top button {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 1em !important;
+    padding: 8px 0 !important;
+  }
+}
+
+/* 8. Responsive spacing for .bprtKa grid (game/ad layout) */
+@media (max-width: 900px) {
+  .bprtKa {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    grid-gap: 12px !important;
+    padding: 0 4px !important;
+  }
+} 
+/* Hide 300x250 ad below 1330px */
+@media (max-width: 1329px) {
+  .sc-al88rd-9 { display: none !important; }
+}
+
+/* Hide 160x600 ad below 992px */
+@media (max-width: 991px) {
+  .sc-al88rd-10 { display: none !important; }
+}
+
+/* Hide 728x90 ad below 728px */
+@media (max-width: 727px) {
+  .sc-al88rd-8 { display: none !important; }
+  /* Show 300x250 ad on mobile */
+  .sc-al88rd-9 { display: block !important; }
+}        
