@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Golf Orbit</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  font-family: Arial, sans-serif;
+}
+
+/* FULL COVER SECTION */
+.game-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #2b2b2b, #050505);
+  overflow: hidden;
+}
+
+/* CENTER CONTENT */
+.hero-content {
+  max-width: 1400px;
+  margin: auto;
+  padding: 80px 60px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+/* LEFT IMAGE */
+.hero-image img {
+  width: 360px;
+  border-radius: 18px;
+  display: block;
+}
+
+/* RIGHT TEXT */
+.hero-info {
+  color: #fff;
+}
+
+.hero-info h1 {
+  font-size: 56px;
+  margin: 0 0 14px;
+  background: #f1d400;
+  color: #000;
+  display: inline-block;
+  padding: 6px 14px;
+}
+
+.hero-info p {
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+/* BUTTON */
+.hero-info button {
+  padding: 16px 44px;
+  border-radius: 40px;
+  font-size: 18px;
+  border: 2px solid #f1d400;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.hero-info button:hover {
+  background: linear-gradient(135deg, #f1d400, #ff6b6b);
+  color: #000;
+}
+
+/* IFRAME FULL COVER */
+.game-hero iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: none;
+  background: #000;
+}
+
+
+</style><meta name="robots" content="noindex, nofollow">
+    </head>
+<body>
+
+<section class="game-hero" id="gameHero">
+
+  <div class="hero-content">
+    <div class="hero-image">
+      <img src="https://pizzaedition.pro/images/1v1-lol@2x.webp" alt="Golf Orbit">
+    </div>
+
+    <div class="hero-info">
+      <h1>GOLF ORBIT</h1>
+      <p>BY: CREATOR</p>
+      <button id="playBtn">PLAY NOW!</button>
+    </div>
+  </div>
+
+  <iframe
+    id="gameIframe"
+    data-src="https://23azostore.github.io/s7/slope-city/"
+    allowfullscreen>
+  </iframe>
+
+</section>
+<script>
+document.getElementById("playBtn").onclick = function () {
+  const iframe = document.getElementById("gameIframe");
+  iframe.src = iframe.dataset.src;
+  iframe.style.display = "block";
+  document.querySelector(".hero-content").style.display = "none";
+};
+</script>
+
+</body>
+</html>

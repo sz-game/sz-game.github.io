@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML, CSS and JavaScript demo</title> 
+<style>
+@keyframes Carousel_scroll-gradient__2VDIv {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@media(min-width:599.95px) {
+    .Carousel_recommendedMobileContainer__BIvqI .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 3.25);
+        height: calc(((((100vw - (76px)) / 3.25) - 4px) * .5952380952) + calc(var(--base-unit) * -.75))
+    }
+}
+@media(min-width:799.95px) {
+    .Carousel_recommendedMobileContainer__BIvqI .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 4.25);
+        height: calc(((((100vw - (76px)) / 4.25) - 4px) * .5952380952) + calc(var(--base-unit) * -.75))
+    }
+}
+@media(min-width:999.95px) {
+    .Carousel_recommendedMobileContainer__BIvqI .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 5.25);
+        height: calc(((((100vw - (76px)) / 5.25) - 4px) * .5952380952) + calc(var(--base-unit) * -.75))
+    }
+}
+@media(min-width:1199.95px) {
+    .Carousel_recommendedMobileContainer__BIvqI .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 6.25);
+        height: calc(((((100vw - (76px)) / 6.25) - 4px) * .5952380952) + calc(var(--base-unit) * -.75))
+    }
+}
+@media(min-width:1699.95px) {
+    .Carousel_recommendedMobileContainer__BIvqI .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 7.25);
+        height: calc(((((100vw - (76px)) / 7.25) - 4px) * .5952380952) + calc(var(--base-unit) * -.75))
+    }
+}
+@media(min-width:1909.95px) {
+    .Carousel_recommendedMobileContainer__BIvqI .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 7.25);
+        height: calc(((((100vw - (216px)) / 7.25) - 4px) * .5952380952) + calc(var(--base-unit) * -.75))
+    }
+}
+@media(min-width:2099.95px) {
+    .Carousel_recommendedMobileContainer__BIvqI .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 8.25);
+        height: calc(((((100vw - (216px)) / 8.25) - 4px) * .5952380952) + calc(var(--base-unit) * -.75))
+    }
+}
+@media(min-width:2999.95px) {
+    .Carousel_recommendedMobileContainer__BIvqI .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 9.25);
+        height: calc(((((100vw - (216px)) / 9.25) - 4px) * .5952380952) + calc(var(--base-unit) * -.75))
+    }
+}
+@media(min-width:599.95px) {
+    .Carousel_recommendedDesktopContainer__N5Glm .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 1.6);
+        height: calc(((((100vw - (76px)) / 1.6) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:799.95px) {
+    .Carousel_recommendedDesktopContainer__N5Glm .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 2.1);
+        height: calc(((((100vw - (76px)) / 2.1) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:999.95px) {
+    .Carousel_recommendedDesktopContainer__N5Glm .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 2.6);
+        height: calc(((((100vw - (76px)) / 2.6) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1199.95px) {
+    .Carousel_recommendedDesktopContainer__N5Glm .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 3.1);
+        height: calc(((((100vw - (76px)) / 3.1) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1699.95px) {
+    .Carousel_recommendedDesktopContainer__N5Glm .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 3.6);
+        height: calc(((((100vw - (76px)) / 3.6) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1909.95px) {
+    .Carousel_recommendedDesktopContainer__N5Glm .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 3.6);
+        height: calc(((((100vw - (216px)) / 3.6) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:2099.95px) {
+    .Carousel_recommendedDesktopContainer__N5Glm .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 4.1);
+        height: calc(((((100vw - (216px)) / 4.1) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:2999.95px) {
+    .Carousel_recommendedDesktopContainer__N5Glm .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 4.6);
+        height: calc(((((100vw - (216px)) / 4.6) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:599.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 3.25) - 4px) * .5617977528) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:799.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 4.25) - 4px) * .5617977528) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:999.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 5.25) - 4px) * .5617977528) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:1199.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 6.25) - 4px) * .5617977528) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:1699.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 7.25) - 4px) * .5617977528) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:1909.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .prime-carousel {
+        height: calc(((((100vw - (216px)) / 7.25) - 4px) * .5617977528) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:2099.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .prime-carousel {
+        height: calc(((((100vw - (216px)) / 8.25) - 4px) * .5617977528) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:2999.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .prime-carousel {
+        height: calc(((((100vw - (216px)) / 9.25) - 4px) * .5617977528) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:599.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 3.25);
+        height: calc(((((100vw - (76px)) / 3.25) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:799.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 4.25);
+        height: calc(((((100vw - (76px)) / 4.25) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:999.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 5.25);
+        height: calc(((((100vw - (76px)) / 5.25) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1199.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 6.25);
+        height: calc(((((100vw - (76px)) / 6.25) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1699.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 7.25);
+        height: calc(((((100vw - (76px)) / 7.25) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1909.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 7.25);
+        height: calc(((((100vw - (216px)) / 7.25) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:2099.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 8.25);
+        height: calc(((((100vw - (216px)) / 8.25) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:2999.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 9.25);
+        height: calc(((((100vw - (216px)) / 9.25) - 4px) * .5617977528) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:599.95px) {
+
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isMobile__DG4jj .prime-carousel,
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isSquare__2kCxV .prime-carousel {
+        height: calc(((((100vw - (76px)) / 4.25) - 4px) * 1) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:799.95px) {
+
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isMobile__DG4jj .prime-carousel,
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isSquare__2kCxV .prime-carousel {
+        height: calc(((((100vw - (76px)) / 5.25) - 4px) * 1) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:599.95px) {
+
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isMobile__DG4jj .Carousel_primeCarouselLi__GXWe8,
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isSquare__2kCxV .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 4.25);
+        height: calc(((((100vw - (76px)) / 4.25) - 4px) * 1) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:799.95px) {
+
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isMobile__DG4jj .Carousel_primeCarouselLi__GXWe8,
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isSquare__2kCxV .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 5.25);
+        height: calc(((((100vw - (76px)) / 5.25) - 4px) * 1) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:599.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 3.25) - 4px) * 1.5) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:799.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 4.25) - 4px) * 1.5) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:999.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 5.25) - 4px) * 1.5) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:1199.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 6.25) - 4px) * 1.5) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:1699.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .prime-carousel {
+        height: calc(((((100vw - (76px)) / 7.25) - 4px) * 1.5) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:1909.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .prime-carousel {
+        height: calc(((((100vw - (216px)) / 7.25) - 4px) * 1.5) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:2099.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .prime-carousel {
+        height: calc(((((100vw - (216px)) / 8.25) - 4px) * 1.5) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:2999.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .prime-carousel {
+        height: calc(((((100vw - (216px)) / 9.25) - 4px) * 1.5) + calc(var(--base-unit) * 3))
+    }
+}
+@media(min-width:599.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 3.25);
+        height: calc(((((100vw - (76px)) / 3.25) - 4px) * 1.5) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:799.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 4.25);
+        height: calc(((((100vw - (76px)) / 4.25) - 4px) * 1.5) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:999.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 5.25);
+        height: calc(((((100vw - (76px)) / 5.25) - 4px) * 1.5) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1199.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 6.25);
+        height: calc(((((100vw - (76px)) / 6.25) - 4px) * 1.5) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1699.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 76px) / 7.25);
+        height: calc(((((100vw - (76px)) / 7.25) - 4px) * 1.5) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:1909.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 7.25);
+        height: calc(((((100vw - (216px)) / 7.25) - 4px) * 1.5) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:2099.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 8.25);
+        height: calc(((((100vw - (216px)) / 8.25) - 4px) * 1.5) + calc(var(--base-unit) * .5))
+    }
+}
+@media(min-width:2999.95px) {
+    .Carousel_simpleCarouselContainer__ZGe38.Carousel_isPortrait__GRnK3 .Carousel_primeCarouselLi__GXWe8 {
+        width: calc((100vw - 216px) / 9.25);
+        height: calc(((((100vw - (216px)) / 9.25) - 4px) * 1.5) + calc(var(--base-unit) * .5))
+    }
+}
+@keyframes GameCarousel_scroll-gradient__pmo9X {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes Button_scroll-gradient__McZnK {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@media(hover: hover) {
+
+    .Button_czyButton--link--purple__2gfu8:hover:not(:disabled),
+    .Button_czyButton--outlined--purple__75yge:hover:not(:disabled) {
+        color: var(--brand-100)
+    }
+}
+@keyframes TopBanner_scroll-gradient__S5eVJ {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes Dropdown_scroll-gradient__iIUek {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes LocaleSelector_scroll-gradient__qhL_6 {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes Sidebar_scroll-gradient__mN_ll {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes CrazyModal_scroll-gradient__B_uuS {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes Logo_scroll-gradient__C5IcP {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes Logo_logo-buzz__KstFX {
+    50% {
+        transform: translateX(1.5px) rotate(2deg)
+    }
+
+    to {
+        transform: translateX(-1.5px) rotate(-2deg)
+    }
+}
+@keyframes TopSearch_scroll-gradient__CQMlf {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@media(max-width: 1509.98px) {
+    .TopSearch_resultLabelContainer__fjVsh.TopSearch_isDesktop__2eSKm {
+        font-size: var(--font-size-button)
+    }
+}
+@keyframes UserPortalIcons_scroll-gradient__z8gFy {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes Header_scroll-gradient__Pm4Jr {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@keyframes Layout_scroll-gradient__cMp3Q {
+    0% {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 350% 0
+    }
+}
+@media(hover:hover) {
+    .GameCarousel_root__wuYqb:hover .GameCarousel_primeCarouselArrow__Xo4VH {
+        opacity: 1
+    }
+}
+@media print {
+    body {
+        background-color: #fff;
+    }
+}
+@media (max-width: 1509.95px) {
+    h2 {
+        font-size: 0.875rem;
+    }
+}
+h3 {
+    font-family: 'Nunito', 'Nunito Fallback', Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 900;
+    color: #fff;}
+a {
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    color: #fff;}
+@keyframes wave {
+
+    0%,
+    60%,
+    100% {
+        opacity: 0.4;
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        -moz-transform: translateY(0);
+    }
+
+    20% {
+        opacity: 1;
+        -webkit-transform: translateY(6px);
+        -moz-transform: translateY(6px);
+        -ms-transform: translateY(6px);
+        transform: translateY(6px);
+        -moz-transform: translateY(6px);
+    }
+
+    40% {
+        opacity: 1;
+        -webkit-transform: translateY(-6px);
+        -moz-transform: translateY(-6px);
+        -ms-transform: translateY(-6px);
+        transform: translateY(-6px);
+        -moz-transform: translateY(-6px);
+    }
+}
+@media (max-width: 874.95px) {
+    .css-16livkf {
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        height: unset;
+    }
+}
+@media (max-width: 874.95px) {
+    .css-jjkk1a {
+        width: 100%;
+        height: 318px;
+    }
+}
+@media (max-width: 874.95px) {
+    .css-17c412x {
+        height: 244px;
+    }
+}
+@media (max-width: 874.95px) {
+    .css-1fyguz1 ul {
+        margin-top: 16px;
+    }
+}
+@media (min-width: 1082px) {
+    .css-1fyguz1 li {
+        width: min(calc(100% / 4), 220px);
+    }
+}
+@media (min-width: 1280px) {
+    .css-1fyguz1 li {
+        width: min(calc(100% / 6), 220px);
+    }
+}
+@media (min-width: 1910px) {
+    .css-1fyguz1 li {
+        width: min(calc(100% / 8), 220px);
+    }
+}
+.css-nb4mi8 {
+    height: 102px;
+    background-color: #1A1B28;
+    margin-right: 8px;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;}
+.css-nb4mi8 img {
+    width: 35px;
+    height: 35px;
+    color: #6842FF;
+    display: block;
+    margin-bottom: 6px;}
+.css-nb4mi8:hover {
+    background-color: #212233;}
+.css-15yp4kt {
+    font-weight: 700;
+    color: #F9FAFF;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;}
+.css-inysc7 {
+    height: 102px;
+    background-color: #1A1B28;
+    margin-right: 8px;
+    padding: 16px;
+    border-radius: 10px;}
+.css-inysc7 img {
+    width: 35px;
+    height: 35px;
+    color: #6842FF;
+    display: block;
+    margin-bottom: 6px;}
+.css-inysc7:hover {
+    background-color: #212233;}
+.css-q3lirz {
+    height: 102px;
+    background-color: #1A1B28;
+    margin-right: 8px;
+    padding: 16px;
+    border-radius: 10px;}
+.css-q3lirz img {
+    width: 35px;
+    height: 35px;
+    color: #6842FF;
+    display: block;
+    margin-bottom: 6px;}
+.css-q3lirz:hover {
+    background-color: #212233;}
+.css-q3lirz:hover {
+    background-color: #1A1B28;}
+</style>
+<meta name="robots" content="noindex, nofollow">
+    </head>
+<body>
+<!-- Start your code here -->
+
+
+<div class="css-16livkf">
+    <div class="css-jjkk1a">
+        <div class="css-17c412x">
+            <h1>Online Games at CrazyGames</h1>
+            <p>CrazyGames features the latest and best free online games. You can enjoy playing fun games without
+                interruptions from downloads, intrusive ads, or pop-ups. Just load up your favorite games instantly in
+                your web browser and enjoy the experience.</p> 
+        </div>
+        <button class="Button_czyButton__y8IRs Button_czyButton--link--purple__2gfu8 GamesPage_seoBlockLearnMoreButton__VZOFC">Learn more</button>
+    </div>
+    <div class="css-1fyguz1">
+        <div class="GameCarousel_root__wuYqb prime-carousel">
+            <ul class="GameCarousel_primeCarouselContainer__QZ_gh">
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="2 Player" href="https://www.crazygames.com/t/2-player">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/2players.svg" loading="lazy" alt="Two Players icon"/>
+                                <div class="css-15yp4kt">2 Player</div>
+                            </div>
+                        </a><a aria-label="Action" href="https://www.crazygames.com/c/action">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Action.svg" loading="lazy" alt="Action icon"/>
+                                <div class="css-15yp4kt">Action</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Adventure" href="https://www.crazygames.com/c/adventure">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Adventure.svg" loading="lazy" alt="Adventure icon"/>
+                                <div class="css-15yp4kt">Adventure</div>
+                            </div>
+                        </a><a aria-label="Basketball" href="https://www.crazygames.com/t/basketball">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Basketball.svg" loading="lazy" alt="Basketball icon"/>
+                                <div class="css-15yp4kt">Basketball</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Bike" href="https://www.crazygames.com/t/bike">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Bike.svg" loading="lazy" alt="Bike icon"/>
+                                <div class="css-15yp4kt">Bike</div>
+                            </div>
+                        </a><a aria-label="Car" href="https://www.crazygames.com/t/car">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Car.svg" loading="lazy" alt="Car icon"/>
+                                <div class="css-15yp4kt">Car</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Card" href="https://www.crazygames.com/t/card">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Card.svg" loading="lazy" alt="Card icon"/>
+                                <div class="css-15yp4kt">Card</div>
+                            </div>
+                        </a><a aria-label="Casual" href="https://www.crazygames.com/c/casual">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Casual.svg" loading="lazy" alt="Casual icon"/>
+                                <div class="css-15yp4kt">Casual</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Clicker" href="https://www.crazygames.com/c/clicker">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Clicker.svg" loading="lazy" alt="Clicker icon"/>
+                                <div class="css-15yp4kt">Clicker</div>
+                            </div>
+                        </a><a aria-label="Controller" href="https://www.crazygames.com/t/controller">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Controller.svg" loading="lazy" alt="Controller icon"/>
+                                <div class="css-15yp4kt">Controller</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Driving" href="https://www.crazygames.com/c/driving">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Driving.svg" loading="lazy" alt="Driving icon"/>
+                                <div class="css-15yp4kt">Driving</div>
+                            </div>
+                        </a><a aria-label="Escape" href="https://www.crazygames.com/t/escape">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Escape.svg" loading="lazy" alt="Escape icon"/>
+                                <div class="css-15yp4kt">Escape</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Flash" href="https://www.crazygames.com/t/flash">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Flash.svg" loading="lazy" alt="Flash icon"/>
+                                <div class="css-15yp4kt">Flash</div>
+                            </div>
+                        </a><a aria-label="FPS" href="https://www.crazygames.com/t/first-person-shooter">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/FPS.svg" loading="lazy" alt="FPS icon"/>
+                                <div class="css-15yp4kt">FPS</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Horror" href="https://www.crazygames.com/t/horror">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Horror.svg" loading="lazy" alt="Horror icon"/>
+                                <div class="css-15yp4kt">Horror</div>
+                            </div>
+                        </a><a aria-label=".io" href="https://www.crazygames.com/c/io">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/io.svg" loading="lazy" alt="Io icon"/>
+                                <div class="css-15yp4kt">.io</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Mahjong" href="https://www.crazygames.com/t/mahjong">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Mahjong.svg" loading="lazy" alt="Mahjong icon"/>
+                                <div class="css-15yp4kt">Mahjong</div>
+                            </div>
+                        </a><a aria-label="Minecraft" href="https://www.crazygames.com/t/minecraft">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Minecraft.svg" loading="lazy" alt="Minecraft icon"/>
+                                <div class="css-15yp4kt">Minecraft</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Multiplayer" href="https://www.crazygames.com/t/multiplayer">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Multiplayer.svg" loading="lazy" alt="Multiplayer icon"/>
+                                <div class="css-15yp4kt">Multiplayer</div>
+                            </div>
+                        </a><a aria-label="Pool" href="https://www.crazygames.com/t/pool">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Pool.svg" loading="lazy" alt="Pool icon"/>
+                                <div class="css-15yp4kt">Pool</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Puzzle" href="https://www.crazygames.com/c/puzzle">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Puzzle.svg" loading="lazy" alt="Puzzle icon"/>
+                                <div class="css-15yp4kt">Puzzle</div>
+                            </div>
+                        </a><a aria-label="Shooting" href="https://www.crazygames.com/c/shooting">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Shooting.svg" loading="lazy" alt="Shooting icon"/>
+                                <div class="css-15yp4kt">Shooting</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Soccer" href="https://www.crazygames.com/t/soccer">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Soccer.svg" loading="lazy" alt="Soccer icon"/>
+                                <div class="css-15yp4kt">Soccer</div>
+                            </div>
+                        </a><a aria-label="Sports" href="https://www.crazygames.com/c/sports">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Sports.svg" loading="lazy" alt="Sports icon"/>
+                                <div class="css-15yp4kt">Sports</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Stickman" href="https://www.crazygames.com/t/stick">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/Stickman.svg" loading="lazy" alt="Stickman icon"/>
+                                <div class="css-15yp4kt">Stickman</div>
+                            </div>
+                        </a><a aria-label="Thinky" href="https://www.crazygames.com/t/thinky">
+                            <div class="css-inysc7"><img src="https://imgs.crazygames.com/icon/Thinky.svg" loading="lazy" alt="Thinky icon"/>
+                                <div class="css-15yp4kt">Thinky</div>
+                            </div>
+                        </a></div>
+                </li>
+                <li class="Carousel_primeCarouselLi__GXWe8 primeCarouselLi">
+                    <div><a aria-label="Tower Defense" href="https://www.crazygames.com/t/tower-defense">
+                            <div class="css-nb4mi8"><img src="https://imgs.crazygames.com/icon/TowerDefense.svg" loading="lazy" alt="TowerDefense icon"/>
+                                <div class="css-15yp4kt">Tower Defense</div>
+                            </div>
+                        </a>
+                        <div class="css-q3lirz"></div>
+                    </div>
+                </li>
+            </ul>
+            <button class="GameCarousel_primeCarouselArrow__Xo4VH GameCarousel_primeCarouselArrowRight__8hF78 arrow" aria-label="Right arrow"></button>
+        </div>
+    </div>
+</div>
+</html>
