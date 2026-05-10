@@ -82,7 +82,7 @@
 }
 
 .okjidGhocmXN7zKxDo6s {
-    background: #ffffff80
+    background: #8f8d8d80
 }
 
 @media (min-width:881px) and (max-width:1320.9px) {
@@ -142,7 +142,7 @@
 
 .J91n1ymJasoch_FZq89b {
     align-self: stretch;
-    background: #fff;
+    background: #1a1b2e;
     display: flex;
     flex-grow: 0;
     flex-shrink: 0;
@@ -493,7 +493,7 @@ html[dir=rtl] .J91n1ymJasoch_FZq89b {
 }
 
 .hSBT7NJmqCF0UOqGFDLA {
-    color: var(--blue-1);
+    color: white;
     font: 700 20px/24px var(--fontTorus);
     margin: 0 8px 0 0;
     overflow: hidden;
@@ -536,4 +536,24 @@ html[dir=rtl] .hSBT7NJmqCF0UOqGFDLA {
 .LgL008mUK57BTn8KGGP4:hover {
     border-color: var(--pizzaedition1-blue);
     color: var(--pizzaedition1-blue)
+}
+.new-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.category-nav {
+  position:  relative; /* ya hata dein */
+  top: 70px;          /* ya hata dein */
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  margin-bottom: 80px;
+}
+.category-nav {
+  width: 100%;
+  z-index: 999;
 }
