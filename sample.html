@@ -15,9 +15,9 @@
         <meta name="publisher" content="Sarkar Games">
         <meta name="robots" content="index, follow">
         <link rel="canonical" href="https://unblockedgames.free" />
-        <link rel="stylesheet" href="/nav.css" crossorigin="anonymous" data-n-g="">
         <link rel="stylesheet" href="/assest/css/toph.css" crossorigin="anonymous" data-n-g="">
-
+        
+        <link rel="stylesheet" href="/nav.css" crossorigin="anonymous" data-n-g="">
         <link rel="stylesheet" href="/games-layout.css" crossorigin="anonymous" data-n-g="">
 <style>.game-border-bar{
     width:100%;
@@ -1697,37 +1697,14 @@
         </main>
         <script src="/assest/js/toph.js"></script>
         <script src="/assest/js/search.js"></script>
-<Script>const likeBtn = document.querySelector(".like-btn");
-const dislikeBtn = document.querySelector(".dislike-btn");
+<Script>
 const controlsBtn = document.querySelector(".controls-btn");
 const shareBtn = document.querySelector(".share-btn");
 const refreshBtn = document.querySelector(".refresh-btn");
 const fullscreenBtn = document.querySelector(".fullscreen-btn");
 
 const iframe = document.querySelector("iframe");
-
-/* LIKE */
-likeBtn.addEventListener("click", () => {
-
-    likeBtn.classList.toggle("active");
-
-    if(likeBtn.classList.contains("active")){
-        dislikeBtn.classList.remove("active");
-    }
-
-});
-
-/* DISLIKE */
-dislikeBtn.addEventListener("click", () => {
-
-    dislikeBtn.classList.toggle("active");
-
-    if(dislikeBtn.classList.contains("active")){
-        likeBtn.classList.remove("active");
-    }
-
-});
-
+ 
 
 /* CONTROLS SCROLL */
 controlsBtn.addEventListener("click", () => {
@@ -1784,6 +1761,262 @@ fullscreenBtn.addEventListener("click", () => {
     }
 
 });</Script>
+ 
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+onValue,
+runTransaction
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+
+/* FIREBASE CONFIG */
+const firebaseConfig = {
+
+    apiKey: "AIzaSyBwyoXZ0zObSvs6dQsuslFoQf58XJZ56r8",
+
+    authDomain: "unblockedgames-free.firebaseapp.com",
+
+    databaseURL: "https://unblockedgames-free-default-rtdb.firebaseio.com",
+
+    projectId: "unblockedgames-free",
+
+    storageBucket: "unblockedgames-free.firebasestorage.app",
+
+    messagingSenderId: "733863181516",
+
+    appId: "1:733863181516:web:0d74cd3b08ca559f869669"
+
+};
+
+/* INIT */
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+/* AUTO GAME ID */
+const gameId = "sample-game-id";
+
+/* DB REF */
+const gameRef = ref(db, "games/" + gameId);
+
+/* BUTTONS */
+const likeBtn = document.querySelector(".like-btn");
+
+const dislikeBtn =
+document.querySelector(".dislike-btn");
+
+/* COUNTS */
+const likeCount =
+document.querySelector(".like-count");
+
+const dislikeCount =
+document.querySelector(".dislike-count");
+
+/* FORMATTER */
+function formatCount(num){
+
+    if(num >= 1000000){
+
+        return (num / 1000000).toFixed(1) + "M";
+
+    }
+
+    if(num >= 1000){
+
+        return (num / 1000).toFixed(1) + "K";
+
+    }
+
+    return num;
+
+}
+
+/* USER REACTION STORAGE */
+const reactionKey =
+"reaction-" + gameId;
+
+/* LOAD SAVED STATE */
+const savedReaction =
+localStorage.getItem(reactionKey);
+
+if(savedReaction === "like"){
+
+    likeBtn.classList.add("active");
+
+}
+
+if(savedReaction === "dislike"){
+
+    dislikeBtn.classList.add("active");
+
+}
+
+/* REALTIME DATABASE */
+onValue(gameRef, (snapshot)=>{
+
+    const data = snapshot.val();
+
+    if(!data){
+
+        likeCount.innerText = 0;
+
+        if(dislikeCount){
+
+            dislikeCount.innerText = 0;
+
+        }
+
+        return;
+
+    }
+
+    likeCount.innerText =
+    formatCount(data.likes || 0);
+
+    if(dislikeCount){
+
+        dislikeCount.innerText =
+        formatCount(data.dislikes || 0);
+
+    }
+
+});
+
+/* UPDATE REACTION */
+async function updateReaction(type){
+
+    const currentReaction =
+    localStorage.getItem(reactionKey);
+
+    if(currentReaction === type){
+
+        /* REMOVE SAME REACTION */
+
+        localStorage.removeItem(reactionKey);
+
+        likeBtn.classList.remove("active");
+
+        dislikeBtn.classList.remove("active");
+
+        runTransaction(gameRef, (data)=>{
+
+            if(data == null){
+
+                return {
+                    likes:0,
+                    dislikes:0
+                };
+
+            }
+
+            if(type === "like"){
+
+                data.likes =
+                Math.max((data.likes || 0) - 1, 0);
+
+            }
+
+            if(type === "dislike"){
+
+                data.dislikes =
+                Math.max((data.dislikes || 0) - 1, 0);
+
+            }
+
+            return data;
+
+        });
+
+        return;
+
+    }
+
+    /* SAVE NEW REACTION */
+    localStorage.setItem(reactionKey, type);
+
+    likeBtn.classList.remove("active");
+
+    dislikeBtn.classList.remove("active");
+
+    if(type === "like"){
+
+        likeBtn.classList.add("active");
+
+    }
+
+    if(type === "dislike"){
+
+        dislikeBtn.classList.add("active");
+
+    }
+
+    runTransaction(gameRef, (data)=>{
+
+        if(data == null){
+
+            data = {
+                likes:0,
+                dislikes:0
+            };
+
+        }
+
+        /* REMOVE OLD */
+        if(currentReaction === "like"){
+
+            data.likes =
+            Math.max((data.likes || 0) - 1, 0);
+
+        }
+
+        if(currentReaction === "dislike"){
+
+            data.dislikes =
+            Math.max((data.dislikes || 0) - 1, 0);
+
+        }
+
+        /* ADD NEW */
+        if(type === "like"){
+
+            data.likes =
+            (data.likes || 0) + 1;
+
+        }
+
+        if(type === "dislike"){
+
+            data.dislikes =
+            (data.dislikes || 0) + 1;
+
+        }
+
+        return data;
+
+    });
+
+}
+
+/* EVENTS */
+likeBtn.addEventListener("click", ()=>{
+
+    updateReaction("like");
+
+});
+
+dislikeBtn.addEventListener("click", ()=>{
+
+    updateReaction("dislike");
+
+});
+
+</script>
 
 </body>
 </html>
