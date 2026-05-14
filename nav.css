@@ -154,7 +154,7 @@ a {
     }
 }
 
-.bttn {
+.btn {
     border-radius: 30px;
     transition: all .25s ease;
     border: none;
@@ -172,7 +172,7 @@ a {
     user-select: none
 }
 
-.bttn:focus {
+.btn:focus {
     outline: none
 }
 
@@ -318,19 +318,19 @@ a {
     }
 }
 
-.bttn-link-white,
+.btn-link-white,
 .Button_ubgButton--outlined--white__alf7U {
     color: var(--white-90)
 }
 
-.bttn-link-white:active,
+.btn-link-white:active,
 .Button_ubgButton--outlined--white__alf7U:active {
     color: rgb(var(--white-50)/80%)
 }
 
 @media(hover:hover) {
 
-    .bttn-link-white:hover:not(:disabled),
+    .btn-link-white:hover:not(:disabled),
     .Button_ubgButton--outlined--white__alf7U:hover:not(:disabled) {
         color: var(--white-50)
     }
@@ -431,8 +431,8 @@ a {
     width: 100%
 }
 
-.bttn [role=img],
-.bttn>img {
+.btn [role=img],
+.btn>img {
     height: 20px;
     width: 20px;
     margin-right: calc(var(--base-unit)*1)
@@ -5697,7 +5697,7 @@ a {
     display: none
 }
 
-.sidebar-toggle-bttn {
+.sidebar-toggle-btn {
     border-radius: 30px;
     -webkit-transition: all 250ms ease;
     transition: all 250ms ease;
@@ -5727,30 +5727,30 @@ a {
     margin-right: 4px;
 }
 
-.sidebar-toggle-bttn:active {
+.sidebar-toggle-btn:active {
     color: rgba(170, 173, 190, 0.8);
 }
 
 @media (hover: hover) {
-    .sidebar-toggle-bttn:hover {
+    .sidebar-toggle-btn:hover {
         color: rgba(170, 173, 190, 0.8);
     }
 }
 
-.sidebar-toggle-bttn:disabled {
+.sidebar-toggle-btn:disabled {
     background: #28293D;
     color: #474967;
     cursor: default;
 }
 
-.sidebar-toggle-bttn svg,
-.sidebar-toggle-bttn span[role="img"] {
+.sidebar-toggle-btn svg,
+.sidebar-toggle-btn span[role="img"] {
     height: 24px;
     width: 24px;
 }
 
 @media (max-width:388.95px) {
-    .sidebar-toggle-bttn {
+    .sidebar-toggle-btn {
         display: none;
     }
 }
@@ -5899,14 +5899,14 @@ a {
 
 
 
-.bttn>img {
+.btn>img {
     width: 24px;
     height: 24px;
     display: block;
     object-fit: contain;
 }
 
-.bttn-header-icon {
+.btn-header-icon {
     padding: 0;
     display: inline-flex;
     align-items: center;
@@ -5917,33 +5917,33 @@ a {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.bttn-header-icon:hover {
+.btn-header-icon:hover {
     border-color: rgba(255, 255, 255, 0.65);
     background: rgba(255, 255, 255, 0.1);
 }
 
-.bttn-header-icon-desktop {
+.btn-header-icon-desktop {
     min-width: 40px;
     height: 40px;
     width: auto;
     padding: 0 0.85rem;
 }
 
-.bttn-header-icon span {
+.btn-header-icon span {
     display: inline-block;
     line-height: 1;
     font-size: 13px;
 }
 
-.bttn-header-icon img {
+.btn-header-icon img {
     transition: transform .3s ease;
     flex-shrink: 0;
 }
-.bttn-header-icon.setting-icon > img {
+.btn-header-icon.setting-icon > img {
     margin-right: 0;
 }
 
-.bttn-header-icon.setting-icon {
+.btn-header-icon.setting-icon {
     min-width: 40px;
     width: 40px;
     padding: 0;
@@ -6030,7 +6030,7 @@ button-effect:hover{
 }
 
 /* Simplified classes for footer buttons and icons */
-.contact-bttn {
+.contact-btn {
     border-radius: 30px;
     transition: all .25s ease;
     border: none;
@@ -6052,16 +6052,16 @@ button-effect:hover{
     margin-top: calc(var(--base-unit)*1)
 }
 
-.contact-bttn:focus {
+.contact-btn:focus {
     outline: none
 }
 
-.contact-bttn:active {
+.contact-btn:active {
     background: rgb(var(--brand-100)/70%)
 }
 
 @media(hover:hover) {
-    .contact-bttn:hover:not(:disabled) {
+    .contact-btn:hover:not(:disabled) {
         background: var(--brand-80)
     }
 }
