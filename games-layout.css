@@ -17069,7 +17069,7 @@ a {
 
 @media(max-width:819.98px) {
     .GamePageDesktop_underGameContainerGrid__cdhNC, .page-under-grid {
-        margin-top: calc(var(--base-unit)*2)
+        margin-top: calc(var(--base-unit)*9)
     }
 }
 
