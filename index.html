@@ -23,183 +23,187 @@
 
 <body>
     <div id="ubgHeader" class="app-header">
-        <div class="header-left"><!--$--><button aria-label="Open/Close sidebar" class="sidebar-toggle-bttn"><span
-                    role="img" aria-hidden="true" class="icon icon-close-nav icon-size-20"></span></button><a href="/">
-                <div class="site-logo">
-                    <div class="logo-icon"><img src="/cartoon.png" alt="CrazyGames" class="logo-image"></div><img
-                        src="/logo-txt.png" alt="CrazyGames" id="logoTextSvg" class="logo-text">
+                <div class="header-left"><!--$--><button aria-label="Open/Close sidebar"
+                                class="sidebar-toggle-btn"><span role="img" aria-hidden="true"
+                                        class="icon icon-close-nav icon-size-20"></span></button><a href="/">
+                                <div class="site-logo">
+                                        <div class="logo-icon"><img src="/cartoon.png" alt="CrazyGames"
+                                                        class="logo-image"></div><img src="/logo-txt.png"
+                                                alt="CrazyGames" id="logoTextSvg" class="logo-text">
+                                </div>
+                        </a><!--/$--></div>
+                <form class="search-form desktop-layout" autocomplete="off">
+                        <div class="search-input-wrapper"><input class="search-input search-field desktop-layout"
+                                        id="search-input" placeholder="Search games and categories" type="text"
+                                        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                                        data-lpignore="true" data-form-type="other" data-1p-ignore="true"
+                                        data-bwignore="true" data-form="false" aria-autocomplete="none">
+                                <div class="icon-box"><span role="img" aria-hidden="true"
+                                                class="icon icon-search icon-size-20"></span>
+                                </div>
+                                <div id="search-suggestions" class="search-results-dropdown hidden"></div>
+                        </div>
+                </form>
+                <div class="header-right">
+                        <a href="/all-games/" aria-label="All Games"
+                                class="btn btn-link-white btn-header-icon btn-header-icon-desktop"><img
+                                        src="/assest/icon/joystick-game-control-svgrepo-com.svg"
+                                        alt="All Games"><span>All Games</span></a>
+                        <a href="/category/popular/" aria-label="All Category"
+                                class="btn btn-link-white btn-header-icon btn-header-icon-desktop"><img
+                                        src="/assest/icon/category-svgrepo-com.svg" alt="All Category"><span>All
+                                        Categories</span></a>
+                        <a href="/setting/" aria-label="Setting"
+                                class="btn btn-link-white btn-header-icon btn-header-icon-desktop setting-icon"><img
+                                        src="/assest/icon/settings-cog-line-svgrepo-com.svg" alt="Setting"></a>
                 </div>
-            </a><!--/$--></div>
-        <form class="search-form desktop-layout" autocomplete="off">
-            <div class="search-input-wrapper"><input class="search-input search-field desktop-layout" id="search-input"
-                    placeholder="Search games and categories" type="text" autocomplete="off"
-                    autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"
-                    data-form-type="other" data-1p-ignore="true" data-bwignore="true" data-form="false"
-                    aria-autocomplete="none">
-                <div class="icon-box"><span role="img" aria-hidden="true" class="icon icon-search icon-size-20"></span>
-                </div>
-                <div id="search-suggestions" class="search-results-dropdown hidden"></div>
-            </div>
-        </form>
-        <div class="header-right">
-            <a href="/all-games/" aria-label="All Games"
-                class="bttn bttn-link-white bttn-header-icon bttn-header-icon-desktop"><img
-                    src="/assest/icon/joystick-game-control-svgrepo-com.svg" alt="All Games"><span>All Games</span></a>
-            <a href="/category/popular/" aria-label="All Category"
-                class="bttn bttn-link-white bttn-header-icon bttn-header-icon-desktop"><img src="/assest/icon/category-svgrepo-com.svg"
-                    alt="All Category"><span>All Categories</span></a>
-            <a href="/setting/" aria-label="Setting"
-                class="bttn bttn-link-white bttn-header-icon bttn-header-icon-desktop setting-icon"><img
-                    src="/assest/icon/settings-cog-line-svgrepo-com.svg" alt="Setting"></a>
         </div>
-    </div>
-    <div class="modal-backdrop header-backdrop header-intent-ctas"></div>
-    <nav id="mainNav" class="sidebar sidebar-desktop">
-        <div class="sidebar-container" id="sidebarContainer">
-            <div class="sidebar-link sidebar-link-active"><img
-                    src="/assest/icon/home-smile-svgrepo-com.svg" loading="lazy" alt="Home icon">
-                <div class="sidebar-label">Home</div>
-            </div>
-            <a aria-label="Action Games" href="/category/action/">
-                <div class="sidebar-link"><img src="/assest/icon/flash-filled-svgrepo-com.svg"
-                        loading="lazy" alt="Action icon">
-                    <div class="sidebar-label">Action</div>
-                </div>
-            </a><a aria-label="Adventure Games" href="/category/adventure/">
-                <div class="sidebar-link"><img src="/assest/icon/adventure-colour-svgrepo-com.svg"
-                        loading="lazy" alt="Adventure icon">
-                    <div class="sidebar-label">Adventure</div>
-                </div>
-            </a><a aria-label="Arcade Games" href="/category/arcade/">
-                <div class="sidebar-link"><img src="/assest/icon/gamer-joystick-controller-svgrepo-com.svg"
-                        loading="lazy" alt="Arcade icon">
-                    <div class="sidebar-label">Arcade</div>
-                </div>
-            </a><a aria-label="Basketball Games" href="/category/basketball-games/">
-                <div class="sidebar-link"><img src="/assest/icon/basketball-2-svgrepo-com.svg"
-                        loading="lazy" alt="Basketball icon">
-                    <div class="sidebar-label">Basketball</div>
-                </div>
-            </a><a aria-label="Bike Games" href="/category/bike/">
-                <div class="sidebar-link"><img src="/assest/icon/bike-svgrepo-com.svg"
-                        loading="lazy" alt="Bike icon">
-                    <div class="sidebar-label">Bike</div>
-                </div>
-            </a><a aria-label="Multiplayer Games" href="/category/multiplayer/">
-                <div class="sidebar-link"><img src="/assest/icon/group-filled-persons-svgrepo-com.svg"
-                        loading="lazy" alt="Multiplayer icon">
-                    <div class="sidebar-label">Multiplayer</div>
-                </div>
-            </a>
-            <div class="sidebar-divider" role="separator"></div><a aria-label="Boys Games" href="/category/boys-games/">
-                <div class="sidebar-link"><img src="/assest/icon/boy-svgrepo-com.svg"
-                        loading="lazy" alt="Boys icon">
-                    <div class="sidebar-label">Boys</div>
-                </div>
-            </a><a aria-label="Car Games" href="/category/car/">
-                <div class="sidebar-link"><img src="/assest/icon/car-sport-svgrepo-com.svg"
-                        loading="lazy" alt="Car icon">
-                    <div class="sidebar-label">Car</div>
-                </div>
-            </a><a aria-label="Fighting Games" href="/category/fighting/">
-                <div class="sidebar-link"><img src="/assest/icon/boxing-fighter-svgrepo-com.svg"
-                        loading="lazy" alt="Fighting icon">
-                    <div class="sidebar-label">Fighting</div>
-                </div>
-            </a><a aria-label="Girls Games" href="/category/girls-games/">
-                <div class="sidebar-link"><img src="/assest/icon/girl-svgrepo-com.svg"
-                        loading="lazy" alt="Girls icon">
-                    <div class="sidebar-label">Girls</div>
-                </div>
-            </a><a aria-label="Horror Games" href="/category/horror/">
-                <div class="sidebar-link"><img src="/assest/icon/ghost-1-svgrepo-com.svg"
-                        loading="lazy" alt="Horror icon">
-                    <div class="sidebar-label">Horror</div>
-                </div>
-            </a><a aria-label="Idle Games" href="/category/idle/">
-                <div class="sidebar-link"><img src="/assest/icon/light-bulb-idea-svgrepo-com.svg"
-                        loading="lazy" alt="Idle icon">
-                    <div class="sidebar-label">Idle</div>
-                </div>
-            </a><a aria-label="IO Games" href="/category/io-games/">
-                <div class="sidebar-link"><img src="/assest/icon/light-io-svgrepo-com.svg"
-                        loading="lazy" alt="IO icon">
-                    <div class="sidebar-label">IO</div>
-                </div>
-            </a><a aria-label="Platformer Games" href="/category/platformer/">
-                <div class="sidebar-link"><img src="/assest/icon/layers-3-svgrepo-com.svg"
-                        loading="lazy" alt="Platformer icon">
-                    <div class="sidebar-label">Platformer</div>
-                </div>
-            </a><a aria-label="Puzzle Games" href="/category/puzzle/">
-                <div class="sidebar-link"><img src="/assest/icon/puzzle-svgrepo-com.svg"
-                        loading="lazy" alt="Puzzle icon">
-                    <div class="sidebar-label">Puzzle</div>
-                </div>
-            </a><a aria-label="Racing Games" href="/category/racing/">
-                <div class="sidebar-link"><img src="/assest/icon/racing-flag-svgrepo-com.svg"
-                        loading="lazy" alt="Racing icon">
-                    <div class="sidebar-label">Racing</div>
-                </div>
-            </a><a aria-label="Shooting Games" href="/category/shooting/">
-                <div class="sidebar-link"><img src="/assest/icon/gun-svgrepo-com.svg"
-                        loading="lazy" alt="Shooting icon">
-                    <div class="sidebar-label">Shooting</div>
-                </div>
-            </a><a aria-label="Skill Games" href="/category/skill/">
-                <div class="sidebar-link"><img src="/assest/icon/science-svgrepo-com.svg"
-                        loading="lazy" alt="Skill icon">
-                    <div class="sidebar-label">Skill</div>
-                </div>
-            </a><a aria-label="Sports Games" href="/category/sports/">
-                <div class="sidebar-link"><img src="/assest/icon/sports-volleyball-solid-svgrepo-com.svg"
-                        loading="lazy" alt="Sports icon">
-                    <div class="sidebar-label">Sports</div>
-                </div>
-            </a><a aria-label="Strategy Games" href="/category/strategy/">
-                <div class="sidebar-link"><img src="/assest/icon/skill-svgrepo-com.svg"
-                        loading="lazy" alt="Strategy icon">
-                    <div class="sidebar-label">Strategy</div>
-                </div>
-            </a>
-            <div class="sidebar-divider" role="separator"></div>
-            <div id="sidebar-hidden"
-                class="sidebar-footer"><button
-                    class="contact-bttn"><span
-                        role="img" aria-hidden="true"
-                        class="mail-icon"></span>Contact us</button>
-                <a aria-label="About us Games" href="/about-us/">
-                <div class="sidebar-link"><img src="/assest/icon/about-svgrepo-com.svg"
-                        loading="lazy" alt="About us icon">
-                    <div class="sidebar-label">About us</div>
-                </div>
-            </a><a aria-label="DMCA" href="/dmca/">
-                <div class="sidebar-link"><img src="/assest/icon/lock-svgrepo-com.svg"
-                        loading="lazy" alt="DMCA icon">
-                    <div class="sidebar-label">DMCA</div>
-                </div>
-            </a><a aria-label="Privacy Policy" href="/privacy-policy/">
-                <div class="sidebar-link"><img src="/assest/icon/privacy-tips-svgrepo-com.svg"
-                        loading="lazy" alt="Privacy Policy icon">
-                    <div class="sidebar-label">Privacy Policy</div>
-                </div>
-            </a><a aria-label="Term of Use" href="/term-of-use/">
-                <div class="sidebar-link"><img src="/assest/icon/file-text-svgrepo-com.svg"
-                        loading="lazy" alt="Term of Use icon">
-                    <div class="sidebar-label">Term of Use</div>
-                </div>
-            </a><a aria-label="FAQs" href="/faqs/">
-                <div class="sidebar-link"><img src="/assest/icon/question-mark-svgrepo-com.svg"
-                        loading="lazy" alt="FAQs icon">
-                    <div class="sidebar-label">FAQs</div>
-                </div>
-            </a>
-                <div class="copyright">© <!-- -->2026<!-- --> UnblockedGames</div>
-            </div>
+        <nav id="mainNav" class="sidebar sidebar-desktop">
+                <div class="sidebar-container" id="sidebarContainer">
+                        <div class="sidebar-link sidebar-link-active"><img src="/assest/icon/home-smile-svgrepo-com.svg"
+                                        loading="lazy" alt="Home icon">
+                                <div class="sidebar-label">Home</div>
+                        </div>
+                        <a aria-label="Action Games" href="/category/action/">
+                                <div class="sidebar-link"><img src="/assest/icon/flash-filled-svgrepo-com.svg"
+                                                loading="lazy" alt="Action icon">
+                                        <div class="sidebar-label">Action</div>
+                                </div>
+                        </a><a aria-label="Adventure Games" href="/category/adventure/">
+                                <div class="sidebar-link"><img src="/assest/icon/adventure-colour-svgrepo-com.svg"
+                                                loading="lazy" alt="Adventure icon">
+                                        <div class="sidebar-label">Adventure</div>
+                                </div>
+                        </a><a aria-label="Arcade Games" href="/category/arcade/">
+                                <div class="sidebar-link"><img
+                                                src="/assest/icon/gamer-joystick-controller-svgrepo-com.svg"
+                                                loading="lazy" alt="Arcade icon">
+                                        <div class="sidebar-label">Arcade</div>
+                                </div>
+                        </a><a aria-label="Basketball Games" href="/category/basketball-games/">
+                                <div class="sidebar-link"><img src="/assest/icon/basketball-2-svgrepo-com.svg"
+                                                loading="lazy" alt="Basketball icon">
+                                        <div class="sidebar-label">Basketball</div>
+                                </div>
+                        </a><a aria-label="Bike Games" href="/category/bike/">
+                                <div class="sidebar-link"><img src="/assest/icon/bike-svgrepo-com.svg" loading="lazy"
+                                                alt="Bike icon">
+                                        <div class="sidebar-label">Bike</div>
+                                </div>
+                        </a><a aria-label="Multiplayer Games" href="/category/multiplayer/">
+                                <div class="sidebar-link"><img src="/assest/icon/group-filled-persons-svgrepo-com.svg"
+                                                loading="lazy" alt="Multiplayer icon">
+                                        <div class="sidebar-label">Multiplayer</div>
+                                </div>
+                        </a>
+                        <div class="sidebar-divider" role="separator"></div><a aria-label="Boys Games"
+                                href="/category/boys-games/">
+                                <div class="sidebar-link"><img src="/assest/icon/boy-svgrepo-com.svg" loading="lazy"
+                                                alt="Boys icon">
+                                        <div class="sidebar-label">Boys</div>
+                                </div>
+                        </a><a aria-label="Car Games" href="/category/car/">
+                                <div class="sidebar-link"><img src="/assest/icon/car-sport-svgrepo-com.svg"
+                                                loading="lazy" alt="Car icon">
+                                        <div class="sidebar-label">Car</div>
+                                </div>
+                        </a><a aria-label="Fighting Games" href="/category/fighting/">
+                                <div class="sidebar-link"><img src="/assest/icon/boxing-fighter-svgrepo-com.svg"
+                                                loading="lazy" alt="Fighting icon">
+                                        <div class="sidebar-label">Fighting</div>
+                                </div>
+                        </a><a aria-label="Girls Games" href="/category/girls-games/">
+                                <div class="sidebar-link"><img src="/assest/icon/girl-svgrepo-com.svg" loading="lazy"
+                                                alt="Girls icon">
+                                        <div class="sidebar-label">Girls</div>
+                                </div>
+                        </a><a aria-label="Horror Games" href="/category/horror/">
+                                <div class="sidebar-link"><img src="/assest/icon/ghost-1-svgrepo-com.svg" loading="lazy"
+                                                alt="Horror icon">
+                                        <div class="sidebar-label">Horror</div>
+                                </div>
+                        </a><a aria-label="Idle Games" href="/category/idle/">
+                                <div class="sidebar-link"><img src="/assest/icon/light-bulb-idea-svgrepo-com.svg"
+                                                loading="lazy" alt="Idle icon">
+                                        <div class="sidebar-label">Idle</div>
+                                </div>
+                        </a><a aria-label="IO Games" href="/category/io-games/">
+                                <div class="sidebar-link"><img src="/assest/icon/light-io-svgrepo-com.svg"
+                                                loading="lazy" alt="IO icon">
+                                        <div class="sidebar-label">IO</div>
+                                </div>
+                        </a><a aria-label="Platformer Games" href="/category/platformer/">
+                                <div class="sidebar-link"><img src="/assest/icon/layers-3-svgrepo-com.svg"
+                                                loading="lazy" alt="Platformer icon">
+                                        <div class="sidebar-label">Platformer</div>
+                                </div>
+                        </a><a aria-label="Puzzle Games" href="/category/puzzle/">
+                                <div class="sidebar-link"><img src="/assest/icon/puzzle-svgrepo-com.svg" loading="lazy"
+                                                alt="Puzzle icon">
+                                        <div class="sidebar-label">Puzzle</div>
+                                </div>
+                        </a><a aria-label="Racing Games" href="/category/racing/">
+                                <div class="sidebar-link"><img src="/assest/icon/racing-flag-svgrepo-com.svg"
+                                                loading="lazy" alt="Racing icon">
+                                        <div class="sidebar-label">Racing</div>
+                                </div>
+                        </a><a aria-label="Shooting Games" href="/category/shooting/">
+                                <div class="sidebar-link"><img src="/assest/icon/gun-svgrepo-com.svg" loading="lazy"
+                                                alt="Shooting icon">
+                                        <div class="sidebar-label">Shooting</div>
+                                </div>
+                        </a><a aria-label="Skill Games" href="/category/skill/">
+                                <div class="sidebar-link"><img src="/assest/icon/science-svgrepo-com.svg" loading="lazy"
+                                                alt="Skill icon">
+                                        <div class="sidebar-label">Skill</div>
+                                </div>
+                        </a><a aria-label="Sports Games" href="/category/sports/">
+                                <div class="sidebar-link"><img
+                                                src="/assest/icon/sports-volleyball-solid-svgrepo-com.svg"
+                                                loading="lazy" alt="Sports icon">
+                                        <div class="sidebar-label">Sports</div>
+                                </div>
+                        </a><a aria-label="Strategy Games" href="/category/strategy/">
+                                <div class="sidebar-link"><img src="/assest/icon/skill-svgrepo-com.svg" loading="lazy"
+                                                alt="Strategy icon">
+                                        <div class="sidebar-label">Strategy</div>
+                                </div>
+                        </a>
+                        <div class="sidebar-divider" role="separator"></div>
+                        <div id="sidebar-hidden" class="sidebar-footer"><button class="contact-btn"><span role="img"
+                                                aria-hidden="true" class="mail-icon"></span>Contact us</button>
+                                <a aria-label="About us Games" href="/about-us/">
+                                        <div class="sidebar-link"><img src="/assest/icon/about-svgrepo-com.svg"
+                                                        loading="lazy" alt="About us icon">
+                                                <div class="sidebar-label">About us</div>
+                                        </div>
+                                </a><a aria-label="DMCA" href="/dmca/">
+                                        <div class="sidebar-link"><img src="/assest/icon/lock-svgrepo-com.svg"
+                                                        loading="lazy" alt="DMCA icon">
+                                                <div class="sidebar-label">DMCA</div>
+                                        </div>
+                                </a><a aria-label="Privacy Policy" href="/privacy-policy/">
+                                        <div class="sidebar-link"><img src="/assest/icon/privacy-tips-svgrepo-com.svg"
+                                                        loading="lazy" alt="Privacy Policy icon">
+                                                <div class="sidebar-label">Privacy Policy</div>
+                                        </div>
+                                </a><a aria-label="Term of Use" href="/term-of-use/">
+                                        <div class="sidebar-link"><img src="/assest/icon/file-text-svgrepo-com.svg"
+                                                        loading="lazy" alt="Term of Use icon">
+                                                <div class="sidebar-label">Term of Use</div>
+                                        </div>
+                                </a><a aria-label="FAQs" href="/faqs/">
+                                        <div class="sidebar-link"><img src="/assest/icon/question-mark-svgrepo-com.svg"
+                                                        loading="lazy" alt="FAQs icon">
+                                                <div class="sidebar-label">FAQs</div>
+                                        </div>
+                                </a>
+                                <div class="copyright">© <!-- -->2026<!-- --> UnblockedGames</div>
+                        </div>
 
-        </div>
-        </div>
-    </nav>
+                </div>
+                </div>
+        </nav>
     <main id="layoutMain" class="main-layout layout-desktop layout-sidebar-collapsed layout-sidebar-expanded">
         <div id="search-results-page" class="search-results-page" aria-live="polite">
             <div class="search-results-header">
