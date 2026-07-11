@@ -6900,7 +6900,7 @@
     --black-60: #28293d;
     --black-70: #212233;
     --black-80: #1a1b28;
-    --black-90: #13141e;
+    --black-90: #161B22;
     --black-100: #0c0d14;
     --white-10: #666a7f;
     --white-20: #767a8e;
@@ -7406,7 +7406,7 @@ a {
     width: 100%;
     height: 100%;
     color: rgba(0, 0, 0, 0);
-    object-fit: cover
+    object-fit: fill
 }
 
 .GameThumb_gameThumbLinkMobile__J9FBe .GameThumb_gameThumbImage__FSasr.GameThumb_greyedOut__m6CwS, .thumb-image.GameThumb_greyedOut__m6CwS {
@@ -12257,7 +12257,7 @@ a {
 
 .GameInfo_roundedCornersContainer__D5D_p, .game-info-rounded {
     padding: calc(var(--base-unit)*3);
-    background: var(--black-90);
+    background: #161B22;
     border-radius: 16px
 }
 
@@ -16957,7 +16957,7 @@ a {
     }
 }
 
-.game-main-container .leaderboard-container .GamePageDesktop_leaderboard__ddMUk, .page-leaderboard {
+.game-main-container .leaderboard-container .page-leaderboard {
     width: 728px;
     height: 96.9px;
     position: relative;
@@ -16969,7 +16969,7 @@ a {
     margin: auto;
 }
 
-.GamePageDesktop_showMoreIndicatorDesktop__ii_Z_, .page-show-more-indicator {
+.page-show-more-desktop, .page-show-more-indicator {
     position: fixed;
     bottom: 0;
     width: 187px;
@@ -16997,7 +16997,7 @@ a {
     padding: calc(var(--base-unit)*2);
     padding-bottom: 0;
     padding-top: 0;
-    background-color: var(--black-90);
+    background-color: #161B22;
     margin-top: 2px
 }
 
@@ -17026,25 +17026,25 @@ a {
     }
 }
 
-.GamePageDesktop_rightSidebar__QgTMJ .GamePageDesktop_rightGridContainer__qJUvH, .page-right-sidebar .GamePageDesktop_rightGridContainer__qJUvH, .page-right-grid {
+  .page-right-grid {
     padding: calc(var(--base-unit)*.5);
     padding-top: calc(var(--base-unit)*.5);
     padding-bottom: calc(var(--base-unit)*2.5)
 }
 
-.GamePageDesktop_rightSidebar__QgTMJ .GamePageDesktop_rightGridContainer__qJUvH, .page-right-sidebar .GamePageDesktop_rightGridContainer__qJUvH>div:last-child, .page-right-grid>div:last-child {
+ .page-right-grid>div:last-child {
     display: grid;
     grid-template-columns: 1fr;
     gap: 4px 8px
 }
 
 @media(min-width:1280px) {
-    .GamePageDesktop_rightSidebar__QgTMJ .GamePageDesktop_rightGridContainer__qJUvH, .page-right-sidebar .GamePageDesktop_rightGridContainer__qJUvH>div:last-child, .page-right-grid>div:last-child {
+      .page-right-grid>div:last-child {
         grid-template-columns: 1fr 1fr
     }
 }
 
-.GamePageDesktop_rightSidebar__QgTMJ .GamePageDesktop_rightGridContainer__qJUvH, .page-right-sidebar .GamePageDesktop_rightGridContainer__qJUvH>div:last-child>a, .page-right-grid>div:last-child>a {
+  .page-right-grid>div:last-child>a {
     margin: 0
 }
 
@@ -17052,7 +17052,7 @@ a {
     display: flex
 }
 
-.GamePageDesktop_underGameContainerGrid__cdhNC, .page-under-grid {
+.page-under-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17062,29 +17062,29 @@ a {
 }
 
 @media(min-width:1082px) {
-    .GamePageDesktop_underGameContainerGrid__cdhNC, .page-under-grid {
+    .page-under-grid {
         display: none
     }
 }
 
 @media(max-width:819.98px) {
-    .GamePageDesktop_underGameContainerGrid__cdhNC, .page-under-grid {
+    .page-under-grid {
         margin-top: calc(var(--base-unit)*9)
     }
 }
 
-.GamePageDesktop_underGameContainerGrid__cdhNC .GamePageDesktop_underGameContainerGamesWrapper__Rahgf, .page-under-grid .GamePageDesktop_underGameContainerGamesWrapper__Rahgf, .page-under-games {
+ .page-under-games {
     display: grid;
     width: 100%
 }
 
-.GamePageDesktop_underGameContainerGrid__cdhNC .GamePageDesktop_underGameContainerGamesWrapper__Rahgf, .page-under-grid .GamePageDesktop_underGameContainerGamesWrapper__Rahgf>div:first-child, .page-under-games>div:first-child {
+ .page-under-games>div:first-child {
     padding-top: calc(var(--base-unit)*2);
     padding-left: calc(var(--base-unit)*2);
     margin-bottom: 0
 }
 
-.GamePageDesktop_underGameContainerGrid__cdhNC .GamePageDesktop_underGameContainerGamesWrapper__Rahgf, .page-under-grid .GamePageDesktop_underGameContainerGamesWrapper__Rahgf>div:nth-child(2), .page-under-games>div:nth-child(2) {
+  .page-under-games>div:nth-child(2) {
     padding: calc(var(--base-unit)*2);
     gap: calc(var(--base-unit)*1) calc(var(--base-unit)*2);
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr))

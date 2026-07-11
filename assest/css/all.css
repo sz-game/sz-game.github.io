@@ -669,7 +669,7 @@ template {
     padding: 0;
     color: #ffffff;
     font-size: 1.2rem;
-    font-family: Fredoka One, verdana, sans-serif;
+    font-family:Nunito-fallback;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
 }
 
 .header-wrapper-link {

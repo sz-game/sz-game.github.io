@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-language" content="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="194x194" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
+    <meta name="author" content="Sarkar Games">
+    <meta name="publisher" content="Sarkar Games">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://unblockedgames.free" />
+    <link rel="stylesheet" href="/assest/css/toph.css" crossorigin="anonymous" data-n-g="">
+    <link rel="stylesheet" href="/games-layout.css" crossorigin="anonymous" data-n-g="">
+    <link rel="stylesheet" href="/assest/css/game-page.css" crossorigin="anonymous" data-n-g="">
+    <link rel="stylesheet" href="/nav.css" crossorigin="anonymous" data-n-g="">
+
+    <style>
+        :root{
+    --bg: #0D1117;
+    --surface-2: #161B22;
+    --border: #2a2a33;
+    --yellow: #ffdd00;
+    --purple-dark: #6a5adf;
+    --text: #ffffff;
+    --text-muted: #9797a3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  /* This whole block only renders on mobile widths */
+  .game-card-wrap{ display:none; }
+  @media (max-width: 880px){
+    .game-card-wrap{ display:block; }
+  }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .game-card{
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 16px 16px 20px;
+    text-align:center;
+  }
+
+  .thumb{
+    width:100%;
+    aspect-ratio: 1.9 / 1;
+    border-radius: 18px;
+    overflow:hidden;
+    background: var(--surface-2);
+  }
+  .thumb img{
+    width:100%; height:100%; object-fit:fill; display:block;
+  }
+
+  .game-card h1{
+    font-size: 22px;
+    font-weight:700;
+    margin-top: 16px;
+    letter-spacing:-0.2px;
+  }
+
+  .meta-row{
+    display:flex; align-items:center; justify-content:center; gap:20px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .meta-row span{
+    display:flex; align-items:center; gap:6px;
+  }
+
+  .play-btn{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background: var(--yellow);
+    color:#000000;
+    border:none;
+    border-radius: 999px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 18px auto 0;
+    width: 100%;
+    cursor:pointer;
+  }
+  .play-btn:active{ background: var(--purple-dark); }
+
+  /* Responsive Play Next Section */
+  .page-under-games .thumb-grid {
+    display: grid !important;
+    gap: 12px !important;
+    width: 100%;
+  }
+
+  /* Mobile: 3 columns */
+  @media (max-width: 600px) {
+    .page-under-games .thumb-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+  }
+
+  /* Tablet: 4 columns */
+  @media (min-width: 601px) and (max-width: 900px) {
+    .page-under-games .thumb-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+
+  /* Desktop: auto-fit */
+  @media (min-width: 901px) {
+    .page-under-games .thumb-grid {
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+    }
+  }
+
+  .reactions-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top: 16px;
+  }
+  .reaction-group{
+    display:flex; align-items:center;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow:hidden;
+  }
+  .reaction-btn{
+    background:none; border:none; color:var(--text);
+    display:flex; align-items:center; gap:6px;
+    padding: 11px 15px;
+    font-size: 14px; font-weight:600;
+    cursor:pointer;
+  }
+  .reaction-btn img{ width:17px; height:17px; filter: invert(1); }
+  .like-btn{ border-right: 1px solid var(--border); }
+
+  .circle-btn{
+    width:42px; height:42px;
+    border-radius:50%;
+    background: var(--surface-2);
+    border:none;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--text);
+    cursor:pointer;
+    flex-shrink:0;
+  }
+
+  /* FULLSCREEN GAME OVERLAY */
+  .game-overlay{
+    position:fixed;
+    inset:0;
+    background:#000;
+    z-index:9999;
+    display:none;
+    overflow:hidden;
+  }
+  .game-overlay.active{ display:block; }
+  .game-overlay iframe{
+    border:none; display:block;
+    width:100%; height:100%;
+  }
+
+  /* Auto-fit iframe to whichever orientation the device is currently in */
+  @media screen and (orientation: portrait){
+    .game-overlay iframe{
+      position:absolute;
+      top:0; left:100%;
+      width:100vh;
+      height:100vw;
+      transform-origin: top left;
+      transform: rotate(90deg);
+    }
+  }
+  @media screen and (orientation: landscape){
+    .game-overlay iframe{
+      position:absolute;
+      top:0; left:0;
+      width:100vw;
+      height:100vh;
+      transform:none;
+    }
+  }
+  .overlay-close{
+    position:absolute;
+    top:12px; right:12px;
+    height:38px;
+    padding: 0 16px;
+    border-radius:999px;
+    background: rgba(0,0,0,0.6);
+    border: 1.5px solid #e14b4b;
+    color:#e14b4b;
+    font-size:14px;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    gap:6px;
+    z-index:2;
+    cursor:pointer;
+  }
+
+
+
+      .game-border-bar {
+        width: 100%;
+        height: 58px;
+        background: #171a2b;
+        border-top: 1px solid rgba(255, 255, 255, .08);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 14px;
+        box-sizing: border-box;
+        border-radius: 0 0 14px 14px;
+      }
+
+      /* LEFT SIDE */
+      .border-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .border-left img {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .border-left span {
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        font-family: sans-serif;
+      }
+
+      .border-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* REACTION GROUP */
+      .reaction-group {
+        display: flex;
+        align-items: center;
+        background: #161B22;
+        border-radius: 18px;
+        overflow: hidden;
+        height: 38px;
+        border: 1px solid rgba(255, 255, 255, .06);
+      }
+
+      /* REACTION BUTTONS */
+      .reaction-btn {
+        border: none;
+        background: transparent;
+        color: #fff;
+        cursor: pointer;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: .25s ease;
+      }
+
+      .reaction-btn:first-child {
+        width: 88px;
+        border-right: 1px solid rgba(255, 255, 255, .08);
+      }
+
+      .reaction-btn:last-child {
+        width: 54px;
+      }
+
+      .reaction-btn img {
+        width: 18px;
+        height: 18px;
+        filter: brightness(0) invert(1);
+        transition: .25s ease;
+      }
+
+      .like-count {
+        margin-left: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        font-family: sans-serif;
+      }
+
+      /* ACTIVE */
+      .like-btn.active img {
+        filter:
+          brightness(0) saturate(100%) invert(58%) sepia(84%) saturate(2607%) hue-rotate(184deg) brightness(101%) contrast(101%);
+      }
+
+      .like-btn.active .like-count {
+        color: #00b7ff;
+      }
+
+      .dislike-btn.active img {
+        filter:
+          brightness(0) saturate(100%) invert(18%) sepia(98%) saturate(7431%) hue-rotate(337deg) brightness(101%) contrast(104%);
+      }
+
+      /* NORMAL BUTTONS */
+      .border-btn {
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 50%;
+        background: #161B22;
+        color: #fff;
+        cursor: pointer;
+        font-size: 17px;
+        transition: .25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* HOVER */
+      .border-btn:hover,
+      .reaction-btn:hover {
+        transform: translateY(-2px) scale(1.05);
+        background: rgba(255, 255, 255, .05);
+      }
+
+      /* CLICK ANIMATION */
+      .border-btn:active,
+      .reaction-btn:active {
+        transform: scale(.88);
+      }
+
+      /* SOUND OFF */
+      .sound-btn.muted {
+        background: #ff3040;
+      }
+
+      .border-btn img,
+      .reaction-btn img {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+        transition: .25s ease;
+      }
+
+      /* hover animation */
+      .border-btn:hover img,
+      .reaction-btn:hover img {
+        transform: scale(1.12);
+      }
+
+      /* sound mute */
+      .sound-btn.muted {
+        background: #ff3040;
+      }
+
+      /* muted icon effect */
+      .sound-btn.muted img {
+        opacity: .6;
+      }
+    </style>
+
+    <style>
+  :root{
+    --bg: #0a0a0d;
+    --surface: #161B22;
+    --surface-2: #161B22;
+    --pill: #23232d;
+    --border: #2a2a33;
+    --purple: #7c6cf0;
+    --text: #ffffff;
+    --text-muted: #9797a3;
+    --text-faint: #6c6c78;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+ 
+
+  .page{
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* top gradient strip like in screenshot */
+  .top-strip{
+    height: 6px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #3a4dd6 0%, #7c6cf0 45%, #e8c96b 100%);
+  }
+
+  .layout{
+    display:block;
+  }
+
+  /* MAIN CARD */
+  .main-card{
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 22px 20px 26px;
+  }
+
+  .breadcrumb{
+    font-size: 13px;
+    color: var(--text-muted);
+    display:flex; flex-wrap:wrap; align-items:center; gap:6px;
+    margin-bottom: 14px;
+  }
+  .breadcrumb a{
+    color: var(--purple);
+    text-decoration:none;
+    font-weight:500;
+  }
+  .breadcrumb .sep{ color: var(--text-faint); }
+  .breadcrumb .current{ color: var(--purple); font-weight:600; }
+
+  .title-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .title-row h1{
+    font-size: 26px;
+    font-weight:700;
+    letter-spacing:-0.3px;
+  }
+
+  .share-btn{
+    display:flex; align-items:center; gap:8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight:600;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+
+  .info-list{
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .info-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 6px;
+    font-size: 14.5px;
+  }
+  .info-row .label{ color: var(--text-muted); min-width: 80px; }
+  .info-row .value{ font-weight:600; }
+  .info-row .sub{ color: var(--text-faint); font-weight:400; }
+
+  .tags-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .tag-pill{
+    display:flex; align-items:center; gap:8px;
+    background: var(--pill);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--text);
+    white-space:nowrap;
+  }
+  .tag-pill .count{ color: var(--purple); font-weight:700; }
+
+   
+
+  /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+  /* Tablet and up */
+  @media (min-width: 760px){
+    .play-btn{ width: auto; min-width: 220px; }
+  }
+
+  /* Small phones: tighten paddings/sizes */
+  @media (max-width: 420px){
+    
+    .main-card{ padding: 18px 14px 20px; border-radius: 14px; }
+    .title-row h1{ font-size: 21px; }
+    .tag-pill{ font-size: 13px; padding: 9px 12px; }
+    .share-btn{ padding: 9px 14px; font-size: 13px; }
+    .info-row{ font-size: 13.5px; }
+  }
+
+  /* Large desktop: a bit more breathing room */
+  @media (min-width: 1200px){
+    .main-card{ padding: 28px 26px 30px; }
+    .title-row h1{ font-size: 30px; }
+  }
+</style>
+  </head>
+  <body>
+    <div id="ubgHeader" class="app-header">
+      <div class="header-left">
+        <!--$-->
+        <button aria-label="Open/Close sidebar" class="sidebar-toggle-btn">
+          <span role="img" aria-hidden="true" class="icon icon-close-nav icon-size-20"></span>
+        </button>
+        <a href="/">
+          <div class="site-logo">
+            <div class="logo-icon">
+              <img src="/cartoon.png" alt="CrazyGames" class="logo-image">
+            </div>
+            <img src="/logo-txt.png" alt="CrazyGames" id="logoTextSvg" class="logo-text">
+          </div>
+        </a>
+        <!--/$-->
+      </div>
+      <form class="search-form desktop-layout" autocomplete="off">
+        <div class="search-input-wrapper">
+          <input class="search-input search-field desktop-layout" id="search-input" placeholder="Search games and categories" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other" data-1p-ignore="true" data-bwignore="true" data-form="false" aria-autocomplete="none">
+          <div class="icon-box">
+            <span role="img" aria-hidden="true" class="icon icon-search icon-size-20"></span>
+          </div>
+          <div id="search-suggestions" class="search-results-dropdown hidden"></div>
+        </div>
+      </form>
+      <div class="header-right">
+        <a href="/all-games/" aria-label="All Games" class="btn btn-link-white btn-header-icon btn-header-icon-desktop">
+          <img src="/assest/icon/joystick-game-control-svgrepo-com.svg" alt="All Games">
+          <span>All Games</span>
+        </a>
+        <a href="/category/popular/" aria-label="All Category" class="btn btn-link-white btn-header-icon btn-header-icon-desktop">
+          <img src="/assest/icon/category-svgrepo-com.svg" alt="All Category">
+          <span>All Categories</span>
+        </a>
+        <a href="/setting/" aria-label="Setting" class="btn btn-link-white btn-header-icon btn-header-icon-desktop setting-icon">
+          <img src="/assest/icon/settings-cog-line-svgrepo-com.svg" alt="Setting">
+        </a>
+      </div>
+    </div>
+    <nav id="mainNav" class="sidebar sidebar-desktop">
+      <div class="sidebar-container" id="sidebarContainer">
+        <div class="sidebar-link sidebar-link-active">
+          <img src="/assest/icon/home-smile-svgrepo-com.svg" loading="lazy" alt="Home icon">
+          <div class="sidebar-label">Home</div>
+        </div>
+        <a aria-label="Action Games" href="/category/action/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/flash-filled-svgrepo-com.svg" loading="lazy" alt="Action icon">
+            <div class="sidebar-label">Action</div>
+          </div>
+        </a>
+        <a aria-label="Adventure Games" href="/category/adventure/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/adventure-colour-svgrepo-com.svg" loading="lazy" alt="Adventure icon">
+            <div class="sidebar-label">Adventure</div>
+          </div>
+        </a>
+        <a aria-label="Arcade Games" href="/category/arcade/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/gamer-joystick-controller-svgrepo-com.svg" loading="lazy" alt="Arcade icon">
+            <div class="sidebar-label">Arcade</div>
+          </div>
+        </a>
+        <a aria-label="Basketball Games" href="/category/basketball-games/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/basketball-2-svgrepo-com.svg" loading="lazy" alt="Basketball icon">
+            <div class="sidebar-label">Basketball</div>
+          </div>
+        </a>
+        <a aria-label="Bike Games" href="/category/bike/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/bike-svgrepo-com.svg" loading="lazy" alt="Bike icon">
+            <div class="sidebar-label">Bike</div>
+          </div>
+        </a>
+        <a aria-label="Multiplayer Games" href="/category/multiplayer/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/group-filled-persons-svgrepo-com.svg" loading="lazy" alt="Multiplayer icon">
+            <div class="sidebar-label">Multiplayer</div>
+          </div>
+        </a>
+        <div class="sidebar-divider" role="separator"></div>
+        <a aria-label="Boys Games" href="/category/boys-games/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/boy-svgrepo-com.svg" loading="lazy" alt="Boys icon">
+            <div class="sidebar-label">Boys</div>
+          </div>
+        </a>
+        <a aria-label="Car Games" href="/category/car/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/car-sport-svgrepo-com.svg" loading="lazy" alt="Car icon">
+            <div class="sidebar-label">Car</div>
+          </div>
+        </a>
+        <a aria-label="Fighting Games" href="/category/fighting/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/boxing-fighter-svgrepo-com.svg" loading="lazy" alt="Fighting icon">
+            <div class="sidebar-label">Fighting</div>
+          </div>
+        </a>
+        <a aria-label="Girls Games" href="/category/girls-games/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/girl-svgrepo-com.svg" loading="lazy" alt="Girls icon">
+            <div class="sidebar-label">Girls</div>
+          </div>
+        </a>
+        <a aria-label="Horror Games" href="/category/horror/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/ghost-1-svgrepo-com.svg" loading="lazy" alt="Horror icon">
+            <div class="sidebar-label">Horror</div>
+          </div>
+        </a>
+        <a aria-label="Idle Games" href="/category/idle/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/light-bulb-idea-svgrepo-com.svg" loading="lazy" alt="Idle icon">
+            <div class="sidebar-label">Idle</div>
+          </div>
+        </a>
+        <a aria-label="IO Games" href="/category/io-games/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/light-io-svgrepo-com.svg" loading="lazy" alt="IO icon">
+            <div class="sidebar-label">IO</div>
+          </div>
+        </a>
+        <a aria-label="Platformer Games" href="/category/platformer/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/layers-3-svgrepo-com.svg" loading="lazy" alt="Platformer icon">
+            <div class="sidebar-label">Platformer</div>
+          </div>
+        </a>
+        <a aria-label="Puzzle Games" href="/category/puzzle/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/puzzle-svgrepo-com.svg" loading="lazy" alt="Puzzle icon">
+            <div class="sidebar-label">Puzzle</div>
+          </div>
+        </a>
+        <a aria-label="Racing Games" href="/category/racing/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/racing-flag-svgrepo-com.svg" loading="lazy" alt="Racing icon">
+            <div class="sidebar-label">Racing</div>
+          </div>
+        </a>
+        <a aria-label="Shooting Games" href="/category/shooting/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/gun-svgrepo-com.svg" loading="lazy" alt="Shooting icon">
+            <div class="sidebar-label">Shooting</div>
+          </div>
+        </a>
+        <a aria-label="Skill Games" href="/category/skill/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/science-svgrepo-com.svg" loading="lazy" alt="Skill icon">
+            <div class="sidebar-label">Skill</div>
+          </div>
+        </a>
+        <a aria-label="Sports Games" href="/category/sports/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/sports-volleyball-solid-svgrepo-com.svg" loading="lazy" alt="Sports icon">
+            <div class="sidebar-label">Sports</div>
+          </div>
+        </a>
+        <a aria-label="Strategy Games" href="/category/strategy/">
+          <div class="sidebar-link">
+            <img src="/assest/icon/skill-svgrepo-com.svg" loading="lazy" alt="Strategy icon">
+            <div class="sidebar-label">Strategy</div>
+          </div>
+        </a>
+        <div class="sidebar-divider" role="separator"></div>
+        <div id="sidebar-hidden" class="sidebar-footer">
+          <button class="contact-btn">
+            <span role="img" aria-hidden="true" class="mail-icon"></span>Contact us </button>
+          <a aria-label="About us Games" href="/about-us/">
+            <div class="sidebar-link">
+              <img src="/assest/icon/about-svgrepo-com.svg" loading="lazy" alt="About us icon">
+              <div class="sidebar-label">About us</div>
+            </div>
+          </a>
+          <a aria-label="DMCA" href="/dmca/">
+            <div class="sidebar-link">
+              <img src="/assest/icon/lock-svgrepo-com.svg" loading="lazy" alt="DMCA icon">
+              <div class="sidebar-label">DMCA</div>
+            </div>
+          </a>
+          <a aria-label="Privacy Policy" href="/privacy-policy/">
+            <div class="sidebar-link">
+              <img src="/assest/icon/privacy-tips-svgrepo-com.svg" loading="lazy" alt="Privacy Policy icon">
+              <div class="sidebar-label">Privacy Policy</div>
+            </div>
+          </a>
+          <a aria-label="Term of Use" href="/term-of-use/">
+            <div class="sidebar-link">
+              <img src="/assest/icon/file-text-svgrepo-com.svg" loading="lazy" alt="Term of Use icon">
+              <div class="sidebar-label">Term of Use</div>
+            </div>
+          </a>
+          <a aria-label="FAQs" href="/faqs/">
+            <div class="sidebar-link">
+              <img src="/assest/icon/question-mark-svgrepo-com.svg" loading="lazy" alt="FAQs icon">
+              <div class="sidebar-label">FAQs</div>
+            </div>
+          </a>
+          <div class="copyright">©
+            <!-- -->2026
+            <!-- --> UnblockedGames
+          </div>
+        </div>
+      </div>
+      </div>
+    </nav>
+     <div id="skrHeader" class="Header_mobile-43dhd mobile-nav-layout">
+    <div class="Header_left-43dhd"><!--$--><a href="/">
+        <div class="site-logo">
+          <div class="logo_icon-48dhd"><img src="/favicon.png" alt="sitenamehere" class="logo_image-48dhd">
+          </div> <img src="/logo-txt.png" alt="CrazyGames" id="logoTextSvg" class="logo_image-49dhd">
+        </div>
+      </a><!--/$--></div>
+    <div class="header-right">
+      <button id="mobile-search-button" type="button" aria-label="Open search"
+        class="btn btn-link-white btn-header-icon btn-header-icon-desktop mobile-search-button">
+        <span class="icon icon-search icon-size-20"></span>
+      </button>
+      <a href="/all-games/" aria-label="All Games"
+        class="btn btn-link-white btn-header-icon btn-header-icon-desktop btskr-icon"><img
+          src="/assest/icon/joystick-game-control-svgrepo-com.svg" alt="All Games"></a>
+      <a href="/popular/" aria-label="Popular Games"
+        class="btn btn-link-white btn-header-icon btn-header-icon-desktop btskr-icon"><img
+          src="/assest/icon/category-svgrepo-com.svg" alt="Popular Games"></a>
+      <a href="/setting/" aria-label="Setting"
+        class="btn btn-link-white btn-header-icon btn-header-icon-desktop setting-icon"><img
+          src="/assest/icon/settings-cog-line-svgrepo-com.svg" alt="Setting"></a>
+    </div>
+  </div> 
+  <div id="mobile-search-popup" class="mobile-search-popup" aria-hidden="true">
+    <div class="mobile-search-popup-panel">
+      <div class="mobile-search-popup-header">
+        <h2>Search Games</h2>
+        <button id="mobile-search-close" type="button" aria-label="Close search"
+          class="mobile-search-close">×</button>
+      </div>
+      <form id="mobile-search-form" class="mobile-search-form" autocomplete="off">
+        <input id="mobile-search-input" class="search-input mobile-search-field"
+          placeholder="Search games and categories" type="text" autocomplete="off" autocorrect="off"
+          autocapitalize="off" spellcheck="false" aria-label="Search games and categories">
+        <button type="submit" class="btn btn-link-white mobile-search-submit">Search</button>
+      </form>
+      <p class="mobile-search-note">Type a game name and press Enter.</p>
+    </div>
+  </div>
+    <main id="layoutMain" class="main-layout layout-desktop layout-sidebar-collapsed layout-sidebar-expanded">
+      <div id="search-results-page" class="search-results-page" aria-live="polite">
+        <div class="search-results-header">
+          <div>
+            <h2 id="search-results-title" class="search-results-title"></h2>
+            <p id="search-results-note" class="search-results-note"></p>
+          </div>
+          <button id="search-results-close" class="search-results-close" type="button" aria-label="Close search results">Close</button>
+        </div>
+        <div id="search-results-grid" class="search-results-grid"></div>
+      </div>
+      <br>
+      <div>
+        <div class="n298 n411 n149 n397 n382">
+          <div class="n282 n283 n262">
+            <div class="desktopVersion">
+            <ul class="n159">
+              <li class="n153 n158">
+                <div class="n156" id="gameFrameWrapper">
+                  <iframe data-testid="test_app_frame" id="test_app_frame" allowfullscreen=""
+                    allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; accelerometer; magnetometer; gyroscope; microphone *"
+                    name="gameFrame" scrolling="no"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation"
+                    src="https://basketball-games.xyz/10-minutes-till-dawn" style="width: 100%; height: 100%; border: none;">
+                  </iframe>
+                </div>
+                <div class="n152">
+                  <div class="n160">
+                    <div class="n161">
+                      <img srcset="/assest/images/codex-1-small@2x.webp 1x, /assest/images/codex-1-small@2x.webp 2x"
+                        alt="10 Minutes Till Dawn" title="10 Minutes Till Dawn">
+                    </div>
+                    <div class="n154">
+                      <h2 class="n162">10 Minutes Till Dawn Unblocked</h2>
+                    </div>
+                  </div>
+                  <div class="n151"><div class="reaction-group">
+                        <button class="reaction-btn like-btn">
+                          <img src="/assest/icon/like-svgrepo-com.svg" alt="Like">
+                          <span class="like-count">13K</span>
+                        </button>
+                        <button class="reaction-btn dislike-btn">
+                          <img src="/assest/icon/dislike-svgrepo-com.svg" alt="Dislike">
+                        </button>
+                      </div>
+                      <!-- CONTROLS -->
+                      <button class="border-btn controls-btn" title="Controls">
+                        <img src="/assest/icon/game-controller-794-svgrepo-com.svg" alt="Controls">
+                      </button>
+                      <!-- SHARE -->
+                      <button class="border-btn share-btn" title="Share">
+                        <img src="/assest/icon/share-arrow-svgrepo-com.svg" alt="Share">
+                      </button>
+                      <!-- REFRESH -->
+                      <button class="border-btn refresh-btn" title="Refresh">
+                        <img src="/assest/icon/refresh-svgrepo-com.svg" alt="Refresh">
+                      </button>
+                      <!-- FULLSCREEN -->
+                      <button class="border-btn fullscreen-btn" title="Fullscreen">
+                        <svg fill="#ffffff" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14yq2cq" focusable="false" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M4 2C2.89543 2 2 2.89543 2 4V8C2 8.55228 2.44772 9 3 9C3.55228 9 4 8.55228 4 8V5.41421L7.79289 9.20711C8.18342 9.59763 8.81658 9.59763 9.20711 9.20711C9.59763 8.81658 9.59763 8.18342 9.20711 7.79289L5.41421 4H8C8.55228 4 9 3.55228 9 3C9 2.44772 8.55228 2 8 2H4ZM16 2C15.4477 2 15 2.44772 15 3C15 3.55228 15.4477 4 16 4H18.5858L14.7929 7.79289C14.4024 8.18342 14.4024 8.81658 14.7929 9.20711C15.1834 9.59763 15.8166 9.59763 16.2071 9.20711L20 5.41421V8C20 8.55228 20.4477 9 21 9C21.5523 9 22 8.55228 22 8V4C22 2.89543 21.1046 2 20 2H16ZM16 20L18.5858 20L14.7929 16.2071C14.4024 15.8166 14.4024 15.1834 14.7929 14.7929C15.1834 14.4024 15.8166 14.4024 16.2071 14.7929L20 18.5858V16C20 15.4477 20.4477 15 21 15C21.5523 15 22 15.4477 22 16V20C22 21.1046 21.1046 22 20 22L16 22C15.4477 22 15 21.5523 15 21C15 20.4477 15.4477 20 16 20ZM4 18.5858L7.79289 14.7929C8.18342 14.4024 8.81658 14.4024 9.20711 14.7929C9.59763 15.1834 9.59763 15.8166 9.20711 16.2071L5.41421 20H8C8.55228 20 9 20.4477 9 21C9 21.5523 8.55228 22 8 22H4C2.89543 22 2 21.1046 2 20V16C2 15.4477 2.44772 15 3 15C3.55228 15 4 15.4477 4 16L4 18.5858Z"></path>
+                        </svg>
+                      </button>
+                  </div>
+                </div>
+              </li>
+              <li class="n131 ad-desktop-only">
+                <div class="n126 n178 vertical">
+                  <div class="n132"></div>
+                  <span class="n129">Advertisement</span>
+                </div>
+              </li>
+              <li class="n130">
+                <div class="n126 vertical">
+                  <div class="n132"></div>
+                  <span class="n129">Advertisement</span>
+                </div>
+              </li>
+              <li class="n127">
+                <div class="n126 n171 horizontal">
+                  <div class="n132"></div>
+                  <span class="n129">Advertisement</span>
+                </div>
+              </li>
+            </ul><br>
+            </div>
+            <div class="mobileVersion">
+                <div class="game-card-wrap">
+    <div class="game-card">
+
+      <div class="thumb">
+        <img src="https://basket-random.pro/assets/images/1v1-lol@2x.webp" alt="Game thumbnail">
+      </div>
+
+      <h1>1v1.LOL</h1>
+
+      <div class="meta-row">
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01z"/></svg>
+          8.3/10
+        </span>
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7v8l10-12h-7z"/></svg>
+          Action
+        </span>
+      </div>
+
+      <button class="play-btn" id="playBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        Play now
+      </button>
+
+      <div class="reactions-row">
+        <div class="reaction-group">
+          <button class="reaction-btn like-btn">
+                          <img src="/assest/icon/like-svgrepo-com.svg" alt="Like">
+                          <span class="like-count">13K</span>
+                        </button>
+                        <button class="reaction-btn dislike-btn">
+                          <img src="/assest/icon/dislike-svgrepo-com.svg" alt="Dislike">
+                        </button>
+                      </div>
+                      <!-- CONTROLS -->
+                      <button class="border-btn controls-btn" title="Controls">
+                        <img src="/assest/icon/game-controller-794-svgrepo-com.svg" alt="Controls">
+                      </button>
+                      <!-- SHARE -->
+                      <button class="border-btn share-btn" title="Share">
+                        <img src="/assest/icon/share-arrow-svgrepo-com.svg" alt="Share">
+                      </button>
+                      <!-- REFRESH -->
+                      <button class="border-btn refresh-btn" title="Refresh">
+                        <img src="/assest/icon/refresh-svgrepo-com.svg" alt="Refresh">
+                      </button>
+                      <!-- FULLSCREEN -->
+                      <button class="border-btn fullscreen-btn" title="Fullscreen">
+                        <svg fill="#ffffff" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14yq2cq" focusable="false" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M4 2C2.89543 2 2 2.89543 2 4V8C2 8.55228 2.44772 9 3 9C3.55228 9 4 8.55228 4 8V5.41421L7.79289 9.20711C8.18342 9.59763 8.81658 9.59763 9.20711 9.20711C9.59763 8.81658 9.59763 8.18342 9.20711 7.79289L5.41421 4H8C8.55228 4 9 3.55228 9 3C9 2.44772 8.55228 2 8 2H4ZM16 2C15.4477 2 15 2.44772 15 3C15 3.55228 15.4477 4 16 4H18.5858L14.7929 7.79289C14.4024 8.18342 14.4024 8.81658 14.7929 9.20711C15.1834 9.59763 15.8166 9.59763 16.2071 9.20711L20 5.41421V8C20 8.55228 20.4477 9 21 9C21.5523 9 22 8.55228 22 8V4C22 2.89543 21.1046 2 20 2H16ZM16 20L18.5858 20L14.7929 16.2071C14.4024 15.8166 14.4024 15.1834 14.7929 14.7929C15.1834 14.4024 15.8166 14.4024 16.2071 14.7929L20 18.5858V16C20 15.4477 20.4477 15 21 15C21.5523 15 22 15.4477 22 16V20C22 21.1046 21.1046 22 20 22L16 22C15.4477 22 15 21.5523 15 21C15 20.4477 15.4477 20 16 20ZM4 18.5858L7.79289 14.7929C8.18342 14.4024 8.81658 14.4024 9.20711 14.7929C9.59763 15.1834 9.59763 15.8166 9.20711 16.2071L5.41421 20H8C8.55228 20 9 20.4477 9 21C9 21.5523 8.55228 22 8 22H4C2.89543 22 2 21.1046 2 20V16C2 15.4477 2.44772 15 3 15C3.55228 15 4 15.4477 4 16L4 18.5858Z"></path>
+                        </svg>
+                      </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FULLSCREEN GAME OVERLAY -->
+  <div class="game-overlay" id="gameOverlay">
+    <button class="overlay-close" id="closeBtn" aria-label="Exit">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Exit
+    </button>
+    <iframe id="gameFrame" src="https://basketball-games.xyz/drive-mad" allowfullscreen title="Game"></iframe>
+  </div>
+              
+             </div>
+        </div>
+      </div>    
+      <div class="layout-wrapper">
+        <div class="game-main">
+          <div class="game-main-container" id="game-main-container">
+            <div class="page-under-grid">
+              <div class="page-under-games">
+                <div class="page-play-next-title">Play next </div>
+                    <div class="thumb-grid" style="justify-content:center">
+                <a class="thumb-link thumb-responsive" aria-label="10 Minutes Till Dawn" href="/g/10-minutes-till-dawn/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">10 Minutes Till Dawn</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/10-minutes-till-dawn.webp 1x, /assest/images/10-minutes-till-dawn@2x.webp 2x" loading="lazy" title="10 Minutes Till Dawn" alt="10 Minutes Till Dawn" src="/assest/images/10-minutes-till-dawn.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="1010 Color Match" href="/g/1010-color-match/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">1010 Color Match</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/1010-color-match.webp 1x, /assest/images/1010-color-match@2x.webp 2x" loading="lazy" title="1010 Color Match" alt="1010 Color Match" src="/assest/images/1010-color-match.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="12 Minibattles" href="/g/12-minibattles/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">12 Minibattles</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/12-minibattles.webp 1x, /assest/images/12-minibattles@2x.webp 2x" loading="lazy" title="12 Minibattles" alt="12 Minibattles" src="/assest/images/12-minibattles.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Cargo Simulator 2" href="/g/18-wheeler-cargo-simulator-2/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Cargo Simulator 2 </div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-cargo-simulator-2.webp 1x, /assest/images/18-wheeler-cargo-simulator-2@2x.webp 2x" loading="lazy" title="18 Wheeler Cargo Simulator 2" alt="18 Wheeler Cargo Simulator 2" src="/assest/images/18-wheeler-cargo-simulator-2.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Cargo Simulator" href="/g/18-wheeler-cargo-simulator/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Cargo Simulator </div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-cargo-simulator.webp 1x, /assest/images/18-wheeler-cargo-simulator@2x.webp 2x" loading="lazy" title="18 Wheeler Cargo Simulator" alt="18 Wheeler Cargo Simulator" src="/assest/images/18-wheeler-cargo-simulator.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Driving Sim" href="/g/18-wheeler-driving-sim/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Driving Sim</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-driving-sim.webp 1x, /assest/images/18-wheeler-driving-sim@2x.webp 2x" loading="lazy" title="18 Wheeler Driving Sim" alt="18 Wheeler Driving Sim" src="/assest/images/18-wheeler-driving-sim.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Truck Parking" href="/g/18-wheeler-truck-parking/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Truck Parking</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-truck-parking.webp 1x, /assest/images/18-wheeler-truck-parking@2x.webp 2x" loading="lazy" title="18 Wheeler Truck Parking" alt="18 Wheeler Truck Parking" src="/assest/images/18-wheeler-truck-parking.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Truck Parking 2" href="/g/18-wheeler-truck-parking-2/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Truck Parking 2 </div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-truck-parking-2.webp 1x, /assest/images/18-wheeler-truck-parking-2@2x.webp 2x" loading="lazy" title="18 Wheeler Truck Parking 2" alt="18 Wheeler Truck Parking 2" src="/assest/images/18-wheeler-truck-parking-2.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="1v1 Lol" href="/g/1v1-lol/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">1v1 Lol</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/1v1-lol.webp 1x, /assest/images/1v1-lol@2x.webp 2x" loading="lazy" title="1v1 Lol" alt="1v1 Lol" src="/assest/images/1v1-lol.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="2048 Fusion" href="/g/2048-fusion/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">2048 Fusion</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/2048-fusion.webp 1x, /assest/images/2048-fusion@2x.webp 2x" loading="lazy" title="2048 Fusion" alt="2048 Fusion" src="/assest/images/2048-fusion.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="2048" href="/g/2048/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">2048</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/2048.webp 1x, /assest/images/2048@2x.webp 2x" loading="lazy" title="2048" alt="2048" src="/assest/images/2048.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="3 Pandas In Japan" href="/g/3-pandas-in-japan/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">3 Pandas In Japan</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/3-pandas-in-japan.webp 1x, /assest/images/3-pandas-in-japan@2x.webp 2x" loading="lazy" title="3 Pandas In Japan" alt="3 Pandas In Japan" src="/assest/images/3-pandas-in-japan.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="3d Bowling" href="/g/3d-bowling/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">3d Bowling</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/3d-bowling.webp 1x, /assest/images/3d-bowling@2x.webp 2x" loading="lazy" title="3d Bowling" alt="3d Bowling" src="/assest/images/3d-bowling.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="3d Free Kick" href="/g/3d-free-kick/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">3d Free Kick</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/3d-free-kick.webp 1x, /assest/images/3d-free-kick@2x.webp 2x" loading="lazy" title="3d Free Kick" alt="3d Free Kick" src="/assest/images/3d-free-kick.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="4x4 Off Road" href="/g/4x4-off-road/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">4x4 Off Road</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/4x4-off-road.webp 1x, /assest/images/4x4-off-road@2x.webp 2x" loading="lazy" title="4x4 Off Road" alt="4x4 Off Road" src="/assest/images/4x4-off-road.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="99 Balls" href="/g/99-balls/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">99 Balls</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/99-balls.webp 1x, /assest/images/99-balls@2x.webp 2x" loading="lazy" title="99 Balls" alt="99 Balls" src="/assest/images/99-balls.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="99 Nights In The Forest" href="/g/99-nights-in-the-forest/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">99 Nights In The Forest</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/99-nights-in-the-forest.webp 1x, /assest/images/99-nights-in-the-forest@2x.webp 2x" loading="lazy" title="99 Nights In The Forest" alt="99 Nights In The Forest" src="/assest/images/99-nights-in-the-forest.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="A Dance Of Fire And Ice" href="/g/a-dance-of-fire-and-ice/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">A Dance Of Fire And Ice</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/a-dance-of-fire-and-ice.webp 1x, /assest/images/a-dance-of-fire-and-ice@2x.webp 2x" loading="lazy" title="A Dance Of Fire And Ice" alt="A Dance Of Fire And Ice" src="/assest/images/a-dance-of-fire-and-ice.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="A Small World Cup" href="/g/a-small-world-cup/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">A Small World Cup</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/a-small-world-cup.webp 1x, /assest/images/a-small-world-cup@2x.webp 2x" loading="lazy" title="A Small World Cup" alt="A Small World Cup" src="/assest/images/a-small-world-cup.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Achievement Unlocked" href="/g/achievement-unlocked/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Achievement Unlocked</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/achievement-unlocked.webp 1x, /assest/images/achievement-unlocked@2x.webp 2x" loading="lazy" title="Achievement Unlocked" alt="Achievement Unlocked" src="/assest/images/achievement-unlocked.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adam And Eve 5 Part 2" href="/g/adam-and-eve-5-part-2/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adam And Eve 5 Part 2</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adam-and-eve-5-part-2.webp 1x, /assest/images/adam-and-eve-5-part-2@2x.webp 2x" loading="lazy" title="Adam And Eve 5 Part 2" alt="Adam And Eve 5 Part 2" src="/assest/images/adam-and-eve-5-part-2.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adam And Eve 5 Part 1" href="/g/adam-and-eve-5-part-1/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adam And Eve 5 Part 1</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adam-and-eve-5-part-1.webp 1x, /assest/images/adam-and-eve-5-part-1@2x.webp 2x" loading="lazy" title="Adam And Eve 5 Part 1" alt="Adam And Eve 5 Part 1" src="/assest/images/adam-and-eve-5-part-1.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adam And Eve 6" href="/g/adam-and-eve-6/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adam And Eve 6</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adam-and-eve-6.webp 1x, /assest/images/adam-and-eve-6@2x.webp 2x" loading="lazy" title="Adam And Eve 6" alt="Adam And Eve 6" src="/assest/images/adam-and-eve-6.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adam And Eve 7" href="/g/adam-and-eve-7/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adam And Eve 7</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adam-and-eve-7.webp 1x, /assest/images/adam-and-eve-7@2x.webp 2x" loading="lazy" title="Adam And Eve 7" alt="Adam And Eve 7" src="/assest/images/adam-and-eve-7.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adventure Drivers" href="/g/adventure-drivers/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adventure Drivers</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adventure-drivers.webp 1x, /assest/images/adventure-drivers@2x.webp 2x" loading="lazy" title="Adventure Drivers" alt="Adventure Drivers" src="/assest/images/adventure-drivers.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Agarpaper Io" href="/g/agarpaper-io/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Agarpaper Io</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/agarpaper-io.webp 1x, /assest/images/agarpaper-io@2x.webp 2x" loading="lazy" title="Agarpaper Io" alt="Agarpaper Io" src="/assest/images/agarpaper-io.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Alien Hominid Hd" href="/g/alien-hominid-hd/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Alien Hominid Hd</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/alien-hominid-hd.webp 1x, /assest/images/alien-hominid-hd@2x.webp 2x" loading="lazy" title="Alien Hominid Hd" alt="Alien Hominid Hd" src="/assest/images/alien-hominid-hd.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Amazing Strange Rope Police Vice Spider Vegas" href="/g/amazing-strange-rope-police-vice-spider-vegas/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Amazing Strange Rope Police Vice Spider Vegas</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/amazing-strange-rope-police-vice-spider-vegas.webp 1x, /assest/images/amazing-strange-rope-police-vice-spider-vegas@2x.webp 2x" loading="lazy" title="Amazing Strange Rope Police Vice Spider Vegas" alt="Amazing Strange Rope Police Vice Spider Vegas" src="/assest/images/amazing-strange-rope-police-vice-spider-vegas.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Amidst The Sky" href="/g/amidst-the-sky/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Amidst The Sky</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/amidst-the-sky.webp 1x, /assest/images/amidst-the-sky@2x.webp 2x" loading="lazy" title="Amidst The Sky" alt="Amidst The Sky" src="/assest/images/amidst-the-sky.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Amongus Io" href="/g/amongus-io/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Amongus Io</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/amongus-io.webp 1x, /assest/images/amongus-io@2x.webp 2x" loading="lazy" title="Amongus Io" alt="Amongus Io" src="/assest/images/amongus-io.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Among Us" href="/g/among-us/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Among Us</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/among-us.webp 1x, /assest/images/among-us@2x.webp 2x" loading="lazy" title="Among Us" alt="Among Us" src="/assest/images/among-us.webp">
+                </a>
+               
+                </div>
+              </div>
+              <button class="btn btn-contained-purple btn-height50 page-show-more-button">
+                <span role="img" aria-hidden="true" class="Icon_icon__OracF icon Icon_icon-plus__xCUj8 icon-plus Icon_size20__yF8AY icon-size-20"></span>Show More </button>
+            </div>
+            <div class="game-info-container">
+              <div class="page">
+  <div class="top-strip"></div>
+
+  <div class="layout">
+
+    <!-- MAIN INFO CARD -->
+    <div class="main-card">
+      <div class="breadcrumb">
+        <a href="#">Games</a><span class="sep">»</span>
+        <a href="#">Action</a><span class="sep">»</span>
+        <a href="#">Driving</a><span class="sep">»</span>
+        <a href="#">Racing</a><span class="sep">»</span>
+        <span class="current">Duck Life: Space</span>
+      </div>
+
+      <div class="title-row">
+        <h1>Duck Life: Space</h1>
+        <button class="share-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+          Share
+        </button>
+      </div>
+
+      <div class="info-list">
+        <div class="info-row">
+          <span class="label">Rating:</span>
+          <span class="value">9.1</span>
+          <span class="sub">(based on last 6 months)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Released:</span>
+          <span class="value">September 2017</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Game engine:</span>
+          <span class="value">Unity 5.6</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Platforms:</span>
+          <span class="value">Browser (desktop-only), App Store (iOS, Android)</span>
+        </div>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag-pill">Action <span class="count">695</span></span>
+        <span class="tag-pill">Jumping <span class="count">151</span></span>
+        <span class="tag-pill">Space <span class="count">62</span></span>
+        <span class="tag-pill">Racing <span class="count">126</span></span>
+        <span class="tag-pill">Animal <span class="count">219</span></span>
+      </div>
+ 
+    </div>
+
+  </div>
+</div>
+              <div class="game-info game-info-desktop">
+                
+                <div class="game-info-rounded">
+                  <div class="game-info-html description-first" style="margin-block-end:1em">
+                    <p>Deadly Descent is an exciting driving simulator game where you will need to speed your way through impossible-looking obstacles! They are difficult, but not impossible.</p>
+                  </div>
+                  <div class="game-info-html"> Your goal is to reach the finish line, whether you can get through dangerous obstacles or not-so-dangerous ones. Any collision will likely destroy your car. Precision is key to survival, making this game ideal for anyone seeking a thrill. <p></p>
+                    <h2>How to Play Deadly Descent</h2>
+                    <p>Prepare for the most intense, destructive races of your life in Deadly Descent. </p>
+                    <p> You will be on a dirt road track or similar landscapes with nothing but speed in your control. </p>
+                    <p> Most of the races will leave your car completely destroyed, smashed, flipped, torn apart, catapulted off the edge, or worse. But the key is to get there first. Yes, it may sound odd, but your goal is to be the fastest in the race and survive as best you can with a banged-up car rather than suffer a fatal off-road accident. </p>
+                    <p> Keep your speed steady. Going fast will help you reach the finish line quickly, but it can also generate the force to destroy your car if you lose control. </p>
+                    <p> Give yourself enough time to brake and navigate obstacles such as smashing levers, spiked rolling crushers, sporadic crates, and more. If your car flips, you can survive if it gets banged up, no problem. But if it hits any of these objects at full force, you are likely not going to make it out of the round in one piece. </p>
+                    <p> Each round offers new obstacles to overcome, challenging your reflexes and strategy as you push your car to the limit.</p>
+                    <h3>Features</h3>
+                    <ul>
+                      <li>Destructible vehicles</li>
+                      <li>Refined physics and detailed graphics</li>
+                      <li>Unique tracks and endless challenges </li>
+                      <li>The experience is highly realistic while remaining optimized to run smoothly on both phones and computers.</li>
+                    </ul>
+                    <h3>More Games Like This</h3>
+                    <p>Satiate your need for speed with a few more driving games from our vast selection. If you want to change vehicles, <a target="_blank" href="https://www.crazygames.com/game/moto-x3m">Moto X3M</a> is one of our most popular. Get back in the car in <a target="_blank" href="https://www.crazygames.com/game/drift-hunters">Drift Hunters</a>, another car game where speeding is nearly required. If you're in the mood for a classic, try <a target="_blank" href="https://www.crazygames.com/game/polytrack">Polytrack</a>. </p>
+                  </div>
+                  <h3 class="MuiBox-root mui-box section-heading">Last Updated</h3>
+                  <p class="MuiBox-root mui-box section-note">Jan 20, 2026 </p>
+                  <div class="game-info-html">
+                    <h3>Controls</h3>
+                    <p>
+                      <strong>PC Controls</strong>
+                    </p>
+                    <ul>
+                      <li>WASD / arrow keys = control the car </li>
+                      <li>C = change camera view</li>
+                    </ul>
+                    <p>
+                      <strong>Mobile Controls</strong>
+                    </p>
+                    <p> Use the on-screen buttons and on-screen steering wheel to play the game. </p>
+                  </div>
+                  <h2 class="MuiBox-root mui-box faq-heading">FAQ</h2>
+                  <div class="game-info-html game-info-margin-end">
+                    <div>
+                      <h3>Can you drive with a banged up car in Deadly Descent?</h3>
+                      <div>
+                        <p>Yes, you can drive with a banged-up car in Deadly Descent. If your car is not completely destroyed, it can keep driving.</p>
+                      </div>
+                    </div>
+                    <div>
+                      <h3>Is Deadly Descent mobile friendly? </h3>
+                      <div>
+                        <p>Deadly Descent is mobile-friendly and can be played both on your phone and on desktop. </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="page-right-sidebar">
+            <div class="page-right-mpu">
+              <div style="width:300px;display:block;margin-bottom:24px;position:relative">
+                <div style="text-align:center;width:100%;height:100%;position:relative;display:block;background:transparent">
+                  <div style="width:300px;height:250px;margin:auto;overflow:hidden;position:relative;background:rgba(71, 73, 103, 0.10);box-shadow:inset 0 0 0 1px #28293D">
+                    <div class="MuiBox-root mui-box ad-box" id="div-gpt-ad-1590672182999-0" style="position:absolute;top:0;left:0;z-index:1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="page-right-grid">
+              <div class="page-play-next-title">Play next</div>
+              <div class="thumb-grid" style="justify-content:center">
+                <a class="thumb-link thumb-responsive" aria-label="10 Minutes Till Dawn" href="/g/10-minutes-till-dawn/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">10 Minutes Till Dawn</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/10-minutes-till-dawn.webp 1x, /assest/images/10-minutes-till-dawn@2x.webp 2x" loading="lazy" title="10 Minutes Till Dawn" alt="10 Minutes Till Dawn" src="/assest/images/10-minutes-till-dawn.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="1010 Color Match" href="/g/1010-color-match/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">1010 Color Match</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/1010-color-match.webp 1x, /assest/images/1010-color-match@2x.webp 2x" loading="lazy" title="1010 Color Match" alt="1010 Color Match" src="/assest/images/1010-color-match.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="12 Minibattles" href="/g/12-minibattles/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">12 Minibattles</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/12-minibattles.webp 1x, /assest/images/12-minibattles@2x.webp 2x" loading="lazy" title="12 Minibattles" alt="12 Minibattles" src="/assest/images/12-minibattles.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Cargo Simulator 2" href="/g/18-wheeler-cargo-simulator-2/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Cargo Simulator 2 </div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-cargo-simulator-2.webp 1x, /assest/images/18-wheeler-cargo-simulator-2@2x.webp 2x" loading="lazy" title="18 Wheeler Cargo Simulator 2" alt="18 Wheeler Cargo Simulator 2" src="/assest/images/18-wheeler-cargo-simulator-2.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Cargo Simulator" href="/g/18-wheeler-cargo-simulator/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Cargo Simulator </div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-cargo-simulator.webp 1x, /assest/images/18-wheeler-cargo-simulator@2x.webp 2x" loading="lazy" title="18 Wheeler Cargo Simulator" alt="18 Wheeler Cargo Simulator" src="/assest/images/18-wheeler-cargo-simulator.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Driving Sim" href="/g/18-wheeler-driving-sim/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Driving Sim</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-driving-sim.webp 1x, /assest/images/18-wheeler-driving-sim@2x.webp 2x" loading="lazy" title="18 Wheeler Driving Sim" alt="18 Wheeler Driving Sim" src="/assest/images/18-wheeler-driving-sim.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Truck Parking" href="/g/18-wheeler-truck-parking/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Truck Parking</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-truck-parking.webp 1x, /assest/images/18-wheeler-truck-parking@2x.webp 2x" loading="lazy" title="18 Wheeler Truck Parking" alt="18 Wheeler Truck Parking" src="/assest/images/18-wheeler-truck-parking.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="18 Wheeler Truck Parking 2" href="/g/18-wheeler-truck-parking-2/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">18 Wheeler Truck Parking 2 </div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/18-wheeler-truck-parking-2.webp 1x, /assest/images/18-wheeler-truck-parking-2@2x.webp 2x" loading="lazy" title="18 Wheeler Truck Parking 2" alt="18 Wheeler Truck Parking 2" src="/assest/images/18-wheeler-truck-parking-2.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="1v1 Lol" href="/g/1v1-lol/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">1v1 Lol</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/1v1-lol.webp 1x, /assest/images/1v1-lol@2x.webp 2x" loading="lazy" title="1v1 Lol" alt="1v1 Lol" src="/assest/images/1v1-lol.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="2048 Fusion" href="/g/2048-fusion/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">2048 Fusion</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/2048-fusion.webp 1x, /assest/images/2048-fusion@2x.webp 2x" loading="lazy" title="2048 Fusion" alt="2048 Fusion" src="/assest/images/2048-fusion.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="2048" href="/g/2048/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">2048</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/2048.webp 1x, /assest/images/2048@2x.webp 2x" loading="lazy" title="2048" alt="2048" src="/assest/images/2048.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="3 Pandas In Japan" href="/g/3-pandas-in-japan/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">3 Pandas In Japan</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/3-pandas-in-japan.webp 1x, /assest/images/3-pandas-in-japan@2x.webp 2x" loading="lazy" title="3 Pandas In Japan" alt="3 Pandas In Japan" src="/assest/images/3-pandas-in-japan.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="3d Bowling" href="/g/3d-bowling/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">3d Bowling</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/3d-bowling.webp 1x, /assest/images/3d-bowling@2x.webp 2x" loading="lazy" title="3d Bowling" alt="3d Bowling" src="/assest/images/3d-bowling.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="3d Free Kick" href="/g/3d-free-kick/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">3d Free Kick</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/3d-free-kick.webp 1x, /assest/images/3d-free-kick@2x.webp 2x" loading="lazy" title="3d Free Kick" alt="3d Free Kick" src="/assest/images/3d-free-kick.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="4x4 Off Road" href="/g/4x4-off-road/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">4x4 Off Road</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/4x4-off-road.webp 1x, /assest/images/4x4-off-road@2x.webp 2x" loading="lazy" title="4x4 Off Road" alt="4x4 Off Road" src="/assest/images/4x4-off-road.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="99 Balls" href="/g/99-balls/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">99 Balls</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/99-balls.webp 1x, /assest/images/99-balls@2x.webp 2x" loading="lazy" title="99 Balls" alt="99 Balls" src="/assest/images/99-balls.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="99 Nights In The Forest" href="/g/99-nights-in-the-forest/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">99 Nights In The Forest</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/99-nights-in-the-forest.webp 1x, /assest/images/99-nights-in-the-forest@2x.webp 2x" loading="lazy" title="99 Nights In The Forest" alt="99 Nights In The Forest" src="/assest/images/99-nights-in-the-forest.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="A Dance Of Fire And Ice" href="/g/a-dance-of-fire-and-ice/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">A Dance Of Fire And Ice</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/a-dance-of-fire-and-ice.webp 1x, /assest/images/a-dance-of-fire-and-ice@2x.webp 2x" loading="lazy" title="A Dance Of Fire And Ice" alt="A Dance Of Fire And Ice" src="/assest/images/a-dance-of-fire-and-ice.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="A Small World Cup" href="/g/a-small-world-cup/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">A Small World Cup</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/a-small-world-cup.webp 1x, /assest/images/a-small-world-cup@2x.webp 2x" loading="lazy" title="A Small World Cup" alt="A Small World Cup" src="/assest/images/a-small-world-cup.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Achievement Unlocked" href="/g/achievement-unlocked/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Achievement Unlocked</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/achievement-unlocked.webp 1x, /assest/images/achievement-unlocked@2x.webp 2x" loading="lazy" title="Achievement Unlocked" alt="Achievement Unlocked" src="/assest/images/achievement-unlocked.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adam And Eve 5 Part 2" href="/g/adam-and-eve-5-part-2/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adam And Eve 5 Part 2</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adam-and-eve-5-part-2.webp 1x, /assest/images/adam-and-eve-5-part-2@2x.webp 2x" loading="lazy" title="Adam And Eve 5 Part 2" alt="Adam And Eve 5 Part 2" src="/assest/images/adam-and-eve-5-part-2.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adam And Eve 5 Part 1" href="/g/adam-and-eve-5-part-1/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adam And Eve 5 Part 1</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adam-and-eve-5-part-1.webp 1x, /assest/images/adam-and-eve-5-part-1@2x.webp 2x" loading="lazy" title="Adam And Eve 5 Part 1" alt="Adam And Eve 5 Part 1" src="/assest/images/adam-and-eve-5-part-1.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adam And Eve 6" href="/g/adam-and-eve-6/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adam And Eve 6</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adam-and-eve-6.webp 1x, /assest/images/adam-and-eve-6@2x.webp 2x" loading="lazy" title="Adam And Eve 6" alt="Adam And Eve 6" src="/assest/images/adam-and-eve-6.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adam And Eve 7" href="/g/adam-and-eve-7/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adam And Eve 7</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adam-and-eve-7.webp 1x, /assest/images/adam-and-eve-7@2x.webp 2x" loading="lazy" title="Adam And Eve 7" alt="Adam And Eve 7" src="/assest/images/adam-and-eve-7.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Adventure Drivers" href="/g/adventure-drivers/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Adventure Drivers</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/adventure-drivers.webp 1x, /assest/images/adventure-drivers@2x.webp 2x" loading="lazy" title="Adventure Drivers" alt="Adventure Drivers" src="/assest/images/adventure-drivers.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Agarpaper Io" href="/g/agarpaper-io/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Agarpaper Io</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/agarpaper-io.webp 1x, /assest/images/agarpaper-io@2x.webp 2x" loading="lazy" title="Agarpaper Io" alt="Agarpaper Io" src="/assest/images/agarpaper-io.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Alien Hominid Hd" href="/g/alien-hominid-hd/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Alien Hominid Hd</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/alien-hominid-hd.webp 1x, /assest/images/alien-hominid-hd@2x.webp 2x" loading="lazy" title="Alien Hominid Hd" alt="Alien Hominid Hd" src="/assest/images/alien-hominid-hd.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Amazing Strange Rope Police Vice Spider Vegas" href="/g/amazing-strange-rope-police-vice-spider-vegas/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Amazing Strange Rope Police Vice Spider Vegas</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/amazing-strange-rope-police-vice-spider-vegas.webp 1x, /assest/images/amazing-strange-rope-police-vice-spider-vegas@2x.webp 2x" loading="lazy" title="Amazing Strange Rope Police Vice Spider Vegas" alt="Amazing Strange Rope Police Vice Spider Vegas" src="/assest/images/amazing-strange-rope-police-vice-spider-vegas.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Amidst The Sky" href="/g/amidst-the-sky/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Amidst The Sky</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/amidst-the-sky.webp 1x, /assest/images/amidst-the-sky@2x.webp 2x" loading="lazy" title="Amidst The Sky" alt="Amidst The Sky" src="/assest/images/amidst-the-sky.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Amongus Io" href="/g/amongus-io/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Amongus Io</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/amongus-io.webp 1x, /assest/images/amongus-io@2x.webp 2x" loading="lazy" title="Amongus Io" alt="Amongus Io" src="/assest/images/amongus-io.webp">
+                </a>
+                <a class="thumb-link thumb-responsive" aria-label="Among Us" href="/g/among-us/">
+                  <div class="thumb-label thumb-label-hot">Hot</div>
+                  <div class="thumb-title">Among Us</div>
+                  <img class="thumb-image" loading="lazy" width="273" srcset="/assest/images/among-us.webp 1x, /assest/images/among-us@2x.webp 2x" loading="lazy" title="Among Us" alt="Among Us" src="/assest/images/among-us.webp">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="/assest/js/toph.js"></script>
+    <script src="/assest/js/search.js"></script>
+    <Script>
+      const controlsBtn = document.querySelector(".controls-btn");
+      const shareBtn = document.querySelector(".share-btn");
+      const refreshBtn = document.querySelector(".refresh-btn");
+      const fullscreenBtn = document.querySelector(".fullscreen-btn");
+      const iframe = document.querySelector("iframe");
+      /* CONTROLS SCROLL */
+      controlsBtn.addEventListener("click", () => {
+        const controlsSection = document.querySelector("#controls");
+        if (controlsSection) {
+          controlsSection.scrollIntoView({
+            behavior: "smooth"
+          });
+        }
+      });
+      /* SHARE */
+      shareBtn.addEventListener("click", async () => {
+        try {
+          await navigator.share({
+            title: document.title,
+            text: "Play this game!",
+            url: window.location.href
+          });
+        } catch (err) {
+          navigator.clipboard.writeText(window.location.href);
+          shareBtn.innerHTML = "✓";
+          setTimeout(() => {
+            shareBtn.innerHTML = "🔗";
+          }, 1500);
+        }
+      });
+      /* REFRESH */
+      refreshBtn.addEventListener("click", () => {
+        iframe.src = iframe.src;
+      });
+      /* FULLSCREEN */
+      fullscreenBtn.addEventListener("click", () => {
+        const container = document.querySelector(".game-container");
+        if (container.requestFullscreen) {
+          container.requestFullscreen();
+        }
+      });
+    </Script>
+    <script type="module">
+      import {
+        initializeApp
+      }
+      from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+        runTransaction
+      }
+      from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+      /* FIREBASE CONFIG */
+      const firebaseConfig = {
+        apiKey: "AIzaSyBwyoXZ0zObSvs6dQsuslFoQf58XJZ56r8",
+        authDomain: "unblockedgames-free.firebaseapp.com",
+        databaseURL: "https://unblockedgames-free-default-rtdb.firebaseio.com",
+        projectId: "unblockedgames-free",
+        storageBucket: "unblockedgames-free.firebasestorage.app",
+        messagingSenderId: "733863181516",
+        appId: "1:733863181516:web:0d74cd3b08ca559f869669"
+      };
+      /* INIT */
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      /* AUTO GAME ID */
+      const gameId = "level-devil";
+      /* DB REF */
+      const gameRef = ref(db, "games/" + gameId);
+      /* BUTTONS */
+      const likeBtn = document.querySelector(".like-btn");
+      const dislikeBtn = document.querySelector(".dislike-btn");
+      /* COUNTS */
+      const likeCount = document.querySelector(".like-count");
+      const dislikeCount = document.querySelector(".dislike-count");
+      /* FORMATTER */
+      function formatCount(num) {
+        if (num >= 1000000) {
+          return (num / 1000000).toFixed(1) + "M";
+        }
+        if (num >= 1000) {
+          return (num / 1000).toFixed(1) + "K";
+        }
+        return num;
+      }
+      /* USER REACTION STORAGE */
+      const reactionKey = "reaction-" + gameId;
+      /* LOAD SAVED STATE */
+      const savedReaction = localStorage.getItem(reactionKey);
+      if (savedReaction === "like") {
+        likeBtn.classList.add("active");
+      }
+      if (savedReaction === "dislike") {
+        dislikeBtn.classList.add("active");
+      }
+      /* REALTIME DATABASE */
+      onValue(gameRef, (snapshot) => {
+        const data = snapshot.val();
+        if (!data) {
+          likeCount.innerText = 0;
+          if (dislikeCount) {
+            dislikeCount.innerText = 0;
+          }
+          return;
+        }
+        likeCount.innerText = formatCount(data.likes || 0);
+        if (dislikeCount) {
+          dislikeCount.innerText = formatCount(data.dislikes || 0);
+        }
+      });
+      /* UPDATE REACTION */
+      async function updateReaction(type) {
+        const currentReaction = localStorage.getItem(reactionKey);
+        if (currentReaction === type) {
+          /* REMOVE SAME REACTION */
+          localStorage.removeItem(reactionKey);
+          likeBtn.classList.remove("active");
+          dislikeBtn.classList.remove("active");
+          runTransaction(gameRef, (data) => {
+            if (data == null) {
+              return {
+                likes: 0,
+                dislikes: 0
+              };
+            }
+            if (type === "like") {
+              data.likes = Math.max((data.likes || 0) - 1, 0);
+            }
+            if (type === "dislike") {
+              data.dislikes = Math.max((data.dislikes || 0) - 1, 0);
+            }
+            return data;
+          });
+          return;
+        }
+        /* SAVE NEW REACTION */
+        localStorage.setItem(reactionKey, type);
+        likeBtn.classList.remove("active");
+        dislikeBtn.classList.remove("active");
+        if (type === "like") {
+          likeBtn.classList.add("active");
+        }
+        if (type === "dislike") {
+          dislikeBtn.classList.add("active");
+        }
+        runTransaction(gameRef, (data) => {
+          if (data == null) {
+            data = {
+              likes: 0,
+              dislikes: 0
+            };
+          }
+          /* REMOVE OLD */
+          if (currentReaction === "like") {
+            data.likes = Math.max((data.likes || 0) - 1, 0);
+          }
+          if (currentReaction === "dislike") {
+            data.dislikes = Math.max((data.dislikes || 0) - 1, 0);
+          }
+          /* ADD NEW */
+          if (type === "like") {
+            data.likes = (data.likes || 0) + 1;
+          }
+          if (type === "dislike") {
+            data.dislikes = (data.dislikes || 0) + 1;
+          }
+          return data;
+        });
+      }
+      /* EVENTS */
+      likeBtn.addEventListener("click", () => {
+        updateReaction("like");
+      });
+      dislikeBtn.addEventListener("click", () => {
+        updateReaction("dislike");
+      });
+    </script>
+<script>
+        // Random Games Display Script
+// Displays random games in the .n159 grid based on screen width
+// Refreshes every 10 minutes
+
+class RandomGamesDisplay {
+  constructor() {
+    this.games = [];
+    this.refreshInterval = null;
+    this.init();
+  }
+
+  // Initialize the display
+  async init() {
+    try {
+      await this.loadGames();
+      this.displayRandomGames();
+      this.startRefreshTimer();
+      window.addEventListener('resize', () => this.displayRandomGames());
+    } catch (error) {
+      console.error('Error initializing random games display:', error);
+    }
+  }
+
+  // Load games from JSON
+  async loadGames() {
+    try {
+      let response;
+      try {
+        response = await fetch('/assest/data/games.json');
+        if (!response.ok) throw new Error('Not found');
+      } catch (error) {
+        response = await fetch('assest/data/games.json');
+      }
+      this.games = await response.json();
+      console.log(`Loaded ${this.games.length} games`);
+    } catch (error) {
+      console.error('Error loading games:', error);
+      throw error;
+    }
+  }
+
+  // Get number of games to display based on screen width
+  getGameCount() {
+    const width = window.innerWidth;
+
+    // Based on your CSS media queries
+    if (width < 564) return 3;
+    if (width < 684) return 3;
+    if (width < 834) return 4;
+    if (width < 954) return 5;
+    if (width < 1074) return 6;
+    if (width < 1224) return 7;
+    if (width < 1344) return 8;
+    if (width < 1464) return 8;
+    if (width < 1584) return 10;
+    if (width < 1704) return 11;
+    if (width < 1824) return 12;
+    if (width < 1944) return 13;
+    if (width < 2064) return 14;
+    if (width < 2184) return 15;
+    if (width < 2304) return 16;
+    return 19; // For screens >= 2304px
+  }
+
+  // Get random games
+  getRandomGames(count) {
+    const shuffled = [...this.games].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  }
+
+  // Create a game element
+  createGameElement(game) {
+    const gameDiv = document.createElement('div');
+    gameDiv.className = 'us-grid-game';
+
+    const a = document.createElement('a');
+    a.href = game.href;
+    a.title = game.title;
+    a.className = 'us-game-link';
+
+    const wrapImage = document.createElement('div');
+    wrapImage.className = 'us-wrap-image';
+
+    const img = document.createElement('img');
+    img.src = game.img;
+    img.alt = game.title;
+    img.title = game.title;
+    img.loading = 'lazy';
+    
+    // Create srcset with @2x version
+    const imageName = game.img.replace(/\.(webp|png|jpg|jpeg)$/, '');
+    img.srcset = `${game.img} 1x, ${imageName}@2x.webp 2x`;
+
+    const gameTitle = document.createElement('div');
+    gameTitle.className = 'us-game-title';
+
+    const titleSpan = document.createElement('span');
+    titleSpan.className = 'text-overflow';
+    titleSpan.textContent = game.title;
+
+    const vignette = document.createElement('div');
+    vignette.className = 'GameThumb_gradientVignette__Q04oZ';
+
+    gameTitle.appendChild(titleSpan);
+    wrapImage.appendChild(img);
+    wrapImage.appendChild(gameTitle);
+    a.appendChild(wrapImage);
+    a.appendChild(vignette);
+    gameDiv.appendChild(a);
+
+    return gameDiv;
+  }
+
+  // Display random games in the grid
+  displayRandomGames() {
+    const grid = document.querySelector('.n159');
+    if (!grid) {
+      console.warn('Random games container not found');
+      return;
+    }
+
+    const gameCount = this.getGameCount();
+    const randomGames = this.getRandomGames(gameCount);
+
+    const existingGames = grid.querySelectorAll('div.us-grid-game');
+    existingGames.forEach(element => element.remove());
+
+    randomGames.forEach((game, index) => {
+      const gameElement = this.createGameElement(game);
+      gameElement.style.animationDelay = `${index * 0.05}s`;
+      grid.appendChild(gameElement);
+    });
+
+    console.log(`Displayed ${randomGames.length} random games`);
+  }
+
+  // Start the 10-minute refresh timer
+  startRefreshTimer() {
+    // Refresh every 10 minutes (600000 milliseconds)
+    this.refreshInterval = setInterval(() => {
+      console.log('Refreshing random games...');
+      this.displayRandomGames();
+    }, 600000); // 10 minutes
+
+    console.log('Refresh timer started - will refresh every 10 minutes');
+  }
+
+  // Stop the refresh timer (useful for cleanup)
+  stopRefreshTimer() {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+      console.log('Refresh timer stopped');
+    }
+  }
+
+  // Manual refresh method (can be called from console or buttons)
+  refresh() {
+    console.log('Manual refresh triggered');
+    this.displayRandomGames();
+  }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    window.randomGamesDisplay = new RandomGamesDisplay();
+  });
+} else {
+  window.randomGamesDisplay = new RandomGamesDisplay();
+}
+
+</script>
+ <script>
+    const playBtn = document.getElementById('playBtn');
+    const overlay = document.getElementById('gameOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+    const gameFrame = document.getElementById('gameFrame');
+
+    const GAME_URL = 'https://basketball-games.xyz/drive-mad';
+
+    playBtn.addEventListener('click', async () => {
+      gameFrame.src = GAME_URL;
+      overlay.classList.add('active');
+
+      try {
+        if (overlay.requestFullscreen) {
+          await overlay.requestFullscreen();
+        } else if (overlay.webkitRequestFullscreen) {
+          overlay.webkitRequestFullscreen();
+        }
+      } catch (e) {}
+
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          await screen.orientation.lock('landscape');
+        }
+      } catch (e) {}
+    });
+
+    function closeGame() {
+      overlay.classList.remove('active');
+      gameFrame.src = 'https://basketball-games.xyz/drive-mad';
+      try {
+        if (screen.orientation && screen.orientation.unlock) {
+          screen.orientation.unlock();
+        }
+      } catch (e) {}
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+    }
+
+    closeBtn.addEventListener('click', closeGame);
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement && overlay.classList.contains('active')) {
+        closeGame();
+      }
+    });
+  </script>
+  </body>
+</html>
