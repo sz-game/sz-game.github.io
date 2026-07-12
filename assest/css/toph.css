@@ -6,7 +6,7 @@
       max-width: var(--page-max-width);
       margin: 36px auto 0;
       padding: 0 var(--page-gutter);
-      width: 98%;
+      width: 100%;
     }
 
     .game-slider {
@@ -181,8 +181,7 @@
     @media (max-width: 1360px) {
       .game-slider-wrap {
         max-width: 1240px;
-        padding-left: 14px;
-        padding-right: 14px;
+        
       }
 
       .game-slide {

@@ -145,6 +145,9 @@ body{
   opacity:1;
   transform: translateY(0);
 }
+.card:hover {
+  border: 2px solid yellow;
+}
 .card-small .card-label,
 .card-wide .card-label{
   font-size: 13px;
@@ -203,7 +206,7 @@ body{
 
 .rc-track{
   display:flex;
-  gap: 10px;
+  gap: 8px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -244,8 +247,11 @@ body{
 .rc-card:hover .rc-card-label{
   opacity:1;
   transform: translateY(0);
+  
 }
-
+.rc-card:hover {
+  border: 2px solid yellow;
+}
 .rc-badge-originals{
   position:absolute;
   top:8px; left:8px;
@@ -299,7 +305,14 @@ body{
 .sc-card img{
   width:100%; height:100%; object-fit:fill; display:block;
 }
-
+.sc-card:hover .rc-card-label{
+  opacity:1;
+  transform: translateY(0);
+  
+}
+.sc-card:hover {
+  border: 2px solid yellow;
+}
 .sc-badge-top{
   position:absolute;
   top:8px; left:8px;
@@ -370,6 +383,9 @@ body{
   opacity:1;
   transform: translateY(0);
 }
+.wc-card:hover {
+  border: 2px solid yellow;
+}
 
 .wc-badge-top{
   position:absolute;
@@ -406,4 +422,146 @@ body{
 .sc-nav-arrow.left .nav-icon,
 .wc-nav-arrow.left .nav-icon{
   transform: scaleX(-1);
+}
+
+
+/* =========================================================
+   RESPONSIVE CARD SIZES — all 4 sliders
+   Cards grow in size as the viewport gets wider, across
+   15 breakpoints. Below 564px the existing small-phone
+   sizes (from the @media max-width:640px block) apply.
+========================================================= */
+@media (min-width: 374px){
+  .carousel{grid-auto-columns: 123px;}
+  .card-featured{ width: 246.6px;}
+  .card-wide{ width:246.6px; height: 246.6px;}
+  .card-small{width: 123.04px; height: 123.04px;}
+  .rc-card{ width:123.03px; height:123.04px; }
+  .sc-card{ width:93.54px; height:139.9px; }
+  .wc-card{ width:359.4px; height:200.7px; }
+}
+
+
+@media (min-width: 469px){
+  .rc-card{ width:123.03px; height:123.04px; }
+  .sc-card{ width:139.01px; height:208.38px; }
+  .wc-card{ width:278.06px; height:176.74px; }
+}
+
+@media (min-width: 639px){
+  .rc-card{ width:123.03px; height:123.04px; }
+  .sc-card{ width:139.01px; height:208.38px; }
+  .wc-card{ width:278.06px; height:176.74px; }
+}
+
+@media (min-width: 834px){
+  .rc-card{ width:176.57px; height:99.19px; }
+  .sc-card{ width:218px; height:348px; }
+  .wc-card{ width:374px; height:250px; }
+}
+
+@media (min-width: 954px){
+  .rc-card{ width:176.57px; height:99.19px; }
+  .sc-card{ width:176.57px; height:264.84px; }
+  .wc-card{ width:360.61px; height:202.59px; }
+}
+
+@media (min-width: 1074px){
+  .rc-card{ width:204.77px; height:115.19px; }
+  .sc-card{ width:204.77px; height:306.99px; }
+  .wc-card{ width:417.22px; height:234.54px; }
+}
+
+@media (min-width: 1224px){
+  .rc-card{ width:203.09px; height:114.44px; }
+  .sc-card{ width:203.09px; height:304.23px; }
+  .wc-card{ width:412.71px; height:232.21px; }
+}
+
+@media (min-width: 1344px){
+  .rc-card{ width:203.09px; height:114.44px; }
+  .sc-card{ width:203.09px; height:304.23px; }
+  .wc-card{ width:412.71px; height:232.21px; }
+}
+
+@media (min-width: 1464px){
+  .rc-card{ width:246.14px; height:138.35px; }
+  .sc-card{ width:246.14px; height:369.13px; }
+  .wc-card{ width:500.16px; height:281.05px; }
+}
+
+@media (min-width: 1584px){
+  .rc-card{ width:246.14px; height:138.35px; }
+  .sc-card{ width:246.14px; height:369.13px; }
+  .wc-card{ width:500.16px; height:281.05px; }
+}
+
+@media (min-width: 1704px){
+  .rc-card{ width:243.41px; height:137.22px; }
+  .sc-card{ width:243.41px; height:364.57px; }
+  .wc-card{ width:493.15px; height:277.52; }
+}
+
+@media (min-width: 1824px){
+  .rc-card{ width:243.41px; height:137.22px; }
+  .sc-card{ width:243.41px; height:364.57px; }
+  .wc-card{ width:493.15px; height:277.52px; }
+}
+
+@media (min-width: 1944px){
+  .carousel{grid-auto-columns: 266px;}
+  .card-featured{ width: 544px;}
+  .card-wide{ width:544px; height: 544px;}
+  .card-small{width: 272px; height: 272px;}
+  .rc-card{ width:268.8px; height:151.35px; }
+  .sc-card{ width:268.4px; height:402.8px; }
+  .wc-card{ width:544.58px; height:306.29px; }
+}
+
+@media (min-width: 2064px){
+  .rc-card{ width:268.8px; height:151.350px; }
+  .sc-card{ width:268.4px; height:402.8px; }
+  .wc-card{ width:532.92px; height:300px; }
+}
+
+@media (min-width: 2184px){
+  .rc-card{ width:263.06px; height:147px; }
+  .sc-card{ width:263.06px; height:394.36px; }
+  .wc-card{ width:532.92px; height:300px; }
+}
+
+@media (min-width: 2304px){
+  .rc-card{ width:297.08px; height:166.89px; }
+  .sc-card{ width:297.08px; height:445.63px; }
+  .wc-card{ width:601.84px; height:338.11px; }
+}
+
+@media (min-width: 2716px){
+  .rc-card{ width:319.63px; height:180.38px; }
+  .sc-card{ width:319.63px; height:478.53px; }
+  .wc-card{ width:645.33px; height:363.37px; }
+}
+
+@media (min-width: 3016px){
+  .rc-card{ width:321.49px; height:181.31px; }
+  .sc-card{ width:321.4px; height:481.43px; }
+  .wc-card{ width:648.9px; height:365.25px; }
+}
+
+@media (min-width: 4035px){
+  .rc-card{ width:431.38px; height:242.7px; }
+  .sc-card{ width:431.38px; height:646.67px; }
+  .wc-card{ width:870.7px; height:489.5px; }
+}
+
+@media (min-width: 6072px){
+  .rc-card{ width:651.19px; height:365.48px; }
+  .sc-card{ width:651.19px; height:977.18px; }
+  .wc-card{ width:1314.3px; height:738px; }
+}
+
+@media (min-width: 8110px){
+  .rc-card{ width:871.19px; height:448.25px; }
+  .sc-card{ width:871.19px; height:1307.7px; }
+  .wc-card{ width:1757.9px; height:986.55px; }
 }
