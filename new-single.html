@@ -388,7 +388,7 @@
  
 
   .page{
-    max-width: 1100px;
+    max-width: 100%;
     margin: 0 auto;
   }
 
@@ -511,7 +511,7 @@
   }
 </style>
   </head>
-  <body>
+  <body> 
     <div id="ubgHeader" class="app-header">
       <div class="header-left">
         <!--$-->
@@ -551,6 +551,7 @@
         </a>
       </div>
     </div>
+    
     <nav id="mainNav" class="sidebar sidebar-desktop">
       <div class="sidebar-container" id="sidebarContainer">
         <div class="sidebar-link sidebar-link-active">
@@ -718,8 +719,8 @@
           </div>
         </div>
       </div>
-      </div>
-    </nav>
+       
+    </nav> 
      <div id="skrHeader" class="Header_mobile-43dhd mobile-nav-layout">
     <div class="Header_left-43dhd"><!--$--><a href="/">
         <div class="site-logo">
@@ -730,7 +731,7 @@
     <div class="header-right">
       <button id="mobile-search-button" type="button" aria-label="Open search"
         class="btn btn-link-white btn-header-icon btn-header-icon-desktop mobile-search-button">
-        <span class="icon icon-search icon-size-20"></span>
+        <span class="icon icon-search icon-size-20" style="background-color: white;"></span>
       </button>
       <a href="/all-games/" aria-label="All Games"
         class="btn btn-link-white btn-header-icon btn-header-icon-desktop btskr-icon"><img
@@ -1610,14 +1611,14 @@ class RandomGamesDisplay {
     if (width < 1224) return 7;
     if (width < 1344) return 8;
     if (width < 1464) return 8;
-    if (width < 1584) return 10;
-    if (width < 1704) return 11;
-    if (width < 1824) return 12;
-    if (width < 1944) return 13;
-    if (width < 2064) return 14;
-    if (width < 2184) return 15;
-    if (width < 2304) return 16;
-    return 19; // For screens >= 2304px
+    if (width < 1584) return 8;
+    if (width < 1704) return 15;
+    if (width < 1824) return 18;
+    if (width < 1944) return 27;
+    if (width < 2064) return 28;
+    if (width < 2184) return 29;
+    if (width < 2304) return 30;
+    return 53; // For screens >= 2304px
   }
 
   // Get random games

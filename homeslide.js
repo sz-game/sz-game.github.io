@@ -1,44 +1,36 @@
-  const carousel = document.getElementById('carousel');
-  const nextBtn = document.getElementById('nextBtn');
-  const prevBtn = document.getElementById('prevBtn');
+// Works no matter how many times each slider is repeated on the page.
+// No ids needed — each wrapper finds its OWN track + arrows using
+// querySelector scoped to that wrapper (via closest/child lookup),
+// so duplicated ids can never break other copies again.
 
-  function scrollAmount(){
-    return carousel.clientWidth * 0.85;
-  }
+function setupSliders(wrapSelector, trackSelector, arrowSelector, ratio){
+  document.querySelectorAll(wrapSelector).forEach((wrap) => {
+    const track = wrap.querySelector(trackSelector);
+    const nextBtn = wrap.querySelector(arrowSelector + ':not(.left)');
+    const prevBtn = wrap.querySelector(arrowSelector + '.left');
+    if (!track || !nextBtn || !prevBtn) return;
 
-  nextBtn.addEventListener('click', () => {
-    carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    function amount(){
+      return track.clientWidth * ratio;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: amount(), behavior: 'smooth' });
+    });
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -amount(), behavior: 'smooth' });
+    });
   });
-  prevBtn.addEventListener('click', () => {
-    carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-  });
+}
 
-    const rcTrack = document.getElementById('rc-track');
-  const rcNextBtn = document.getElementById('rcNextBtn');
-  const rcPrevBtn = document.getElementById('rcPrevBtn');
+// SLIDER 1 — featured + small square grid
+setupSliders('.carousel-wrap', '.carousel', '.nav-arrow', 0.85);
 
-  function rcScrollAmount(){
-    return rcTrack.clientWidth * 0.8;
-  }
+// SLIDER 2 — single row rectangular cards
+setupSliders('.rc-wrap', '.rc-track', '.rc-nav-arrow', 0.8);
 
-  rcNextBtn.addEventListener('click', () => {
-    rcTrack.scrollBy({ left: rcScrollAmount(), behavior: 'smooth' });
-  });
-  rcPrevBtn.addEventListener('click', () => {
-    rcTrack.scrollBy({ left: -rcScrollAmount(), behavior: 'smooth' });
-  });
+// SLIDER 3 — portrait cards
+setupSliders('.sc-wrap', '.sc-track', '.sc-nav-arrow', 0.85);
 
-    const scTrack = document.getElementById('sc-track');
-  const scNextBtn = document.getElementById('scNextBtn');
-  const scPrevBtn = document.getElementById('scPrevBtn');
-
-  function scScrollAmount(){
-    return scTrack.clientWidth * 0.85;
-  }
-
-  scNextBtn.addEventListener('click', () => {
-    scTrack.scrollBy({ left: scScrollAmount(), behavior: 'smooth' });
-  });
-  scPrevBtn.addEventListener('click', () => {
-    scTrack.scrollBy({ left: -scScrollAmount(), behavior: 'smooth' });
-  });
+// SLIDER 4 — wide landscape cards
+setupSliders('.wc-wrap', '.wc-track', '.wc-nav-arrow', 0.85);

@@ -1,350 +1,409 @@
- :root{
-    --bg: #0b0c14;
-    --surface: #141621;
-    --surface-2: #1c1f2e;
-    --surface-3: #252838;
-    --border: #2a2d40;
+:root{
+  --bg: #0b0c14;
+  --surface: #141621;
+  --surface-2: #1c1f2e;
+  --surface-3: #252838;
+  --border: #2a2d40;
 
-    --gold: #f0b93d;
-    --gold-hover: #ffcb5c;
+  --gold: #f0b93d;
+  --gold-hover: #ffcb5c;
 
-    --ember: #e6533f;
+  --ember: #e6533f;
+  --violet: #9b8cf0;
 
-    --violet: #9b8cf0;
+  --text: #f7f7fa;
+  --text-muted: #a3a6b8;
+  --text-faint: #5f6275;
 
-    --text: #f7f7fa;
-    --text-muted: #a3a6b8;
-    --text-faint: #5f6275;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    padding: 20px;
-    -webkit-font-smoothing: antialiased;
-  }
+  --arrow-bg: #f0d210;
+  --arrow-bg-hover: #e4c812;
+}
 
-  .carousel-wrap{
-    position:relative;
-    max-width: 100%;
-    margin: 0 auto;
-  }
+*{ box-sizing:border-box; margin:0; padding:0; }
 
-  .carousel{
-    display:grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-auto-flow: column;
-    grid-auto-columns: 140px;
-    gap: 10px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    padding-bottom: 4px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .carousel::-webkit-scrollbar{ display:none; }
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 20px;
+  -webkit-font-smoothing: antialiased;
+}
 
-  .card{
-    position:relative;
-    border-radius: 12px;
-    overflow:hidden;
-    background: var(--surface-2);
-    scroll-snap-align: start;
-    cursor:pointer;
-  }
-  .card img{
-    width:100%; height:100%; object-fit:cover; display:block;
-  }
+/* =========================================================
+   SHARED ARROW STYLE (used by all 4 sliders)
+   Hidden by default, fades in only when hovering the slider
+========================================================= */
+.nav-arrow,
+.rc-nav-arrow,
+.sc-nav-arrow,
+.wc-nav-arrow{
+  position:absolute;
+  top:50%;
+  right:-6px;
+  transform: translateY(-50%);
+  width:48px; height:48px;
+  border-radius:50%;
+  background: var(--arrow-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  z-index:3;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+.nav-arrow.left,
+.rc-nav-arrow.left,
+.sc-nav-arrow.left,
+.wc-nav-arrow.left{
+  left:-6px; right:auto;
+}
+.nav-arrow:hover,
+.rc-nav-arrow:hover,
+.sc-nav-arrow:hover,
+.wc-nav-arrow:hover{
+  background: var(--arrow-bg-hover);
+}
+.nav-arrow svg,
+.rc-nav-arrow svg,
+.sc-nav-arrow svg,
+.wc-nav-arrow svg{
+  width:24px; height:24px;
+}
 
-  .card-featured{
-    grid-row: span 2;
-    grid-column: span 2;
-    width: 290px;
-  }
-  .card-small{
-    grid-row: span 1;
-    grid-column: span 1;
-    width: 140px;
-    height: 140px;
-  }
-  .card-wide{
-    grid-row: span 2;
-    grid-column: span 2;
-    width: 290px;
-  }
+/* show arrows only while the pointer is over the slider */
+.carousel-wrap:hover .nav-arrow,
+.rc-wrap:hover .rc-nav-arrow,
+.sc-wrap:hover .sc-nav-arrow,
+.wc-wrap:hover .wc-nav-arrow{
+  opacity:1;
+  pointer-events:auto;
+}
 
-  .card-label{
-    position:absolute;
-    left:0; right:0; bottom:0;
-    padding: 14px 12px 10px;
-    background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
-    font-size: 20px;
-    font-weight: 800;
-    color:#fff;
-    letter-spacing: -0.3px;
+@media (max-width: 640px){
+  .nav-arrow, .rc-nav-arrow, .sc-nav-arrow, .wc-nav-arrow{
+    width:34px; height:34px;
   }
-  .card-small .card-label,
-  .card-wide .card-label{
-    font-size: 13px;
-    font-weight:700;
-    padding: 10px 8px 8px;
-  }
+}
 
-  .badge{
-    position:absolute;
-    top:8px; left:8px;
-    display:flex; align-items:center; gap:5px;
-    background: rgba(0,0,0,0.6);
-    color:#fff;
-    font-size: 11px;
-    font-weight:700;
-    padding: 4px 9px;
-    border-radius: 999px;
-    z-index:2;
-  }
-  .badge-top{ background: var(--gold); color:#3a2a05; }
-  .badge-updated{ background: var(--violet); color:#1c1740; }
-  .badge-right{
-    position:absolute; top:8px; right:8px;
-    background: rgba(0,0,0,0.6);
-    color: var(--text-muted);
-    font-size: 10px;
-    font-weight:600;
-    padding: 3px 8px;
-    border-radius: 999px;
-    z-index:2;
-  }
-  .badge-refresh{
-    position:absolute; top:8px; right:8px;
-    width:22px; height:22px;
-    border-radius:50%;
-    background: rgba(0,0,0,0.6);
-    display:flex; align-items:center; justify-content:center;
-    z-index:2;
-  }
-  .badge-refresh svg{ width:12px; height:12px; }
+/* =========================================================
+   SLIDER 1 — featured + small square grid ("carousel")
+========================================================= */
+.carousel-wrap{
+  position:relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
-  .nav-arrow{
-    position:absolute;
-    top:50%;
-    right: -6px;
-    transform: translateY(-50%);
-    width: 48px; height:48px;
-    border-radius:50%;
-    background: #f0d210;
-    border: 1px solid var(--border);
-    color: var(--text);
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    z-index:3;
-  }
-  .nav-arrow:hover{ background: #e4c812; }
-  .nav-arrow.left{ left:-6px; right:auto; }
+.carousel{
+  display:grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 140px;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar{ display:none; }
 
-  @media (max-width: 640px){
-    .carousel{ grid-auto-columns: 110px; gap: 8px; }
-    .card-small{ width:110px; height:110px; }
-    .card-featured, .card-wide{ width: 228px; }
-    .card-label{ font-size:16px; }
-    .nav-arrow{ width:34px; height:34px; }
-  }
-  .nav-arrow svg{ width:24px; height:24px; }
+.card{
+  position:relative;
+  border-radius: 12px;
+  overflow:hidden;
+  background: var(--surface-2);
+  scroll-snap-align: start;
+  cursor:pointer;
+}
+.card img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
 
+.card-featured{ grid-row: span 2; grid-column: span 2; width: 290px; }
+.card-small{ grid-row: span 1; grid-column: span 1; width: 140px; height: 140px; }
+.card-wide{ grid-row: span 2; grid-column: span 2; width: 290px; }
 
-    :root{
-    --bg: #0b0c14;
-    --surface: #141621;
-    --surface-2: #1c1f2e;
-    --surface-3: #252838;
-    --border: #2a2d40;
+/* card title — hidden until the card is hovered */
+.card-label{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding: 14px 12px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+  font-size: 20px;
+  font-weight: 800;
+  color:#fff;
+  letter-spacing: -0.3px;
+  opacity:0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.card:hover .card-label{
+  opacity:1;
+  transform: translateY(0);
+}
+.card-small .card-label,
+.card-wide .card-label{
+  font-size: 13px;
+  font-weight:700;
+  padding: 10px 8px 8px;
+}
 
-    --gold: #f0b93d;
-    --violet: #9b8cf0;
+.badge{
+  position:absolute;
+  top:8px; left:8px;
+  display:flex; align-items:center; gap:5px;
+  background: rgba(0,0,0,0.6);
+  color:#fff;
+  font-size: 11px;
+  font-weight:700;
+  padding: 4px 9px;
+  border-radius: 999px;
+  z-index:2;
+}
+.badge-top{ background: var(--gold); color:#3a2a05; }
+.badge-updated{ background: var(--violet); color:#1c1740; }
+.badge-right{
+  position:absolute; top:8px; right:8px;
+  background: rgba(0,0,0,0.6);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight:600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  z-index:2;
+}
+.badge-refresh{
+  position:absolute; top:8px; right:8px;
+  width:22px; height:22px;
+  border-radius:50%;
+  background: rgba(0,0,0,0.6);
+  display:flex; align-items:center; justify-content:center;
+  z-index:2;
+}
+.badge-refresh svg{ width:12px; height:12px; }
 
-    --text: #f7f7fa;
-    --text-muted: #a3a6b8;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    padding: 20px;
-    -webkit-font-smoothing: antialiased;
-  }
+@media (max-width: 640px){
+  .carousel{ grid-auto-columns: 110px; gap: 8px; }
+  .card-small{ width:110px; height:110px; }
+  .card-featured, .card-wide{ width: 228px; }
+}
 
-  .rc-wrap{
-    position:relative;
-    max-width: 100%;
-    margin: 0 auto;
-  }
+/* =========================================================
+   SLIDER 2 — single row rectangular cards ("rc-")
+========================================================= */
+.rc-wrap{
+  position:relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
-  .rc-track{
-    display:flex;
-    gap: 10px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    padding-bottom: 4px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .rc-track::-webkit-scrollbar{ display:none; }
+.rc-track{
+  display:flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.rc-track::-webkit-scrollbar{ display:none; }
 
-  .rc-card{
-    position:relative;
-    flex: 0 0 auto;
-    width: 200px;
-    height: 130px;
-    border-radius: 10px;
-    overflow:hidden;
-    background: var(--surface-2);
-    scroll-snap-align: start;
-    cursor:pointer;
-  }
-  .rc-card img{
-    width:100%; height:100%; object-fit:cover; display:block;
-  }
+.rc-card{
+  position:relative;
+  flex: 0 0 auto;
+  width: 200px;
+  height: 130px;
+  border-radius: 10px;
+  overflow:hidden;
+  background: var(--surface-2);
+  scroll-snap-align: start;
+  cursor:pointer;
+}
+.rc-card img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
 
-  .rc-card-label{
-    position:absolute;
-    left:0; right:0; bottom:0;
-    padding: 10px 10px 8px;
-    background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
-    font-size: 13px;
-    font-weight:700;
-    color:#fff;
-  }
+/* card title — hidden until the card is hovered */
+.rc-card-label{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding: 10px 10px 8px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+  font-size: 13px;
+  font-weight:700;
+  color:#fff;
+  opacity:0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.rc-card:hover .rc-card-label{
+  opacity:1;
+  transform: translateY(0);
+}
 
-  .rc-badge-originals{
-    position:absolute;
-    top:8px; left:8px;
-    display:flex; align-items:center; gap:5px;
-    background: rgba(20,22,33,0.9);
-    border: 1px solid var(--border);
-    color: var(--violet);
-    font-size: 11px;
-    font-weight:700;
-    padding: 4px 10px;
-    border-radius: 999px;
-    z-index:2;
-  }
-  .rc-badge-originals svg{ width:12px; height:12px; }
+.rc-badge-originals{
+  position:absolute;
+  top:8px; left:8px;
+  display:flex; align-items:center; gap:5px;
+  background: rgba(20,22,33,0.9);
+  border: 1px solid var(--border);
+  color: var(--violet);
+  font-size: 11px;
+  font-weight:700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  z-index:2;
+}
+.rc-badge-originals svg{ width:12px; height:12px; }
 
-  .rc-nav-arrow{
-    position:absolute;
-    top:50%;
-    right: -6px;
-    transform: translateY(-50%);
-    width: 48px; height:48px;
-    border-radius:50%;
-    background: #fadb12;
-    border: 1px solid var(--border);
-    color: var(--text);
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    z-index:3;
-  }
-  .rc-nav-arrow:hover{ background: #e4c812; }
-  .rc-nav-arrow.left{ left:-6px; right:auto; }
+@media (max-width: 640px){
+  .rc-card{ width:150px; height:100px; }
+}
 
-  @media (max-width: 640px){
-    .rc-card{ width:150px; height:100px; }
-    .rc-card-label{ font-size:12px; }
-    .rc-nav-arrow{ width:32px; height:32px; }
-  }
-    .rc-nav-arrow svg{ width:24px; height:24px; }
+/* =========================================================
+   SLIDER 3 — portrait cards ("sc-")
+========================================================= */
+.sc-wrap{
+  position:relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
+.sc-track{
+  display:flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.sc-track::-webkit-scrollbar{ display:none; }
 
+.sc-card{
+  position:relative;
+  flex: 0 0 auto;
+  width: 200px;
+  height: 320px;
+  border-radius: 12px;
+  overflow:hidden;
+  background: var(--surface-2);
+  scroll-snap-align: start;
+  cursor:pointer;
+}
+.sc-card img{
+  width:100%; height:100%; object-fit:fill; display:block;
+}
 
+.sc-badge-top{
+  position:absolute;
+  top:8px; left:8px;
+  display:flex; align-items:center; gap:5px;
+  background: var(--gold);
+  color:#3a2a05;
+  font-size: 11px;
+  font-weight:700;
+  padding: 4px 9px;
+  border-radius: 999px;
+  z-index:2;
+}
+.sc-badge-top svg{ width:11px; height:11px; }
 
-     :root{
-    --bg: #0b0c14;
-    --surface-2: #1c1f2e;
-    --surface-3: #252838;
-    --border: #2a2d40;
+@media (max-width: 640px){
+  .sc-card{ width:140px; height:224px; }
+}
 
-    --gold: #f0b93d;
+/* =========================================================
+   SLIDER 4 — wide landscape cards ("wc-")
+========================================================= */
+.wc-wrap{
+  position:relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
-    --text: #f7f7fa;
-    --text-muted: #a3a6b8;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    padding: 20px;
-    -webkit-font-smoothing: antialiased;
-  }
+.wc-track{
+  display:flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.wc-track::-webkit-scrollbar{ display:none; }
 
-  .sc-wrap{
-    position:relative;
-    max-width: 100%;
-    margin: 0 auto;
-  }
+.wc-card{
+  position:relative;
+  flex: 0 0 auto;
+  width: 344px;
+  height: 230px;
+  border-radius: 14px;
+  overflow:hidden;
+  background: var(--surface-2);
+  scroll-snap-align: start;
+  cursor:pointer;
+}
+.wc-card img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
 
-  .sc-track{
-    display:flex;
-    gap: 10px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 4px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .sc-track::-webkit-scrollbar{ display:none; }
+/* card title — hidden until the card is hovered */
+.wc-label{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding: 14px 14px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+  font-size: 16px;
+  font-weight:700;
+  color:#fff;
+  opacity:0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.wc-card:hover .wc-label{
+  opacity:1;
+  transform: translateY(0);
+}
 
-  .sc-card{
-    position:relative;
-    flex: 0 0 auto;
-    width: 200px;
-    height: 320px;
-    border-radius: 12px;
-    overflow:hidden;
-    background: var(--surface-2);
-    scroll-snap-align: start;
-    cursor:pointer;
-  }
-  .sc-card img{
-    width:100%; height:100%; object-fit:fill; display:block;
-  }
+.wc-badge-top{
+  position:absolute;
+  top:8px; left:8px;
+  display:flex; align-items:center; gap:5px;
+  background: var(--gold);
+  color:#3a2a05;
+  font-size: 11px;
+  font-weight:700;
+  padding: 4px 9px;
+  border-radius: 999px;
+  z-index:2;
+}
+.wc-badge-top svg{ width:11px; height:11px; }
 
-  .sc-badge-top{
-    position:absolute;
-    top:8px; left:8px;
-    display:flex; align-items:center; gap:5px;
-    background: var(--gold);
-    color:#3a2a05;
-    font-size: 11px;
-    font-weight:700;
-    padding: 4px 9px;
-    border-radius: 999px;
-    z-index:2;
-  }
-  .sc-badge-top svg{ width:11px; height:11px; }
+@media (max-width: 640px){
+  .wc-card{ width:260px; height:174px; }
+  .wc-label{ font-size:14px; }
+}
 
-  .sc-nav-arrow{
-    position:absolute;
-    top:50%;
-    right: -6px;
-    transform: translateY(-50%);
-    width: 48px; height:48px;
-    border-radius:50%;
-    background: #fadb12;
-    border: 1px solid var(--border);
-    color: var(--text);
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    z-index:3;
-  }
-  .sc-nav-arrow:hover{ background: #e4c812; }
-  .sc-nav-arrow.left{ left:-6px; right:auto; }
+/* Add this to your combined stylesheet.
+   Sizes the sprite-based icon and mirrors it for the "left" (prev)
+   button — replaces the old inline transform="matrix(-1,0,0,1,0,0)"
+   that used to live inside every prev button's raw SVG. */
 
-  @media (max-width: 640px){
-    .sc-card{ width:140px; height:224px; }
-    .sc-nav-arrow{ width:32px; height:32px; }
-  }
-    .sc-nav-arrow svg{ width:24px; height:24px; }
+.nav-icon{
+  width: 24px;
+  height: 24px;
+  fill: #000000;
+}
+
+.nav-arrow.left .nav-icon,
+.rc-nav-arrow.left .nav-icon,
+.sc-nav-arrow.left .nav-icon,
+.wc-nav-arrow.left .nav-icon{
+  transform: scaleX(-1);
+}
