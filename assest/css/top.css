@@ -23,8 +23,8 @@ body {
 
  /* Custom site scrollbar style */
     html {
-      scrollbar-width: thin;
-      scrollbar-color: #f0d210 #1b1b1b;
+       scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
     }
 
     ::-webkit-scrollbar {
