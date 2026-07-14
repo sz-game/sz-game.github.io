@@ -17040,7 +17040,7 @@ a {
 
 @media(min-width:1280px) {
       .page-right-grid>div:last-child {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr
     }
 }
 
