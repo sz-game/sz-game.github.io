@@ -17,6 +17,13 @@
 
   --arrow-bg: #f0d210;
   --arrow-bg-hover: #e4c812;
+   --gap: 8px;
+    --col: calc((100vw - 76px - (3 * var(--gap))) / 4);
+    --carousel-gap: 10px;
+
+    /* Small card size */
+   --card-size: min(230px, max(110px, calc((100vw - 110px) / 14)));
+
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -97,36 +104,69 @@ body{
 }
 
 .carousel{
-  display:grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-auto-flow: column;
-  grid-auto-columns: 140px;
-  gap: 10px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding-bottom: 4px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    display:grid;
+    grid-template-rows:repeat(2,1fr);
+    grid-auto-flow:column;
+    grid-auto-columns:var(--card-size);
+
+    gap:var(--gap);
+
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+
+    padding-bottom:4px;
+
+    scrollbar-width:none;
+    -ms-overflow-style:none;
 }
-.carousel::-webkit-scrollbar{ display:none; }
+
+.carousel::-webkit-scrollbar{
+    display:none;
+}
 
 .card{
-  position:relative;
-  border-radius: 12px;
-  overflow:hidden;
-  background: var(--surface-2);
-  scroll-snap-align: start;
-  cursor:pointer;
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--surface-2);
+    scroll-snap-align:start;
+    cursor:pointer;
 }
+
 .card img{
-  width:100%; height:100%; object-fit:cover; display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
-.card-featured{ grid-row: span 2; grid-column: span 2; width: 290px; }
-.card-small{ grid-row: span 1; grid-column: span 1; width: 140px; height: 140px; }
-.card-wide{ grid-row: span 2; grid-column: span 2; width: 290px; }
+/* Featured */
+.card-featured{
+    grid-row:span 2;
+    grid-column:span 2;
 
+    width:calc(var(--card-size) * 2 + var(--gap));
+    height:calc(var(--card-size) * 2 + var(--gap));
+}
+
+/* Small */
+.card-small{
+    grid-row:span 1;
+    grid-column:span 1;
+
+    width:var(--card-size);
+    height:var(--card-size);
+}
+
+/* Wide */
+.card-wide{
+    grid-row:span 2;
+    grid-column:span 2;
+
+    width:calc(var(--card-size) * 2 + var(--gap));
+    height:calc(var(--card-size) * 2 + var(--gap));
+}
 /* card title — hidden until the card is hovered */
 .card-label{
   position:absolute;
@@ -189,11 +229,7 @@ body{
 }
 .badge-refresh svg{ width:12px; height:12px; }
 
-@media (max-width: 640px){
-  .carousel{ grid-auto-columns: 110px; gap: 8px; }
-  .card-small{ width:110px; height:110px; }
-  .card-featured, .card-wide{ width: 228px; }
-}
+ 
 
 /* =========================================================
    SLIDER 2 — single row rectangular cards ("rc-")
@@ -220,8 +256,8 @@ body{
 .rc-card{
   position:relative;
   flex: 0 0 auto;
-  width: 200px;
-  height: 130px;
+  width: clamp(6.911rem, calc(5.047rem + 9.322vw), 40.600rem);
+  height: clamp(3.904rem, calc(2.864rem + 5.198vw), 22.688rem);
   border-radius: 10px;
   overflow:hidden;
   background: var(--surface-2);
@@ -266,10 +302,6 @@ body{
 }
 .rc-badge-originals svg{ width:12px; height:12px; }
 
-@media (max-width: 640px){
-  .rc-card{ width:150px; height:100px; }
-  .rc-outer{ padding: 14px; }
-}
 
 
 /* =========================================================
@@ -295,16 +327,16 @@ body{
 .sc-card{
   position:relative;
   flex: 0 0 auto;
-  width: 200px;
-  height: 320px;
-  border-radius: 12px;
+  width: clamp(6.911rem, calc(5.047rem + 9.322vw), 40.600rem);
+  height: clamp(10.341rem, calc(7.539rem + 14.011vw), 60.975rem);
+  border-radius: 6px;
   overflow:hidden;
   background: var(--surface-2);
   scroll-snap-align: start;
   cursor:pointer;
 }
 .sc-card img{
-  width:100%; height:100%; object-fit:fill; display:block;
+  width:100%; height:100%; object-fit:cover; display:block;
 }
 .sc-card:hover .rc-card-label{
   opacity:1;
@@ -335,106 +367,238 @@ body{
 /* =========================================================
    SLIDER 4 — wide landscape cards ("fg-")
 ========================================================= */
+/* ===========================
+   FEATURED GAMES
+=========================== */
 
-.fg-wrap{ position:relative; max-width: 100%; margin: 0 auto; }
+:root{
+    --gap: 8px;
+
+    /* Small card width */
+    --fg-col: clamp(140px, 13.5vw, 326px);
+}
+
+.fg-wrap{
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
 
 .fg-track{
-  display:grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-auto-flow: column;
-  grid-auto-columns: clamp(140px, 13vw, 280px);
-  gap: 10px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding-bottom: 4px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    display:grid;
+    grid-auto-flow:column;
+    grid-template-rows:repeat(2,1fr);
+    grid-auto-columns:var(--fg-col);
+
+    gap:var(--gap);
+
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+
+    padding-bottom:4px;
+
+    scrollbar-width:none;
+    -ms-overflow-style:none;
 }
-.fg-track::-webkit-scrollbar{ display:none; }
+
+.fg-track::-webkit-scrollbar{
+    display:none;
+}
 
 .fg-card{
-  position:relative;
-  border-radius: 12px;
-  overflow:hidden;
-  background: var(--surface-2);
-  scroll-snap-align: start;
-  cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    border-radius:12px;
+    background:var(--surface-2);
+    scroll-snap-align:start;
+    cursor:pointer;
 }
-.fg-card img{ width:100%; height:100%; object-fit:cover; display:block; }
-.fg-card:hover{ border: 2px solid yellow; }
+
+.fg-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.fg-card:hover{
+    border:2px solid rgb(69,69,38);
+}
+
+/* ---------- Featured ---------- */
 
 .fg-card-featured,
 .fg-card-wide{
-  grid-row: span 2;
-  grid-column: span 2;
+    grid-column: span 2;
+    grid-row: span 2;
+
+    width: calc(var(--fg-col) * 2 + var(--gap));
+
+    /* CrazyGames style */
+    aspect-ratio: 16 / 9;
+    height: auto;
 }
+
+/* ---------- Small ---------- */
+
 .fg-card-small{
-  grid-row: span 1;
-  grid-column: span 1;
-  width: clamp(140px, 13vw, 280px);
-  height: clamp(94px, 8.7vw, 187px);
+    width: var(--fg-col);
+
+    aspect-ratio: 16 / 9;
+    height: auto;
 }
+
+/* ---------- Labels ---------- */
 
 .fg-label{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  padding: 14px 12px 10px;
-  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
-  font-size: clamp(14px, 1.4vw, 20px);
-  font-weight: 800;
-  color:#fff;
-  opacity:0;
-  transform: translateY(6px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+
+    padding:14px 12px 10px;
+
+    background:linear-gradient(to top,rgba(0,0,0,.75),rgba(0,0,0,0));
+
+    font-size:clamp(14px,1.4vw,20px);
+    font-weight:800;
+
+    color:#fff;
+
+    opacity:0;
+    transform:translateY(6px);
+
+    transition:.2s;
 }
-.fg-card:hover .fg-label{ opacity:1; transform: translateY(0); }
+
+.fg-card:hover .fg-label{
+    opacity:1;
+    transform:translateY(0);
+}
+
 .fg-card-small .fg-label,
 .fg-card-wide .fg-label{
-  font-size: clamp(11px, 1vw, 13px);
-  font-weight:700;
-  padding: 10px 8px 8px;
+    font-size:clamp(11px,1vw,13px);
+    font-weight:700;
+    padding:10px 8px 8px;
 }
+
+/* ---------- Badges ---------- */
 
 .fg-badge{
-  position:absolute; top:8px; left:8px;
-  display:flex; align-items:center; gap:5px;
-  background: rgba(0,0,0,0.6);
-  color:#fff; font-size: 11px; font-weight:700;
-  padding: 4px 9px; border-radius: 999px; z-index:2;
+    position:absolute;
+    top:8px;
+    left:8px;
+
+    display:flex;
+    align-items:center;
+    gap:5px;
+
+    padding:4px 9px;
+
+    border-radius:999px;
+
+    font-size:11px;
+    font-weight:700;
+
+    z-index:2;
+
+    background:rgba(0,0,0,.6);
+    color:#fff;
 }
-.fg-badge-top{ background: var(--gold); color:#3a2a05; }
-.fg-badge-updated{ background: var(--violet); color:#1c1740; }
+
+.fg-badge-top{
+    background:var(--gold);
+    color:#3a2a05;
+}
+
+.fg-badge-updated{
+    background:var(--violet);
+    color:#1c1740;
+}
 
 .fg-badge-platform{
-  position:absolute; top:8px; left:8px;
-  width:22px; height:22px; border-radius:6px;
-  background: #6441a5;
-  display:flex; align-items:center; justify-content:center; z-index:2;
+    position:absolute;
+    top:8px;
+    left:8px;
+
+    width:22px;
+    height:22px;
+
+    border-radius:6px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#6441a5;
+
+    z-index:2;
 }
-.fg-badge-platform svg{ width:12px; height:12px; }
-.fg-badge-platform + .fg-badge{ left:36px; }
+
+.fg-badge-platform svg{
+    width:12px;
+    height:12px;
+}
+
+.fg-badge-platform + .fg-badge{
+    left:36px;
+}
+
+/* ---------- Arrows ---------- */
 
 .fg-nav-next,
 .fg-nav-prev{
-  position:absolute; top:50%;
-  transform: translateY(-50%);
-  width:48px; height:48px; border-radius:50%;
-  background: var(--arrow-bg);
-  border: 1px solid var(--border);
-  color: var(--text);
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer; z-index:3;
-  opacity:0; pointer-events:none;
-  transition: opacity 0.2s ease, background 0.2s ease;
-}
-.fg-nav-next{ right:-6px; }
-.fg-nav-prev{ left:-6px; }
-.fg-nav-next:hover,
-.fg-nav-prev:hover{ background: var(--arrow-bg-hover); }
-.fg-wrap:hover .fg-nav-next,
-.fg-wrap:hover .fg-nav-prev{ opacity:1; pointer-events:auto; }
 
+    position:absolute;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:var(--arrow-bg);
+
+    border:1px solid var(--border);
+
+    color:var(--text);
+
+    cursor:pointer;
+
+    z-index:3;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.2s;
+}
+
+.fg-nav-next{
+    right:-6px;
+}
+
+.fg-nav-prev{
+    left:-6px;
+}
+
+.fg-nav-next:hover,
+.fg-nav-prev:hover{
+    background:var(--arrow-bg-hover);
+}
+
+.fg-wrap:hover .fg-nav-next,
+.fg-wrap:hover .fg-nav-prev{
+    opacity:1;
+    pointer-events:auto;
+}
 /* Add this to your combined stylesheet.
    Sizes the sprite-based icon and mirrors it for the "left" (prev)
    button — replaces the old inline transform="matrix(-1,0,0,1,0,0)"
@@ -581,221 +745,354 @@ background-position: right center;
   .header-wrapper-h-metarow{ gap: 6px; }
   .header-wrapper-h-subtitle{ font-size: 12px; }
 }
+
+
+
+/* ===== Category Section ===== */
+.category-section {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+  color: #fff;
+}
+
+.category-info {
+  max-width: 480px;
+  background: #161b22;
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.category-info h2 {
+  margin: 0 0 10px;
+}
+
+.category-info p {
+  font-size: 14px;
+  color: #b8bdd6;
+}
+
+.learn-more-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #7b8cff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.learn-more-btn:hover {
+  text-decoration: underline;
+}
+
+/* ===== Category Grid (no slide/scroll) ===== */
+.category-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.category-slider {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+  padding: 6px;
+}
+
+.nav-btn {
+  display: none;
+}
+
+.cat-card {
+  width: 100%;
+  height: 87px;
+  background: #161b22;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: transform .25s, background .25s;
+}
+
+.cat-card:hover {
+  background: #424449;
+  transform: translateY(-3px);
+  box-shadow: #000000 0px 20px 30px -10px;
+}
+
+.cat-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: #fff;
+}
+
+.cat-name {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ===== Learn More Modal ===== */
+.site-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.site-modal-overlay.active {
+  display: flex;
+}
+
+.site-modal {
+  background: #161b22;
+  color: #fff;
+  width: 100%;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+}
+
+.site-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.site-modal-content h2 {
+  margin: 0 0 16px;
+  font-size: 22px;
+  padding-right: 30px;
+}
+
+.site-modal-content h3 {
+  margin: 24px 0 10px;
+  font-size: 17px;
+}
+
+.site-modal-content p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #b8bdd6;
+  margin: 0 0 12px;
+}
+
+/* ===== Category Navigation Bar (separate section) ===== */
+.category-nav {
+  background: linear-gradient(90deg, #f5f5f5 0%, #ffffff 100%);
+  padding: 15px 20px;
+  padding-top: 25px;
+  border-bottom: 1px solid #e0e0e0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.category-nav-container {
+  display: flex;
+  gap: 12px;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  scrollbar-width: thin;
+}
+
+ 
+
+.badge {
+  background: #fff;
+  color: #000000;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+  max-width: 2000px;
+  margin: auto;
+}
+
+/* ===== Responsive Breakpoints ===== */
+
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .category-section {
+    gap: 16px;
+  }
+
+  .category-info {
+    max-width: 240px;
+    padding: 20px;
+  }
+
+  .cat-card {
+    height: 80px;
+  }
+
+  .category-slider {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+}
+
+/* Small tablets & large phones (≤768px) */
+@media (max-width: 768px) {
+  .category-section {
+    flex-direction: column;
+  }
+
+  .category-info {
+    max-width: 100%;
+  }
+
+  .category-wrapper {
+    width: 100%;
+  }
+
+  .cat-card {
+    height: 78px;
+  }
+
+  .category-slider {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .site-modal {
+    max-width: 90%;
+    padding: 24px;
+  }
+
+  .category-nav {
+    padding: 12px 10px;
+  }
+
+  .category-nav-container {
+    gap: 8px;
+    max-width: 100%;
+  }
+
+  .category-tag {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .badge {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .category-tag.more-btn {
+    margin-left: auto;
+    padding: 6px 12px;
+  }
+}
+
+/* Mobile phones (≤480px) */
+@media (max-width: 480px) {
+  .category-section {
+    margin-top: 16px;
+  }
+
+  .category-info {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .category-info h2 {
+    font-size: 18px;
+  }
+
+  .category-info p {
+    font-size: 13px;
+  }
+
+  .cat-card {
+    height: 75px;
+  }
+
+  .cat-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cat-name {
+    font-size: 11px;
+  }
+
+  .category-slider {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .site-modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .site-modal {
+    max-width: 100%;
+    width: 100%;
+    max-height: 90vh;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+  }
+
+  .site-modal-content h2 {
+    font-size: 19px;
+  }
+
+  .site-modal-content h3 {
+    font-size: 15px;
+  }
+
+  .site-modal-content p {
+    font-size: 13px;
+  }
+}
+
+
+
 /* =========================================================
    RESPONSIVE CARD SIZES — all 4 sliders
    Cards grow in size as the viewport gets wider, across
    15 breakpoints. Below 564px the existing small-phone
    sizes (from the @media max-width:640px block) apply.
 ========================================================= */
-@media (min-width: 374px){
-  .carousel{grid-auto-columns: 120px;}
-  .card-featured{ width: 246.6px;}
-  .card-wide{ width:246.6px; height: 246.6px;}
-  .card-small{width: 123.04px; height: 123.04px;}
-  .rc-card{ width:123.03px; height:123.04px; }
-  .sc-card{ width:93.54px; height:139.9px; }
-  .fg-track{ grid-auto-columns: 120px; }
-  .fg-card-featured{ width: 246.6px; }
-  .fg-card-wide{ width: 246.6px; height: 246.6px; }
-  .fg-card-small{ width: 123.04px; height: 123.04px; }
-}
-
-@media (min-width: 469px){
-    .carousel{grid-auto-columns: 56.515px; }
-  .card-featured{ width:123.03px; }
-  .card-wide{ width:123.03px; height:123.03px; }
-  .card-small{ width:61.515px; height:61.515px; }
-.rc-card{ width:123.03px; height:123.04px; }
-  .sc-card{ width:139.01px; height:208.38px; }
-  .fg-track{ grid-auto-columns: 120px; }
-  .fg-card-featured{ width: 246.6px; }
-  .fg-card-wide{ width: 246.6px; height: 246.6px; }
-  .fg-card-small{ width: 123.04px; height: 123.04px; }
-}
-
-@media (min-width: 639px){
-    .carousel{grid-auto-columns: 54.515px; }
-  .card-featured{ width:123.03px; }
-  .card-wide{ width:123.03px; height:123.03px; }
-  .card-small{ width:61.515px; height:61.515px; }
-.rc-card{ width:123.03px; height:123.04px; }
-  .sc-card{ width:139.01px; height:208.38px; }
-  .wc-card{ width:278.06px; height:176.74px; }
-  .fg-track{ grid-auto-columns: 170px;}
-  .fg-card-featured{ width:300.06px; height:196.74px;}
-  .fg-card-wide{ width:300.06px; height:196.74px;  margin-left: -30;}
-  .fg-card-small{ width: 171.11px; height: 93.29px; }
-}
-
-@media (min-width: 954px){
-    .carousel{grid-auto-columns: 82.285px; }
-  .card-featured{ width:176.57px; }
-  .card-wide{ width:176.57px; height:176.57px; }
-  .card-small{ width:88.285px; height:88.285px; }
-.rc-card{ width:176.57px; height:99.19px; }
-  .sc-card{ width:176.57px; height:264.84px; }
-  .fg-track{ grid-auto-columns: 175px; }
-  .fg-card-featured{ width:360.61px; height:202.59px;}
-  .fg-card-wide{ width:360.61px; height:202.59px; }
-  .fg-card-small{ width: 176.31px; height: 97.29px; }
-}
-
-@media (min-width: 1074px){
-    .carousel{grid-auto-columns: 96.385px; }
-  .card-featured{ width:204.77px; }
-  .card-wide{ width:204.77px; height:204.77px; }
-  .card-small{ width:102.385px; height:102.385px; }
-.rc-card{ width:204.77px; height:115.19px; }
-  .sc-card{ width:204.77px; height:306.99px; }
-  .fg-track{ grid-auto-columns: 202px; }
-  .fg-card-featured{ width: 417.22px; height:234.54px;}
-  .fg-card-wide{ width: 417.22px; height:234.54px; }
-  .fg-card-small{ width: 204.78px; height: 111.5px; }
-}
-
-@media (min-width: 1344px){
-    .carousel{grid-auto-columns: 95.545px; }
-  .card-featured{ width:203.09px; }
-  .card-wide{ width:203.09px; height:203.09px; }
-  .card-small{ width:101.545px; height:101.545px; }
-.rc-card{ width:203.09px; height:114.44px; }
-  .sc-card{ width:203.09px; height:304.23px; }
-  .fg-track{ grid-auto-columns: 200px; }
-  .fg-card-featured{ width: 412.71px; height:232.21px;}
-  .fg-card-wide{ width: 412.71px; height:232.21px; }
-  .fg-card-small{ width: 202.76px; height: 112.5px; }
-}
-
-@media (min-width: 1584px){
-    .carousel{grid-auto-columns: 117.070px; }
-  .card-featured{ width:246.14px; }
-  .card-wide{ width:246.14px; height:246.14px; }
-  .card-small{ width:123.070px; height:123.070px; }
-.rc-card{ width:246.14px; height:138.35px; }
-  .sc-card{ width:246.14px; height:369.13px; }
-  .fg-track{ grid-auto-columns: 244px; }
-  .fg-card-featured{ width: 500.16px; height:281.05px;}
-  .fg-card-wide{ width: 500.16px; height:281.05px; }
-  .fg-card-small{ width: 246.16px; height: 136.6px; }
-}
-
-@media (min-width: 1824px){
-    .carousel{grid-auto-columns: 121.705px; }
-  .card-featured{ width:243.41px; }
-  .card-wide{ width:243.41px; height:243.41px; }
-  .card-small{ width:121.705px; height:121.705px; }
-.rc-card{ width:243.41px; height:137.22px; }
-  .sc-card{ width:243.41px; height:364.57px; }
-  .fg-track{ grid-auto-columns: 241px; }
-  .fg-card-featured{ width: 493.15px; height:277.52px;}
-  .fg-card-wide{ width: 493.15px; height:277.52px; }
-  .fg-card-small{ width: 243.11px; height: 135.31px; }
-}
-
-@media (min-width: 1944px){
-  .carousel{grid-auto-columns: 128px;}
-  .card-featured{ width: 268.8px;}
-  .card-wide{ width:268.8px; height: 268.8px;}
-  .card-small{width: 128.4px; height: 128.4px;}
-  .rc-card{ width:268.8px; height:151.35px; }
-  .sc-card{ width:268.4px; height:402.8px; }
-  .fg-track{ grid-auto-columns: 268px; }
-  .fg-card-featured{ width: 544.6px; height: 306.6px;}
-  .fg-card-wide{ width: 544.6px; height: 306.6px; }
-  .fg-card-small{ width: 267.69px; height: 147.55px; }
-}
  
-
-@media (min-width: 2184px){
-  .carousel{grid-auto-columns: 127px;}
-  .card-featured{ width:263.06px; margin-left:2px; }
-  .card-wide{ width:263.06px; height:263.06px; }
-  .card-small{ width:131.53px; height:131.53px; }
-  .rc-card{ width:263.06px; height:147px; }
-  .sc-card{ width:263.06px; height:394.36px; } 
-  .fg-track{ grid-auto-columns: 261px; }
-  .fg-card-featured{ width: 532.92px; height: 299.58px;}
-  .fg-card-wide{ width: 532.92px; height: 299.58px; }
-  .fg-card-small{ width: 262.68px; height: 146.01px; }
-}
-
-@media (min-width: 2304px){
-  .carousel{grid-auto-columns: 144px;}
-  .card-featured{ width:297.08px; margin-left:2px; }
-  .card-wide{ width:297.08px; height:297.08px; }
-  .card-small{ width:148.54px; height:148.54px; }
-  .rc-card{ width:297.08px; height:166.89px; }
-  .sc-card{ width:297.08px; height:445.63px; }
-  .fg-track{ grid-auto-columns: 295px; }
-  .fg-card-featured{ width: 601.84px; height:338.11px;}
-  .fg-card-wide{ width: 601.84px; height:338.11px; }
-  .fg-card-small{ width: 296.92px; height: 165.05px; }
-}
-
-@media (min-width: 2716px){
-  .carousel{grid-auto-columns: 154px;}
-  .card-featured{ width:319.63px; margin-left:2px; }
-  .card-wide{ width:319.63px; height:319.63px; }
-  .card-small{ width:159.815px; height:159.815px; }
-  .rc-card{ width:319.63px; height:180.38px; }
-  .sc-card{ width:319.63px; height:478.53px; }
-  .fg-track{ grid-auto-columns: 318px; }
-  .fg-card-featured{ width: 645.33px; height:363.37px;}
-  .fg-card-wide{ width: 645.33px; height:363.37px; }
-  .fg-card-small{ width: 319.6px; height: 178.62px; }
-}
-
-@media (min-width: 3016px){
-  .carousel{grid-auto-columns: 156px;}
-  .card-featured{ width:321.49px; margin-left:2px; }
-  .card-wide{ width:321.49px; height:321.49px; }
-  .card-small{ width:160.745px; height:160.745px; }
-  .rc-card{ width:321.49px; height:181.31px; }
-  .sc-card{ width:321.4px; height:481.43px; }
-  .fg-track{ grid-auto-columns: 320px; }
-  .fg-card-featured{ width: 648.9px; height:365.25px;}
-  .fg-card-wide{ width: 648.9px; height:365.25px; }
-  .fg-card-small{ width: 321.24px; height: 179.42px; }
-}
-
-@media (min-width: 4035px){
-  .carousel{grid-auto-columns: 210.69px;}
-  .card-featured{ width:431.38px; margin-left:2px; }
-  .card-wide{ width:431.38px; height:431.38px; }
-  .card-small{ width:215.69px; height:215.69px; }
-  .rc-card{ width:431.38px; height:242.7px; }
-  .sc-card{ width:431.38px; height:646.67px; }
-  .wc-card{ width:870.7px; height:489.5px; }
-  .fg-track{ grid-auto-columns: 430px; }
-  .fg-card-featured{ width: 870.7px; height:489.5px;}
-  .fg-card-wide{ width: 870.7px; height:489.5px; }
-  .fg-card-small{ width: 431.75px; height: 241.15px; }
-}
-
-@media (min-width: 6072px){
-  .carousel{grid-auto-columns: 320px;}
-  .card-featured{ width:651.19px; margin-left:2px; }
-  .card-wide{ width:651.19px; height:651.19px; }
-  .card-small{ width:325.595px; height:325.595px; }
-  .rc-card{ width:651.19px; height:365.48px; }
-  .sc-card{ width:651.19px; height:977.18px; }
-  .fg-track{ grid-auto-columns: 652px; }
-  .fg-card-featured{ width: 1314.3px; height:738px;}
-  .fg-card-wide{ width: 1314.3px; height:738px; }
-  .fg-card-small{ width: 652.76px; height: 364.61px; }
-}
-
-@media (min-width: 8110px){
-  .carousel{grid-auto-columns: 430px;}
-  .card-featured{ width:871.19px; margin-left:2px; }
-  .card-wide{ width:871.19px; height:871.19px; }
-  .card-small{ width:435.595px; height:435.595px; }
-  .rc-card{ width:871.19px; height:448.25px; }
-  .sc-card{ width:871.19px; height:1307.7px; }
-  .wc-card{ width:1757.9px; height:986.55px; }
-  .fg-track{ grid-auto-columns: 873px; }
-  .fg-card-featured{ width: 1757.9px; height:986.55px;}
-  .fg-card-wide{ width: 1757.9px; height:986.55px; }
-  .fg-card-small{ width: 873.75px; height: 488.05px; }
-}
-

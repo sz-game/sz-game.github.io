@@ -60,3 +60,8 @@ setupSliders('.wc-wrap', '.wc-track', '.wc-nav-arrow', 0.85);
 
 // SLIDER 5 — featured grid (fg-)
 setupFgSlider(0.85);
+
+document.querySelector('.cp-view-arrow').addEventListener('click', () => {
+    const track = document.querySelector('.cp-track');
+    track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' });
+  });

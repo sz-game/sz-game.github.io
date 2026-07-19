@@ -80,6 +80,28 @@ a {
     height: 20px
 }
 
+.desktop-only,
+.mobile-hide {
+    display: block !important;
+}
+
+.mobile-only,
+.desktop-hide {
+    display: none !important;
+}
+
+@media (max-width: 767px) {
+    .desktop-only,
+    .mobile-hide {
+        display: none !important;
+    }
+
+    .mobile-only,
+    .desktop-hide {
+        display: block !important;
+    }
+}
+
 .icon-close-nav {
     -webkit-mask-image: url(/assest/icon/close-nav.svg);
     mask-image: url(/assest/icon/close-nav.svg)
@@ -3660,7 +3682,7 @@ a {
 }
 
 /* Hide sidebar on mobile */
-@media(max-width:700px) {
+@media(max-width:767px) {
     .sidebar {
         display: none !important;
         width: 0 !important;

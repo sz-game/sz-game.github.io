@@ -185,6 +185,6 @@
       }
 
       .game-slide {
-        flex: 0 0 clamp(12.75rem, 9vw + 10.8rem, 18rem);
+        flex: 0 0 clamp(24.75rem, 9vw + 10.8rem, 18rem);
       }
     }
