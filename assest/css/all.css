@@ -1,3 +1,12 @@
+@font-face {
+    font-family: Nunito;
+    src: url(/assest/css/fonts/Nunito-Italic-VariableFont_wght.ttf) format("truetype");
+}
+
+@font-face {
+   font-family: Nunito;
+    src: url(/assest/css/fonts/Nunito-VariableFont_wght.ttf) format("truetype");
+}
 html{
   overflow-x: auto;
   -ms-overflow-style: none; /* IE & Edge */
@@ -677,8 +686,10 @@ template {
     display: inline-block;
     padding: 0;
     color: #ffffff;
-    font-size: 1.2rem;
-    font-family:Nunito-fallback;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
+    font-size: clamp(24px, calc(23.889px + 0.035vw), 26px); 
+    font-weight: 700;
+    font-style: normal;
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
 }
 
 .header-wrapper-link {
