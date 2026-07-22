@@ -1881,7 +1881,7 @@ a {
     background: #0000;
     border: none;
     color: var(--white-100);
-    font-family: var(--font-nunito);
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
     font-weight: 700;
     font-size: var(--font-size-button);
     padding: calc(var(--base-unit)*1) 0;
@@ -1916,7 +1916,7 @@ a {
     background-color: var(--black-40);
     border: 1px solid #0000;
     box-shadow: 0 0;
-    font-family: var(--font-nunito);
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
     font-weight: 700;
     font-size: var(--font-size-button);
     color: var(--white-50);
@@ -1931,7 +1931,7 @@ a {
 .search-input::placeholder {
     color: var(--white-50);
     opacity: 1;
-    font-family: var(--font-nunito);
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
     -webkit-user-select: none;
     user-select: none
 }
@@ -1991,7 +1991,7 @@ a {
     text-overflow: ellipsis;
     overflow: hidden;
     font-weight: 700;
-    font-family: var(--font-nunito);
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
     font-size: var(--font-size-button);
     -webkit-user-select: none;
     user-select: none
@@ -3311,7 +3311,7 @@ a {
     max-width: calc(100vw - 160px);
     overflow: hidden;
     color: var(--white-100);
-    font-family: var(--font-nunito);
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
     font-size: 20px;
     font-weight: 900;
     line-height: 135%;
@@ -3921,7 +3921,7 @@ b {
 body {
     margin: 0;
     color: #F9FAFF;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.5;
@@ -3940,10 +3940,13 @@ body::backdrop {
 }
 
 @font-face {
-    font-family: Nunito-fallback;
-    size-adjust: 101.44000000000005%;
-    ascent-override: 109%;
-    src: local('Arial');
+    font-family: Nunito;
+    src: url(/assest/css/fonts/Nunito-Italic-VariableFont_wght.ttf) format("truetype");
+}
+
+@font-face {
+   font-family: Nunito;
+    src: url(/assest/css/fonts/Nunito-VariableFont_wght.ttf) format("truetype");
 }
 
 html {
@@ -3968,11 +3971,11 @@ html::-webkit-scrollbar-corner {
 
 body {
     font-size: 14px;
-    font-family: 'Nunito', 'Nunito Fallback', Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
 }
 
 button {
-    font-family: 'Nunito', 'Nunito Fallback', Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
 }
 
 h1,
@@ -3981,7 +3984,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Nunito', 'Nunito Fallback', Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
     font-weight: 900;
     color: #fff;
     margin-block: 0;
@@ -4003,7 +4006,7 @@ h2 {
 }
 
 h3 {
-    font-family: 'Nunito', 'Nunito Fallback', Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-family: Nunito;size-adjust:101.44000000000005%;ascent-override:109%;src:local('Arial');
     font-weight: 900;
     color: #fff;
 }
@@ -4015,7 +4018,11 @@ a {
 }
 
 
-
+.sidebar-divider {
+    margin: calc((8px) * 1) calc(var(8px) * 2);
+    border: none;
+    border-top: 1px solid #28293d;
+}
 
 
 .btn>img {
@@ -4672,241 +4679,23 @@ button-effect:hover{
 
 
  
-@media (min-width: 779px){
-   #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 60px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-} 
 
-@media (min-width: 954px){
-   #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 60px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
+:root{
+    --side-bar-width: 60px;
 }
 
-@media (min-width: 1074px){
-   #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 60px !important;
-}
-#mainNav.hidden {
-  display: none !important;
+#layoutMain{
+    padding-left: var(--side-bar-width);
+    width: 100%;
+    box-sizing: border-box;
 }
 body.sidebar-hidden #layoutMain {
   padding-left: 0 !important;
   width: auto !important;
-}
 }
 
-@media (min-width: 1344px){
-    #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 60px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 1584px){
-#mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 60px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 1824px){
- #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 60px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 1944px){
-#mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 200px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
- 
-
-@media (min-width: 2184px){
-  #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 200px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 2304px){
- #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 200px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 2716px){
- #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 200px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 3016px){
- #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 200px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 4035px){
-  #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 200px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 6072px){
-  #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 200px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
-}
-
-@media (min-width: 8110px){
- #mainNav {
-  --sidebar-width: 200px;
-}
-#layoutMain {
-  transition: padding-left .25s ease, width .25s ease;
-  padding-left: 200px !important;
-}
-#mainNav.hidden {
-  display: none !important;
-}
-body.sidebar-hidden #layoutMain {
-  padding-left: 0 !important;
-  width: auto !important;
-}
+@media (min-width:1800px){
+    :root{
+        --side-bar-width:200px;
+    }
 }
