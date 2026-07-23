@@ -42,7 +42,69 @@
             </g>
         </symbol>
     </svg>
+<button id="lc-launcher" aria-label="Open chat">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#4A1B0C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <span id="lc-badge"></span>
+</button>
 
+<div id="lc-panel">
+  <div id="lc-header">
+    <span class="lc-status"><span class="lc-dot"></span> Live chat</span>
+    <div class="lc-header-btns">
+      <button id="lc-fullscreen" aria-label="Fullscreen" title="Fullscreen">⛶</button>
+      <button id="lc-close" aria-label="Close">&times;</button>
+    </div>
+  </div>
+
+  <div id="lc-name-gate">
+    <p>Enter your name to join the chat</p>
+    <input type="text" id="lc-name-input" maxlength="20" placeholder="Your name">
+    <p id="lc-name-error">That name is already taken. Please pick another one.</p>
+    <button id="lc-name-submit">Join</button>
+  </div>
+
+  <div id="lc-messages" style="display:none;">
+    <button id="lc-jump-bottom">↓ New messages</button>
+  </div>
+
+  <div id="lc-form-wrap" style="display:none;">
+    <div id="lc-suggest"></div>
+    <div id="lc-reply-bar">
+      <div class="lc-reply-info"><b id="lc-reply-author"></b><span id="lc-reply-text"></span></div>
+      <button id="lc-reply-cancel" aria-label="Cancel">&times;</button>
+    </div>
+
+    <div id="lc-emoji-panel">
+      <div id="lc-emoji-tabs"></div>
+      <div id="lc-emoji-search-row">
+        <input type="text" id="lc-emoji-search" placeholder="Search emoji">
+      </div>
+      <div id="lc-emoji-scroll"></div>
+      <div id="lc-emoji-no-results">No emoji found</div>
+    </div>
+
+    <div id="lc-image-row">
+      <input type="text" id="lc-image-input" placeholder="Paste image link...">
+      <button id="lc-image-send">Send link</button>
+    </div>
+
+    <div id="lc-gif-panel">
+      <input type="text" id="lc-gif-search" placeholder="Search GIFs (e.g. happy, hi, lol)...">
+      <div id="lc-gif-results"></div>
+      <div id="lc-gif-hint"></div>
+    </div>
+
+    <div id="lc-form">
+      <button class="lc-toggle-btn" id="lc-emoji-toggle" aria-label="Emoji" title="Emoji">😊</button>
+      <button class="lc-toggle-btn" id="lc-img-toggle" aria-label="Send image link" title="Image link">🖼️</button>
+      <button class="lc-toggle-btn" id="lc-gif-toggle" aria-label="Send GIF" title="GIF">GIF</button>
+      <input type="text" id="lc-text-input" maxlength="300" placeholder="Type a message... (use @ to tag)">
+      <button class="lc-send" id="lc-send-btn" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#4A1B0C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>    
+</div>
     <div id="ubgHeader" class="app-header">
         <div class="header-left">
             <!--$-->
@@ -5721,6 +5783,668 @@
             toggleSidebar();
         }
     })();
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, deleteDoc,
+    query, orderBy, limit, onSnapshot, serverTimestamp, arrayUnion, arrayRemove
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // ----- PASTE YOUR FIREBASE CONFIG HERE -----
+  const firebaseConfig = {
+    apiKey: "AIzaSyDKnJueIviOT1HGEKccWJItk3s8GNckF6I",
+    authDomain: "unblockedgame-chat.firebaseapp.com",
+    databaseURL: "https://unblockedgame-chat-default-rtdb.firebaseio.com",
+    projectId: "unblockedgame-chat",
+    storageBucket: "unblockedgame-chat.firebasestorage.app",
+    messagingSenderId: "316395679509",
+    appId: "1:316395679509:web:6b07fe7216347c8341431c",
+    measurementId: "G-YY019HWRCZ"
+  };
+  // --------------------------------------------
+
+  // Your Giphy API key (from developers.giphy.com/dashboard)
+  const GIPHY_API_KEY = "iakWpXX92v4uxU3R1lO5Vk41OFbSFM5O";
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const messagesRef = collection(db, "livechat_messages");
+  const usersRef = collection(db, "livechat_users");
+
+  const BANNED = ['fuck','fuc','fck','madarchod','bhosdi','chutiya','gandu','bkl','saala','harami','loda','randi'];
+  function maskBanned(str){
+    let out = str;
+    BANNED.forEach(function(word){
+      const re = new RegExp(word, 'gi');
+      out = out.replace(re, '***');
+    });
+    return out;
+  }
+
+  const PALETTE = ['#8FD9C4','#7FB8E0','#F4B183','#C9A0DC','#F7D774','#F6989D','#A9D66B','#E0A8D8'];
+  function colorFor(name){
+    let h = 0;
+    for(let i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) % 9973;
+    return PALETTE[h % PALETTE.length];
+  }
+
+  // ---- Emoji data: one native-picker-style category list, each emoji
+  // carries a short searchable name. Tabs above use one representative
+  // icon per category (matches the native iOS/Android emoji picker style). ----
+  const EMOJI_CATEGORIES = [
+    { name: 'Smileys & People', icon: '😀', items: [
+      ['😀','grinning'], ['😁','grin'], ['😂','joy laughing crying'], ['🤣','rofl floor laughing'],
+      ['😊','smile blush'], ['🙂','slight smile'], ['😉','wink'], ['😍','heart eyes love'],
+      ['😘','kiss heart'], ['😜','wink tongue'], ['🤔','thinking'], ['😎','cool sunglasses'],
+      ['🥳','party celebrate'], ['🤩','star struck'], ['😴','sleep'], ['😅','sweat smile'],
+      ['😇','angel innocent'], ['🥺','pleading puppy eyes'], ['😢','cry sad'], ['😭','sob crying'],
+      ['😡','angry mad'], ['😱','scream shock'], ['🤗','hug'], ['🙃','upside down'],
+      ['😏','smirk'], ['🥱','yawn tired'], ['😬','grimace'], ['🤯','mind blown'],
+      ['🥵','hot sweating'], ['🥶','cold freezing'], ['🤢','nauseated sick'],
+      ['👍','thumbs up like'], ['👎','thumbs down dislike'], ['👏','clap applause'], ['🙏','pray thanks please'],
+      ['💪','muscle strong'], ['✌️','peace victory'], ['🤝','handshake deal'], ['👌','ok perfect'],
+      ['👋','wave hi bye'], ['🤙','call me shaka'], ['🤟','love you'], ['🖐️','hand five'],
+      ['👊','fist bump punch'], ['🙌','raise hands celebrate'], ['💃','dance woman'], ['🕺','dance man'],
+      ['👶','baby'], ['👧','girl'], ['👦','boy'], ['👩','woman'], ['👨','man'], ['🧑','person'],
+      ['👵','old woman'], ['👴','old man'], ['🧕','woman hijab'], ['👮','police officer'],
+      ['👨\u200d⚕️','doctor'], ['👩\u200d🍳','cook chef'], ['🧑\u200d🎓','student graduate'], ['🧑\u200d💻','developer coder']
+    ]},
+    { name: 'Animals & Nature', icon: '🐻', items: [
+      ['🐶','dog'], ['🐱','cat'], ['🐭','mouse'], ['🐹','hamster'], ['🐰','rabbit bunny'],
+      ['🦊','fox'], ['🐻','bear'], ['🐼','panda'], ['🐨','koala'], ['🐯','tiger'],
+      ['🦁','lion'], ['🐮','cow'], ['🐷','pig'], ['🐸','frog'], ['🐵','monkey'],
+      ['🐔','chicken'], ['🐧','penguin'], ['🦄','unicorn'], ['🐴','horse'], ['🐝','bee'],
+      ['🦋','butterfly'], ['🐢','turtle'], ['🐍','snake'], ['🦈','shark'], ['🐙','octopus'],
+      ['🦀','crab'], ['🐘','elephant'], ['🦒','giraffe'], ['🐪','camel'], ['🦉','owl'],
+      ['🌸','blossom flower'], ['🌺','hibiscus flower'], ['🌹','rose flower'], ['🌻','sunflower'],
+      ['🌷','tulip'], ['🌼','daisy'], ['🌙','moon'], ['🌍','earth globe'], ['⭐','star'],
+      ['✨','sparkles'], ['🔥','fire'], ['🌈','rainbow'], ['☀️','sun'], ['☁️','cloud'],
+      ['❄️','snowflake'], ['💧','droplet water']
+    ]},
+    { name: 'Food & Drink', icon: '☕', items: [
+      ['🍏','green apple'], ['🍎','red apple'], ['🍌','banana'], ['🍉','watermelon'], ['🍇','grapes'],
+      ['🍓','strawberry'], ['🍒','cherries'], ['🍑','peach'], ['🍍','pineapple'], ['🥑','avocado'],
+      ['🍕','pizza'], ['🍔','burger'], ['🌭','hot dog'], ['🍟','fries'], ['🍗','chicken leg'],
+      ['🍩','donut'], ['🍪','cookie'], ['🎂','birthday cake'], ['🍫','chocolate'], ['🍿','popcorn'],
+      ['☕','coffee'], ['🍵','tea'], ['🍺','beer'], ['🍷','wine'], ['🥤','soda drink'],
+      ['🍦','ice cream'], ['🍰','cake slice'], ['🍜','noodles ramen'], ['🍣','sushi']
+    ]},
+    { name: 'Activities', icon: '🏀', items: [
+      ['⚽','soccer football'], ['🏀','basketball'], ['🏈','american football'], ['⚾','baseball'],
+      ['🎾','tennis'], ['🏐','volleyball'], ['🏓','ping pong table tennis'], ['🏸','badminton'],
+      ['🎱','pool billiards'], ['🎮','video game controller'], ['🎲','dice'], ['🎯','dart target'],
+      ['🎳','bowling'], ['🏆','trophy win'], ['🥇','gold medal'], ['🎨','art paint'],
+      ['🎬','movie clapper'], ['🎤','microphone karaoke'], ['🎧','headphones music'], ['🎸','guitar'],
+      ['🎉','party popper'], ['🎊','confetti'], ['🎁','gift present'], ['🎈','balloon'],
+      ['🏋️','weightlifting gym'], ['🚴','cycling bike'], ['🏊','swimming'], ['⛳','golf'], ['🎿','ski']
+    ]},
+    { name: 'Travel & Places', icon: '🚗', items: [
+      ['🚗','car'], ['🚕','taxi'], ['🚌','bus'], ['🚓','police car'], ['🚑','ambulance'],
+      ['🚒','fire truck'], ['🚀','rocket space'], ['✈️','plane airplane'], ['🚁','helicopter'],
+      ['⛵','sailboat'], ['🚢','ship'], ['🚲','bike bicycle'], ['🏖️','beach'], ['🏝️','island'],
+      ['🏔️','mountain'], ['🗽','statue of liberty'], ['🗼','tower'], ['🏰','castle'],
+      ['🌋','volcano'], ['🌅','sunrise'], ['🌆','city sunset'], ['🌃','night city'],
+      ['🚦','traffic light'], ['🗺️','map'], ['⛰️','mountain peak'], ['🏕️','camping tent'],
+      ['🚉','train station'], ['🛣️','road highway']
+    ]},
+    { name: 'Objects', icon: '💡', items: [
+      ['⌚','watch'], ['📱','phone mobile'], ['💻','laptop computer'], ['⌨️','keyboard'],
+      ['🖥️','desktop computer'], ['📷','camera'], ['📞','telephone'], ['🔋','battery'],
+      ['💡','bulb idea light'], ['🔦','flashlight torch'], ['💰','money bag'], ['💎','diamond gem'],
+      ['🔑','key'], ['🔒','lock'], ['📌','pin'], ['📎','paperclip'], ['✂️','scissors'],
+      ['🔍','magnifying search'], ['💊','pill medicine'], ['🛒','shopping cart'], ['📚','books'],
+      ['✏️','pencil'], ['🖊️','pen'], ['📅','calendar'], ['🎒','backpack'], ['💼','briefcase work']
+    ]},
+    { name: 'Symbols', icon: '🔣', items: [
+      ['❤️','red heart love'], ['🧡','orange heart'], ['💛','yellow heart'], ['💚','green heart'],
+      ['💙','blue heart'], ['💜','purple heart'], ['🖤','black heart'], ['🤍','white heart'],
+      ['💔','broken heart'], ['❣️','heart exclamation'], ['💕','two hearts'], ['💯','hundred perfect'],
+      ['✅','check done'], ['❌','cross wrong'], ['⭕','circle'], ['❗','exclamation'],
+      ['❓','question mark'], ['♻️','recycle'], ['⚠️','warning'], ['🔥','fire hot'],
+      ['✨','sparkles'], ['⭐','star'], ['🔴','red circle'], ['🟢','green circle'],
+      ['🔵','blue circle'], ['🟡','yellow circle'], ['💤','sleep zzz'], ['🚫','forbidden no']
+    ]},
+    { name: 'Flags', icon: '🏁', items: [
+      ['🏳️','white flag surrender'], ['🏴','black flag'], ['🚩','red flag'], ['🏁','checkered flag finish'],
+      ['🇵🇰','pakistan'], ['🇺🇸','usa america'], ['🇬🇧','uk britain'], ['🇮🇳','india'],
+      ['🇸🇦','saudi arabia'], ['🇦🇪','uae emirates'], ['🇹🇷','turkey'], ['🇨🇳','china'],
+      ['🇯🇵','japan'], ['🇩🇪','germany'], ['🇫🇷','france'], ['🇨🇦','canada'],
+      ['🇦🇺','australia'], ['🇧🇩','bangladesh'], ['🇮🇩','indonesia']
+    ]}
+  ];
+
+  const launcher = document.getElementById('lc-launcher');
+  const badge = document.getElementById('lc-badge');
+  const panel = document.getElementById('lc-panel');
+  const closeBtn = document.getElementById('lc-close');
+  const fullscreenBtn = document.getElementById('lc-fullscreen');
+  const nameGate = document.getElementById('lc-name-gate');
+  const nameInput = document.getElementById('lc-name-input');
+  const nameSubmit = document.getElementById('lc-name-submit');
+  const nameError = document.getElementById('lc-name-error');
+  const messagesBox = document.getElementById('lc-messages');
+  const jumpBottomBtn = document.getElementById('lc-jump-bottom');
+  const formWrap = document.getElementById('lc-form-wrap');
+  const textInput = document.getElementById('lc-text-input');
+  const sendBtn = document.getElementById('lc-send-btn');
+  const suggestBox = document.getElementById('lc-suggest');
+
+  const emojiToggle = document.getElementById('lc-emoji-toggle');
+  const emojiPanel = document.getElementById('lc-emoji-panel');
+  const emojiTabs = document.getElementById('lc-emoji-tabs');
+  const emojiScroll = document.getElementById('lc-emoji-scroll');
+  const emojiSearchInput = document.getElementById('lc-emoji-search');
+  const emojiNoResults = document.getElementById('lc-emoji-no-results');
+
+  const imgToggle = document.getElementById('lc-img-toggle');
+  const imageRow = document.getElementById('lc-image-row');
+  const imageInput = document.getElementById('lc-image-input');
+  const imageSend = document.getElementById('lc-image-send');
+
+  const gifToggle = document.getElementById('lc-gif-toggle');
+  const gifPanel = document.getElementById('lc-gif-panel');
+  const gifSearch = document.getElementById('lc-gif-search');
+  const gifResults = document.getElementById('lc-gif-results');
+  const gifHint = document.getElementById('lc-gif-hint');
+
+  const replyBar = document.getElementById('lc-reply-bar');
+  const replyAuthorEl = document.getElementById('lc-reply-author');
+  const replyTextEl = document.getElementById('lc-reply-text');
+  const replyCancel = document.getElementById('lc-reply-cancel');
+
+  // ---- build the single-scroll emoji picker: one tab per category (icon
+  // only, like the native picker), all categories rendered as sections in
+  // one scrolling list, and a scroll-spy that highlights whichever tab's
+  // section is currently at the top of the visible area. ----
+  let emojiIgnoreScroll = false; // true while we're auto-scrolling from a tab click
+
+  EMOJI_CATEGORIES.forEach(function(cat, idx){
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.className = 'lc-emoji-tab' + (idx === 0 ? ' active' : '');
+    tab.textContent = cat.icon;
+    tab.title = cat.name;
+    tab.dataset.cat = cat.name;
+    tab.addEventListener('click', function(){
+      emojiSearchInput.value = '';
+      renderEmojiSections('');
+      const section = emojiScroll.querySelector('[data-section="' + CSS.escape(cat.name) + '"]');
+      if(section){
+        emojiIgnoreScroll = true;
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActiveEmojiTab(cat.name);
+        setTimeout(function(){ emojiIgnoreScroll = false; }, 500);
+      }
+    });
+    emojiTabs.appendChild(tab);
+  });
+
+  function setActiveEmojiTab(catName){
+    emojiTabs.querySelectorAll('.lc-emoji-tab').forEach(function(t){
+      t.classList.toggle('active', t.dataset.cat === catName);
+    });
+  }
+
+  function renderEmojiSections(filterRaw){
+    const filter = filterRaw.trim().toLowerCase();
+    emojiScroll.innerHTML = '';
+    let anyMatch = false;
+
+    EMOJI_CATEGORIES.forEach(function(cat){
+      const matches = filter
+        ? cat.items.filter(function(it){ return it[1].indexOf(filter) !== -1; })
+        : cat.items;
+      if(!matches.length) return;
+      anyMatch = true;
+
+      const section = document.createElement('div');
+      section.dataset.section = cat.name;
+
+      const title = document.createElement('div');
+      title.className = 'lc-emoji-section-title';
+      title.textContent = cat.name;
+      section.appendChild(title);
+
+      const grid = document.createElement('div');
+      grid.className = 'lc-emoji-section-grid';
+      matches.forEach(function(it){
+        const s = document.createElement('span');
+        s.textContent = it[0];
+        s.title = it[1];
+        s.addEventListener('click', function(){
+          textInput.value += it[0];
+          textInput.focus();
+        });
+        grid.appendChild(s);
+      });
+      section.appendChild(grid);
+      emojiScroll.appendChild(section);
+    });
+
+    emojiNoResults.style.display = anyMatch ? 'none' : 'block';
+    // while searching, no single category applies - clear the tab highlight;
+    // restoring focus to a category (via tab click) resets the search too.
+    if(filter) emojiTabs.querySelectorAll('.lc-emoji-tab').forEach(t => t.classList.remove('active'));
+    else setActiveEmojiTab(EMOJI_CATEGORIES[0].name);
+  }
+  renderEmojiSections('');
+
+  let emojiSearchDebounce = null;
+  emojiSearchInput.addEventListener('input', function(){
+    clearTimeout(emojiSearchDebounce);
+    const val = emojiSearchInput.value;
+    emojiSearchDebounce = setTimeout(function(){ renderEmojiSections(val); }, 120);
+  });
+
+  // scroll-spy: whichever section's top has scrolled past (or is closest
+  // to) the top of the scroll box is the "active" one, matching how native
+  // emoji pickers keep the current category tab lit while you scroll.
+  emojiScroll.addEventListener('scroll', function(){
+    if(emojiIgnoreScroll) return;
+    if(emojiSearchInput.value.trim()) return; // no single category while searching
+    const sections = emojiScroll.querySelectorAll('[data-section]');
+    let current = null;
+    sections.forEach(function(sec){
+      if(sec.offsetTop - emojiScroll.scrollTop <= 28) current = sec;
+    });
+    if(current) setActiveEmojiTab(current.dataset.section);
+  });
+
+  function hideAllPanels(){
+    emojiPanel.style.display = 'none';
+    imageRow.style.display = 'none';
+    gifPanel.style.display = 'none';
+  }
+  emojiToggle.addEventListener('click', function(){
+    const showing = emojiPanel.style.display === 'flex';
+    hideAllPanels();
+    emojiPanel.style.display = showing ? 'none' : 'flex';
+  });
+  imgToggle.addEventListener('click', function(){
+    const showing = imageRow.style.display === 'flex';
+    hideAllPanels();
+    imageRow.style.display = showing ? 'none' : 'flex';
+    if(!showing) imageInput.focus();
+  });
+  gifToggle.addEventListener('click', function(){
+    const showing = gifPanel.style.display === 'block';
+    hideAllPanels();
+    gifPanel.style.display = showing ? 'none' : 'block';
+    if(!showing){
+      gifSearch.focus();
+      if(!gifResults.childElementCount) searchGifs('hi');
+    }
+  });
+
+  // ---- unique browser identity ----
+  function makeId(){
+    if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return 'id-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+  }
+  let clientId = localStorage.getItem('lc_client_id');
+  if(!clientId){
+    clientId = makeId();
+    localStorage.setItem('lc_client_id', clientId);
+  }
+
+  let myName = localStorage.getItem('lc_username') || '';
+  let unread = 0;
+  let panelOpen = false;
+  let knownUsers = [];
+  let lastSnapshotDocs = [];
+  let replyingTo = null; // { author, text, image }
+
+  // highlight state persists across re-renders (see renderMessages/jumpToMessage)
+  let highlightedMsgId = null;
+  let highlightTimeout = null;
+
+  // "new messages" indicator persists across re-renders until user scrolls back down
+  let hasUnseenBelow = false;
+
+  if(myName){ showChat(); }
+
+  launcher.addEventListener('click', function(){
+    panelOpen = !panelOpen;
+    panel.classList.toggle('open', panelOpen);
+    if(panelOpen){
+      unread = 0;
+      badge.style.display = 'none';
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+      hasUnseenBelow = false;
+    }
+  });
+  closeBtn.addEventListener('click', function(){
+    panelOpen = false;
+    panel.classList.remove('open');
+  });
+  fullscreenBtn.addEventListener('click', function(){
+    panel.classList.toggle('fullscreen');
+  });
+
+  nameSubmit.addEventListener('click', claimName);
+  nameInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter') claimName();
+  });
+
+  async function claimName(){
+    const n = nameInput.value.trim();
+    if(!n) return;
+    nameError.style.display = 'none';
+    nameSubmit.disabled = true;
+    nameSubmit.textContent = 'Checking...';
+    try{
+      const existing = await getDoc(doc(usersRef, n));
+      if(existing.exists() && existing.data().ownerId && existing.data().ownerId !== clientId){
+        nameError.style.display = 'block';
+        nameSubmit.disabled = false;
+        nameSubmit.textContent = 'Join';
+        return;
+      }
+      await setDoc(doc(usersRef, n), { name: n, ownerId: clientId, lastSeen: serverTimestamp() });
+      myName = n;
+      localStorage.setItem('lc_username', n);
+      showChat();
+    } catch(err){
+      nameError.textContent = 'Something went wrong, please try again.';
+      nameError.style.display = 'block';
+    } finally {
+      nameSubmit.disabled = false;
+      nameSubmit.textContent = 'Join';
+    }
+  }
+
+  function showChat(){
+    nameGate.style.display = 'none';
+    messagesBox.style.display = 'flex';
+    formWrap.style.display = 'block';
+    listenForMessages();
+    listenForUsers();
+    setInterval(function(){ renderMessages(false); }, 5000); // refresh so the 1-minute delete window updates
+  }
+
+  function listenForUsers(){
+    onSnapshot(query(usersRef, orderBy('lastSeen','desc'), limit(50)), function(snap){
+      knownUsers = [];
+      snap.forEach(function(d){ knownUsers.push(d.id); });
+    });
+  }
+
+  function timeNow(ts){
+    if(!ts) return '';
+    const d = ts.toDate ? ts.toDate() : new Date();
+    return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+  }
+
+  function renderText(text){
+    return text.replace(/(^|\s)(@[a-zA-Z0-9_]+)/g, function(m, pre, tag){
+      return pre + '<span class="lc-mention">' + tag + '</span>';
+    });
+  }
+
+  function listenForMessages(){
+    const q = query(messagesRef, orderBy('ts','asc'), limit(150));
+    onSnapshot(q, function(snap){
+      lastSnapshotDocs = [];
+      snap.forEach(function(d){ lastSnapshotDocs.push({ id: d.id, data: d.data() }); });
+      const hasNew = snap.docChanges().some(c => c.type === 'added');
+      renderMessages(hasNew);
+      if(!panelOpen && hasNew){
+        unread++;
+        badge.textContent = unread;
+        badge.style.display = 'flex';
+      }
+    });
+  }
+
+  function startReplyTo(m, id){
+    replyingTo = { id: id, author: m.author, text: m.text || '', image: m.image || null };
+    showReplyBar();
+  }
+
+  // WhatsApp-style jump: scroll the original message into view and flash it.
+  function jumpToMessage(targetId){
+    highlightedMsgId = targetId;
+    if(highlightTimeout) clearTimeout(highlightTimeout);
+
+    const el = document.getElementById('lc-msg-' + targetId);
+    if(el){
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('lc-highlight');
+    }
+
+    highlightTimeout = setTimeout(function(){
+      highlightedMsgId = null;
+      const stale = document.getElementById('lc-msg-' + targetId);
+      if(stale) stale.classList.remove('lc-highlight');
+    }, 1300);
+  }
+
+  function renderMessages(hasNew){
+    const distanceFromBottom = messagesBox.scrollHeight - messagesBox.scrollTop - messagesBox.clientHeight;
+    const wasNearBottom = distanceFromBottom < 120 || messagesBox.scrollHeight === 0;
+    const prevScrollTop = messagesBox.scrollTop;
+
+    messagesBox.innerHTML = '';
+    messagesBox.appendChild(jumpBottomBtn);
+
+    lastSnapshotDocs.forEach(function(item){
+      const id = item.id;
+      const m = item.data;
+      const isMe = m.author === myName;
+
+      const wrap = document.createElement('div');
+      wrap.className = 'lc-msg-wrap ' + (isMe ? 'me' : 'other');
+      wrap.id = 'lc-msg-' + id;
+      if(id === highlightedMsgId) wrap.classList.add('lc-highlight');
+
+      const bubble = document.createElement('div');
+      bubble.className = 'lc-msg ' + (isMe ? 'me' : 'other');
+      if(!isMe) bubble.style.background = colorFor(m.author);
+
+      let inner = '';
+      if(m.replyTo){
+        const clickable = m.replyTo.id ? ' lc-quote-clickable' : '';
+        inner += '<div class="lc-quote' + clickable + '"><span class="lc-quote-author"></span><span class="lc-quote-text"></span></div>';
+      }
+      if(!isMe) inner += '<span class="lc-name"></span>';
+      if(m.text) inner += '<span class="lc-body"></span>';
+      if(m.image) inner += '<img class="lc-img" src="' + m.image + '">';
+      bubble.innerHTML = inner;
+
+      if(m.replyTo){
+        const quoteEl = bubble.querySelector('.lc-quote');
+        quoteEl.querySelector('.lc-quote-author').textContent = m.replyTo.author;
+        quoteEl.querySelector('.lc-quote-text').textContent = m.replyTo.image ? '📷 GIF' : m.replyTo.text;
+        if(m.replyTo.id){
+          quoteEl.addEventListener('click', function(ev){
+            ev.stopPropagation();
+            jumpToMessage(m.replyTo.id);
+          });
+        }
+      }
+      if(!isMe) bubble.querySelector('.lc-name').textContent = m.author;
+      if(m.text) bubble.querySelector('.lc-body').innerHTML = renderText(m.text);
+
+      bubble.addEventListener('click', function(e){
+        if(e.target.tagName === 'IMG') return;
+        if(e.target.closest('.lc-quote')) return;
+        startReplyTo(m, id);
+      });
+
+      wrap.appendChild(bubble);
+
+      const meta = document.createElement('div');
+      meta.className = 'lc-meta-row';
+      const time = document.createElement('span');
+      time.textContent = timeNow(m.ts);
+      meta.appendChild(time);
+
+      if(!isMe){
+        const likes = m.likes || [];
+        const likeBtn = document.createElement('button');
+        likeBtn.className = 'lc-like-btn' + (likes.indexOf(myName) !== -1 ? ' liked' : '');
+        likeBtn.textContent = '♥ ' + likes.length;
+        likeBtn.addEventListener('click', function(ev){
+          ev.stopPropagation();
+          const msgDoc = doc(messagesRef, id);
+          if(likes.indexOf(myName) !== -1){
+            updateDoc(msgDoc, { likes: arrayRemove(myName) });
+          } else {
+            updateDoc(msgDoc, { likes: arrayUnion(myName) });
+          }
+        });
+        meta.appendChild(likeBtn);
+      }
+
+      const replyBtn = document.createElement('button');
+      replyBtn.className = 'lc-reply-btn';
+      replyBtn.textContent = 'reply';
+      replyBtn.addEventListener('click', function(ev){
+        ev.stopPropagation();
+        startReplyTo(m, id);
+      });
+      meta.appendChild(replyBtn);
+
+      if(isMe && m.ts && m.ts.toMillis && (Date.now() - m.ts.toMillis()) < 60000){
+        const delBtn = document.createElement('button');
+        delBtn.className = 'lc-del-btn';
+        delBtn.textContent = 'delete';
+        delBtn.addEventListener('click', function(ev){
+          ev.stopPropagation();
+          deleteDoc(doc(messagesRef, id));
+        });
+        meta.appendChild(delBtn);
+      }
+
+      wrap.appendChild(meta);
+      messagesBox.appendChild(wrap);
+    });
+
+    if(wasNearBottom){
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+      jumpBottomBtn.style.display = 'none';
+      hasUnseenBelow = false;
+    } else {
+      if(hasNew) hasUnseenBelow = true;
+      messagesBox.scrollTop = prevScrollTop;
+      jumpBottomBtn.style.display = hasUnseenBelow ? 'block' : 'none';
+    }
+  }
+
+  jumpBottomBtn.addEventListener('click', function(){
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+    jumpBottomBtn.style.display = 'none';
+    hasUnseenBelow = false;
+  });
+
+  // --- reply bar ---
+  function showReplyBar(){
+    replyAuthorEl.textContent = replyingTo.author;
+    replyTextEl.textContent = replyingTo.image ? '📷 Photo' : replyingTo.text;
+    replyBar.style.display = 'flex';
+    textInput.focus();
+  }
+  replyCancel.addEventListener('click', function(){
+    replyingTo = null;
+    replyBar.style.display = 'none';
+  });
+
+  // --- @mention suggestions while typing ---
+  textInput.addEventListener('input', function(){
+    const val = textInput.value;
+    const atMatch = val.match(/@([a-zA-Z0-9_]*)$/);
+    if(atMatch){
+      const partial = atMatch[1].toLowerCase();
+      const matches = knownUsers.filter(function(u){ return u.toLowerCase().indexOf(partial) === 0 && u !== myName; });
+      if(matches.length){
+        suggestBox.innerHTML = '';
+        matches.slice(0,6).forEach(function(u){
+          const opt = document.createElement('div');
+          opt.textContent = '@' + u;
+          opt.addEventListener('click', function(){
+            textInput.value = val.slice(0, atMatch.index) + '@' + u + ' ';
+            suggestBox.style.display = 'none';
+            textInput.focus();
+          });
+          suggestBox.appendChild(opt);
+        });
+        suggestBox.style.display = 'block';
+      } else {
+        suggestBox.style.display = 'none';
+      }
+    } else {
+      suggestBox.style.display = 'none';
+    }
+  });
+
+  // --- image via link only (gallery upload removed) ---
+  imageSend.addEventListener('click', function(){ sendImageMessage(imageInput.value.trim()); imageInput.value=''; imageRow.style.display='none'; });
+  imageInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ sendImageMessage(imageInput.value.trim()); imageInput.value=''; imageRow.style.display='none'; } });
+
+  // --- GIF search (Giphy) ---
+  let gifDebounce = null;
+  gifSearch.addEventListener('input', function(){
+    clearTimeout(gifDebounce);
+    const q = gifSearch.value.trim();
+    gifDebounce = setTimeout(function(){ searchGifs(q || 'hi'); }, 450);
+  });
+
+  async function searchGifs(q){
+    if(GIPHY_API_KEY === 'YOUR_GIPHY_API_KEY'){
+      gifHint.textContent = 'Add your GIPHY_API_KEY first (free at developers.giphy.com).';
+      return;
+    }
+    gifHint.textContent = 'Searching...';
+    try{
+      const url = 'https://api.giphy.com/v1/gifs/search?api_key=' + GIPHY_API_KEY +
+                  '&q=' + encodeURIComponent(q) + '&limit=24&rating=g';
+      const res = await fetch(url);
+      const data = await res.json();
+      gifResults.innerHTML = '';
+      (data.data || []).forEach(function(g){
+        const thumb = g.images && g.images.fixed_height_small ? g.images.fixed_height_small.url : null;
+        const full = g.images && g.images.fixed_height ? g.images.fixed_height.url : thumb;
+        if(!thumb) return;
+        const img = document.createElement('img');
+        img.src = thumb;
+        img.addEventListener('click', function(){
+          sendImageMessage(full);
+          gifPanel.style.display = 'none';
+        });
+        gifResults.appendChild(img);
+      });
+      gifHint.textContent = '';
+    } catch(err){
+      gifHint.textContent = "Couldn't load GIFs, please try again.";
+    }
+  }
+
+  async function sendImageMessage(url){
+    if(!url || !myName) return;
+    const payload = { author: myName, text: '', image: url, likes: [], ts: serverTimestamp() };
+    if(replyingTo){ payload.replyTo = replyingTo; replyingTo = null; replyBar.style.display = 'none'; }
+    await addDoc(messagesRef, payload);
+    await setDoc(doc(usersRef, myName), { name: myName, ownerId: clientId, lastSeen: serverTimestamp() });
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  textInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && suggestBox.style.display !== 'block') sendMessage();
+  });
+
+  async function sendMessage(){
+    const raw = textInput.value.trim();
+    if(!raw || !myName) return;
+    const text = maskBanned(raw);
+    textInput.value = '';
+    suggestBox.style.display = 'none';
+    const payload = { author: myName, text: text, image: null, likes: [], ts: serverTimestamp() };
+    if(replyingTo){ payload.replyTo = replyingTo; replyingTo = null; replyBar.style.display = 'none'; }
+    await addDoc(messagesRef, payload);
+    await setDoc(doc(usersRef, myName), { name: myName, ownerId: clientId, lastSeen: serverTimestamp() });
+  }
 </script>
 
 </html>
