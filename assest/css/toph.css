@@ -5,7 +5,7 @@
     .game-slider-wrap {
       max-width: var(--page-max-width);
       margin: 36px auto 0;
-      padding: 0 var(--page-gutter);
+      padding: 20px;
       width: 100%;
     }
 

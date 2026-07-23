@@ -203,8 +203,13 @@ template {
 .row {
     width: 100%;
     margin: auto;
+    padding: 20px;
 }
-
+.tow {
+    width: 100%;
+    margin: auto;
+    padding: 0 20px;
+}
 .font-bold {
     font-weight: bold;
 }

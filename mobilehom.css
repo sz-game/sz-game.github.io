@@ -286,9 +286,9 @@
 
     border-radius: 999px;
 
-    background: #6657ff;
+    background: #f0d210;
 
-    color: #fff;
+    color: #000000;
 
     font-size: clamp(14px, 2vw, 18px);
 
@@ -371,6 +371,7 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     padding-bottom: 4px;
+    padding-top: 20px;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -538,3 +539,22 @@
 .mg-nav-prev svg{ width:20px; height:20px; }
 .mg-wrap:hover .mg-nav-next,
 .mg-wrap:hover .mg-nav-prev{ opacity:1; pointer-events:auto; }
+
+
+
+.mb-section-title{
+    color:#fff;
+    font-size: clamp(31px, 4vw, 35px);
+    font-weight: 800;
+    margin:0;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .mb-section-title span{
+    background: #f0d210;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }

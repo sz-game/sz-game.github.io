@@ -61,35 +61,43 @@ setupSliders('.wc-wrap', '.wc-track', '.wc-nav-arrow', 0.85);
 // SLIDER 5 — featured grid (fg-)
 setupFgSlider(0.85);
 
-document.querySelector('.cp-view-arrow').addEventListener('click', () => {
-    const track = document.querySelector('.cp-track');
-    track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' });
-  });
-
-
-   const mgTrack = document.getElementById('mgTrack');
-  const mgWrap = mgTrack.closest('.mg-wrap');
-
-  function mgPageWidth(){
-    // width of 2 columns + the gap between them = one "slide page"
-    const col = mgTrack.firstElementChild.getBoundingClientRect().width;
-    const gapPx = parseFloat(getComputedStyle(mgTrack).columnGap) || 0;
-    return (col + gapPx) * 2;
+const cpViewArrow = document.querySelector('.cp-view-arrow');
+if (cpViewArrow) {
+  const cpTrack = document.querySelector('.cp-track');
+  if (cpTrack) {
+    cpViewArrow.addEventListener('click', () => {
+      cpTrack.scrollBy({ left: cpTrack.clientWidth * 0.8, behavior: 'smooth' });
+    });
   }
+}
 
-  mgWrap.querySelector('.mg-nav-next').addEventListener('click', () => {
-    mgTrack.scrollBy({ left: mgPageWidth(), behavior: 'smooth' });
-  });
-  mgWrap.querySelector('.mg-nav-prev').addEventListener('click', () => {
-    mgTrack.scrollBy({ left: -mgPageWidth(), behavior: 'smooth' });
-  });
+const mgTrack = document.getElementById('mgTrack');
+if (mgTrack) {
+  const mgWrap = mgTrack.closest('.mg-wrap');
+  if (mgWrap) {
+    function mgPageWidth(){
+      // width of 2 columns + the gap between them = one "slide page"
+      const col = mgTrack.firstElementChild.getBoundingClientRect().width;
+      const gapPx = parseFloat(getComputedStyle(mgTrack).columnGap) || 0;
+      return (col + gapPx) * 2;
+    }
 
+    mgWrap.querySelector('.mg-nav-next')?.addEventListener('click', () => {
+      mgTrack.scrollBy({ left: mgPageWidth(), behavior: 'smooth' });
+    });
+    mgWrap.querySelector('.mg-nav-prev')?.addEventListener('click', () => {
+      mgTrack.scrollBy({ left: -mgPageWidth(), behavior: 'smooth' });
+    });
+  }
+}
 
-  (function(){
+(function(){
   const track = document.getElementById('gmTrack');
   const slider = document.getElementById('gmSlider');
   const prevBtn = document.getElementById('gmPrev');
   const nextBtn = document.getElementById('gmNext');
+
+  if (!track || !slider || !prevBtn || !nextBtn) return;
 
   let pos = 0;
   let oneSetWidth = 0;
