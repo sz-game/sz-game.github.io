@@ -204,6 +204,27 @@ body{
   padding: 10px 8px 8px;
 }
 
+@media (max-width: 350px){
+
+  .card-small{
+     grid-row:span 1;
+    grid-column:span 1;
+
+    width:88px;
+    height:88px;
+  }
+  
+}
+@media (max-width: 768px){
+
+  .card-small{
+     grid-row:span 1;
+    grid-column:span 1;
+
+    width:88px;
+    height:88px;
+  }
+}
 .badge{
   position:absolute;
   top:8px; left:8px;
