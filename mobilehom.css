@@ -382,7 +382,7 @@
 
 .cp-card {
     flex: 0 0 auto;
-    width: 110px;
+    width: 88.9px;
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
@@ -391,8 +391,8 @@
 
 .cp-thumb {
     position: relative;
-    width: 110px;
-    height: 110px;
+    width: 88.9px;
+    height: 88.9px;
     border-radius: 22px;
     overflow: hidden;
     background: linear-gradient(160deg, var(--surface-2), var(--surface));
