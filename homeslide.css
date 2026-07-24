@@ -23,6 +23,8 @@
 
     /* Small card size */
    --card-size: min(230px, max(110px, calc((100vw - 110px) / 14)));
+   --mobile-card-size: min(230px, max(88px, calc((100vw - 110px) / 14)));
+   
 --gm-radius: 18px;
     --gm-card-width: clamp(300px, calc(26vw + 130px), 460px);
     --gm-thumb: clamp(40px, calc(4vw + 40px), 45px);
@@ -204,61 +206,85 @@ body{
   padding: 10px 8px 8px;
 }
 
-@media (max-width: 350px){
+.mobile-car-wrap{
+  position:relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
-  .card-small{
-     grid-row:span 1;
+.mobile-car{
+    display:grid;
+    grid-template-rows:repeat(2,1fr);
+    grid-auto-flow:column;
+    grid-auto-columns:var(--mobile-card-size);
+
+    gap:var(--gap);
+
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+
+    padding-bottom:4px;
+
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+}
+
+.mobile-car::-webkit-scrollbar{
+    display:none;
+}
+
+.mobile-card{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--surface-2);
+    scroll-snap-align:start;
+    cursor:pointer;
+}
+
+.mobile-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* Small */
+.mobile-car-small{
+    grid-row:span 1;
     grid-column:span 1;
 
-    width:88px;
-    height:88px;
-  }
-  
+    width:var(--mobile-card-size);
+    height:var(--mobile-card-size);
 }
-@media (max-width: 768px){
-
-  .card-small{
-     grid-row:span 1;
-    grid-column:span 1;
-
-    width:88px;
-    height:88px;
-  }
-}
-.badge{
+ 
+.mobile-car-label{
   position:absolute;
-  top:8px; left:8px;
-  display:flex; align-items:center; gap:5px;
-  background: rgba(0,0,0,0.6);
+  left:0; right:0; bottom:0;
+  padding: 14px 12px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+  font-size: 20px;
+  font-weight: 800;
   color:#fff;
-  font-size: 11px;
+  letter-spacing: -0.3px;
+  opacity:0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.mobile-card:hover .mobile-car-label{
+  opacity:1;
+  transform: translateY(0);
+}
+.mobile-card:hover {
+  border: 2px solid yellow;
+}
+.mobile-car-small .mobile-car-label,
+.mobile-card-wide .mobile-car-label{
+  font-size: 13px;
   font-weight:700;
-  padding: 4px 9px;
-  border-radius: 999px;
-  z-index:2;
+  padding: 10px 8px 8px;
 }
-.badge-top{ background: var(--gold); color:#3a2a05; }
-.badge-updated{ background: var(--violet); color:#1c1740; }
-.badge-right{
-  position:absolute; top:8px; right:8px;
-  background: rgba(0,0,0,0.6);
-  color: var(--text-muted);
-  font-size: 10px;
-  font-weight:600;
-  padding: 3px 8px;
-  border-radius: 999px;
-  z-index:2;
-}
-.badge-refresh{
-  position:absolute; top:8px; right:8px;
-  width:22px; height:22px;
-  border-radius:50%;
-  background: rgba(0,0,0,0.6);
-  display:flex; align-items:center; justify-content:center;
-  z-index:2;
-}
-.badge-refresh svg{ width:12px; height:12px; }
-
  
 
 /* =========================================================
@@ -388,12 +414,46 @@ body{
   border-radius: 999px;
   z-index:2;
 }
-.sc-badge-top svg{ width:11px; height:11px; }
 
-@media (max-width: 640px){
-  .sc-card{ width:140px; height:224px; }
+.mobile-scr-wrap{
+  position:relative;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
+.mobile-scr-track{
+  display:flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.mobile-scr-track::-webkit-scrollbar{ display:none; }
+
+.mobile-scr-card{
+  position:relative;
+  flex: 0 0 auto;
+  width: calc((100vw - 76px) / (3 + 0.25));
+  height: calc((calc((100vw - 76px) / (3 + 0.25)) - 4px) * 3 / 2 + calc(8px * 0.5));
+  border-radius: 6px;
+  overflow:hidden;
+  background: var(--surface-2);
+  scroll-snap-align: start;
+  cursor:pointer;
+}
+.mobile-scr-card img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.mobile-scr-card:hover .rc-card-label{
+  opacity:1;
+  transform: translateY(0);
+  
+}
+.mobile-scr-card:hover {
+  border: 2px solid yellow;
+} 
 /* =========================================================
    SLIDER 4 — wide landscape cards ("fg-")
 ========================================================= */
@@ -687,7 +747,45 @@ background-position: right center;
   position:relative;
   z-index:2;
 }
+.mobile_fc-section-v2{
+ position:relative;
+  max-width: 99%;
+  margin: 14px auto;
+  padding: 14px;
+  border-radius: 5px;
+  overflow:hidden;
+  left: 10;
+  background-color:#ffffff00;
+  background-image:
+   linear-gradient(126deg, rgb(127, 29, 29), rgba(251, 146, 60, 0) 100.87%);
+  background-size: contain;
+background-position: right center;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+}
 
+.mobile_fc-section-v2::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 8% 50%, rgb(170, 146, 75), transparent 40%),
+    radial-gradient(circle at 92% 50%, rgba(18,21,62,0), transparent 40%);
+  animation: glowPulse 4s ease-in-out infinite;
+  pointer-events:none;
+  z-index:1;
+}
+
+@keyframes glowPulse{
+  0%, 100%{ opacity: 0.6; }
+  50%{ opacity: 1; }
+}
+
+.mobile_fc-section-v2 > *{
+  position:relative;
+  z-index:2;
+}
 .pz-section-v2{
  position:relative;
   max-width: 99%;
@@ -1182,7 +1280,7 @@ background-position: right center;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 3px;
   transition: transform .2s, box-shadow .2s, filter .2s;
 }
 

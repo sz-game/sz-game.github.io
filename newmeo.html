@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mobile-scr-wrap{
+  position:relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.mobile-scr-track{
+  display:flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.mobile-scr-track::-webkit-scrollbar{ display:none; }
+
+.mobile-scr-card{
+  position:relative;
+  flex: 0 0 auto;
+  width: calc((100vw - 76px) / (3 + 0.25));
+  height: calc((calc((100vw - 76px) / (3 + 0.25)) - 4px) * 3 / 2 + calc(8px * 0.5));
+  border-radius: 6px;
+  overflow:hidden;
+  background: var(--surface-2);
+  scroll-snap-align: start;
+  cursor:pointer;
+}
+.mobile-scr-card img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.mobile-scr-card:hover .rc-card-label{
+  opacity:1;
+  transform: translateY(0);
+  
+}
+.mobile-scr-card:hover {
+  border: 2px solid yellow;
+} 
+ 
+    </style>
+</head>
+<body>
+    <div class="mobile-scr-wrap">
+                <div class="mobile-scr-track" class="mobile-scr-track">
+
+                    <div class="mobile-scr-card" onclick="location.href='/g/crossy-road/'"><img src="/assest/potriat/crossy-road.webp" srcset="/assest/potriat/crossy-road.webp 1x, /assest/potriat/crossy-road.webp 2x" loading="lazy" title="Crossy Road" alt="Crossy Road"></div>
+                    <div class="mobile-scr-card" onclick="location.href='/g/tap-tap-shots/'"><img src="/assest/potriat/tap-tap-shots.webp" srcset="/assest/potriat/tap-tap-shots.webp 1x, /assest/potriat/tap-tap-shots.webp 2x" loading="lazy" title="Tap Tap Shots" alt="Tap Tap Shots"></div>
+<div class="mobile-scr-card" onclick="location.href='/g/flappy-bird/'"><img src="/assest/potriat/flappy-bird.webp" srcset="/assest/potriat/flappy-bird.webp 1x, /assest/potriat/flappy-bird.webp 2x" loading="lazy" title="Flappy Bird" alt="Flappy Bird"></div>
+<div class="mobile-scr-card" onclick="location.href='/g/color-switch/'"><img src="/assest/potriat/color-switch.webp" srcset="/assest/potriat/color-switch.webp 1x, /assest/potriat/color-switch.webp 2x" loading="lazy" title="Color Switch" alt="Color Switch"></div>
+<div class="mobile-scr-card" onclick="location.href='/g/flappy-dunk/'"><img src="/assest/potriat/flappy-dunk.webp" srcset="/assest/potriat/flappy-dunk.webp 1x, /assest/potriat/flappy-dunk.webp 2x" loading="lazy" title="Flappy Dunk" alt="Flappy Dunk"></div>
+<div class="mobile-scr-card" onclick="location.href='/g/stack-bump-3d/'"><img src="/assest/potriat/stack-bump-3d.webp" srcset="/assest/potriat/stack-bump-3d.webp 1x, /assest/potriat/stack-bump-3d.webp 2x" loading="lazy" title="Stack Bump 3d" alt="Stack Bump 3d"></div>
+<div class="mobile-scr-card" onclick="location.href='/g/doodle-jump/'"><img src="/assest/potriat/doodle-jump.webp" srcset="/assest/potriat/doodle-jump.webp 1x, /assest/potriat/doodle-jump.webp 2x" loading="lazy" title="Doodle Jump" alt="Doodle Jump"></div>
+<div class="mobile-scr-card" onclick="location.href='/g/down-the-hill/'"><img src="/assest/potriat/down-the-hill.webp" srcset="/assest/potriat/down-the-hill.webp 1x, /assest/potriat/down-the-hill.webp 2x" loading="lazy" title="Down The Hill" alt="Down The Hill"></div>
+<div class="mobile-scr-card" onclick="location.href='/g/turn-turn/'"><img src="/assest/potriat/turn-turn.webp" srcset="/assest/potriat/turn-turn.webp 1x, /assest/potriat/turn-turn.webp 2x" loading="lazy" title="Turn Turn" alt="Turn Turn"></div>
+<div class="mobile-scr-card" onclick="location.href='/g/super-fowlst/'"><img src="/assest/potriat/super-fowlst.webp" srcset="/assest/potriat/super-fowlst.webp 1x, /assest/potriat/super-fowlst.webp 2x" loading="lazy" title="Super Fowlst" alt="Super Fowlst"></div>
+
+                </div>
+
+                <button class="mobile-scr-nav-arrow" id="mobile-scrNextBtn" aria-label="Next">
+                    <svg width="24" height="24" fill="#000000">
+                        <use href="#navArrowIcon"></use>
+                    </svg>
+                </button>
+                <button class="mobile-scr-nav-arrow left" id="mobile-scrPrevBtn" aria-label="Previous">
+                    <svg width="24" height="24" fill="#000000" style="transform:scaleX(-1);">
+                        <use href="#navArrowIcon"></use>
+                    </svg>
+                </button>
+            </div>
+</body>
+</html>
