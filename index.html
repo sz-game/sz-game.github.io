@@ -287,18 +287,7 @@
             <!--/$-->
         </div>
         <div class="header-right">
-            <button id="mobile-search-button" type="button" aria-label="Open search"
-                class="btn btn-link-white btn-header-icon btn-header-icon-desktop mobile-search-button">
-                <span class="icon icon-search icon-size-20"></span>
-            </button>
-            <a href="/all-games/" aria-label="All Games"
-                class="btn btn-link-white btn-header-icon btn-header-icon-desktop btskr-icon">
-                <img src="/assest/icon/joystick-game-control-svgrepo-com.svg" alt="All Games">
-            </a>
-            <a href="/popular/" aria-label="Popular Games"
-                class="btn btn-link-white btn-header-icon btn-header-icon-desktop btskr-icon">
-                <img src="/assest/icon/category-svgrepo-com.svg" alt="Popular Games">
-            </a>
+            
             <a href="/setting/" aria-label="Setting"
                 class="btn btn-link-white btn-header-icon btn-header-icon-desktop setting-icon">
                 <img src="/assest/icon/settings-cog-line-svgrepo-com.svg" alt="Setting">
@@ -8218,7 +8207,202 @@
                 </button>
             </div>
         </div>
+<style>
+  :root{
+    --bottom-nav-bg:#0a0a0d;
+    --bottom-nav-card:#141417;
+    --bottom-nav-card-2:#1c1c21;
+    --bottom-nav-yellow:#ffcc00;
+    --bottom-nav-yellow-glow:#ffe066;
+    --bottom-nav-text:#f5f5f7;
+    --bottom-nav-muted:#7d7d86;
+    --bottom-nav-edge:#26262d;
+  }
 
+  /* ===== BOTTOM NAV (scoped/unique classes to avoid clashing with existing site styles) ===== */
+  .bottom-nav-wrap{
+    position:fixed;
+    bottom:0; left:0; right:0;
+    display:flex;
+    justify-content:center;
+    z-index:999;
+    pointer-events:none;
+    box-sizing:border-box;
+  }
+
+  .bottom-nav-bar{
+    pointer-events:all;
+    width:100%;
+    max-width:768px;
+    background:linear-gradient(180deg, #17171b 0%, #101013 100%);
+    border:1px solid var(--bottom-nav-edge);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:8px 10px;
+    position:relative;
+    box-shadow:
+      0 10px 30px rgba(0,0,0,0.55),
+      inset 0 1px 0 rgba(255,255,255,0.03);
+    box-sizing:border-box;
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+  }
+
+  .bottom-nav-item{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    padding:8px 4px;
+    margin:0;
+    border-radius:14px;
+    cursor:pointer;
+    position:relative;
+    transition:background .25s ease;
+    -webkit-tap-highlight-color:transparent;
+    text-decoration:none;
+    box-sizing:border-box;
+    list-style:none;
+    border:none;
+    background:transparent;
+  }
+
+  .bottom-nav-item svg{
+    width:21px;
+    height:21px;
+    stroke:var(--bottom-nav-muted);
+    fill:none;
+    stroke-width:1.8;
+    transition:stroke .25s ease, transform .25s ease;
+  }
+
+  .bottom-nav-label{
+    font-size:10px;
+    color:var(--bottom-nav-muted);
+    font-weight:600;
+    letter-spacing:0.3px;
+    transition:color .25s ease;
+    line-height:1;
+  }
+
+  .bottom-nav-item.bottom-nav-active svg{
+    stroke:var(--bottom-nav-yellow);
+    transform:translateY(-1px);
+  }
+  .bottom-nav-item.bottom-nav-active .bottom-nav-label{
+    color:var(--bottom-nav-yellow);
+  }
+  .bottom-nav-item.bottom-nav-active{
+    background:rgba(255,204,0,0.08);
+  }
+  .bottom-nav-item.bottom-nav-active::after{
+    content:"";
+    position:absolute;
+    top:2px;
+    width:16px;
+    height:3px;
+    border-radius:3px;
+    background:var(--bottom-nav-yellow);
+    box-shadow:0 0 8px var(--bottom-nav-yellow-glow);
+  }
+
+  /* center play button - the signature element */
+  .bottom-nav-play{
+    position:relative;
+    width:39px;
+    height:39px;
+    margin:0 4px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #ffe066, #ffcc00 55%, #d9a900 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    bottom:-14px;
+    flex-shrink:0;
+    transform:translateY(-16px);
+    box-shadow:
+      0 0 0 6px #0a0a0d,
+      0 6px 18px rgba(255,204,0,0.45),
+      0 0 24px rgba(255,204,0,0.35);
+    transition:transform .2s ease, box-shadow .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .bottom-nav-play::before{
+    content:"";
+    position:absolute;
+    inset:-6px;
+    border-radius:50%;
+    border:1.5px solid rgba(255,204,0,0.35);
+    animation:bottomNavPulseRing 2.4s ease-out infinite;
+  }
+  .bottom-nav-play svg{
+    width:22px;
+    height:22px;
+    fill:#141417;
+    stroke:none;
+    margin-left:2px;
+  }
+  .bottom-nav-play:active{
+    transform:translateY(-16px) scale(0.92);
+  }
+
+  @keyframes bottomNavPulseRing{
+    0%{ transform:scale(0.9); opacity:0.8; }
+    70%{ transform:scale(1.25); opacity:0; }
+    100%{ transform:scale(1.25); opacity:0; }
+  }
+</style>
+     <div class="bottom-nav-wrap mobile-only">
+    <nav class="bottom-nav-bar">
+
+      <a href="/" class="bottom-nav-item bottom-nav-active">
+        <svg viewBox="0 0 24 24"><path d="M3 11L12 3l9 8"/><path d="M5 10v10h14V10"/></svg>
+        <span class="bottom-nav-label">Home</span>
+      </a>
+
+      <a href="/search" class="bottom-nav-item">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span class="bottom-nav-label">Search</span>
+      </a>
+
+      <!-- signature center element -->
+      <a href="/all-games/" class="bottom-nav-item">
+        <div class="bottom-nav-play" title="Play">
+          <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+        </div>
+      </a>
+
+      <a href="/all-categories/" class="bottom-nav-item">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span class="bottom-nav-label">Categories</span>
+      </a>
+
+      <a href="/profile" class="bottom-nav-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+        <span class="bottom-nav-label">Profile</span>
+      </a>
+
+    </nav>
+  </div>
+
+  <script>
+    // active tab ko current page ke URL se auto match karo (scoped to bottom-nav classes only)
+    document.querySelectorAll('.bottom-nav-item').forEach(item => {
+      const href = item.getAttribute('href');
+      if(href === window.location.pathname){
+        document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
+        item.classList.add('bottom-nav-active');
+      }
+      item.addEventListener('click', () => {
+        document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
+        item.classList.add('bottom-nav-active');
+      });
+    });
+  </script>
     </main>
 </body>
 <script src="/assest/js/toph.js"></script>
