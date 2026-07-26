@@ -1,6 +1,6 @@
 :root {
 
-    --gap: clamp(6px, 1vw, 10px);
+    --gap: clamp(8px, 1vw, 12px);
     --side-space: clamp(10px, 3vw, 18px);
     --card-width: calc((100vw - (var(--side-space) * 2) - (var(--gap) * 3)) / 3);
 
@@ -8,7 +8,7 @@
 
     --title-height: clamp(22px, 3vw, 28px);
 
-    --font-size: clamp(9px, 1.6vw, 12px);
+    --font-size: clamp(12px, 1.6vw, 14px);
     --tg-radius: clamp(16px, 2vw, 22px);
     --border: #2a2d40;
     --text: #f7f7fa;
@@ -58,7 +58,6 @@
 
     text-decoration: none;
 
-    background: #252525;
     border-radius: 7px;
     box-shadow:
         0 2px 4px rgba(0, 0, 0, .20),
@@ -98,7 +97,6 @@
 
     justify-content: center;
 
-    padding-inline: 5px;
 
     font-size: var(--font-size);
 
@@ -118,54 +116,6 @@
 
 
 /* ===== Color Rotation ===== */
-
-.game-card:nth-child(8n+1) span {
-
-    background: linear-gradient(180deg, #3da7ff, #2d6dff);
-
-}
-
-.game-card:nth-child(8n+2) span {
-
-    background: linear-gradient(180deg, #ffbb42, #f07a18);
-
-}
-
-.game-card:nth-child(8n+3) span {
-
-    background: linear-gradient(180deg, #44d84a, #1aa239);
-
-}
-
-.game-card:nth-child(8n+4) span {
-
-    background: linear-gradient(180deg, #ff63b8, #d72d78);
-
-}
-
-.game-card:nth-child(8n+5) span {
-
-    background: linear-gradient(180deg, #15c4ff, #0087ff);
-
-}
-
-.game-card:nth-child(8n+6) span {
-
-    background: linear-gradient(180deg, #8d63ff, #6132d8);
-
-}
-
-.game-card:nth-child(8n+7) span {
-
-    background: linear-gradient(180deg, #ff7650, #d9472b);
-
-}
-
-.game-card:nth-child(8n) span {
-
-    background: linear-gradient(180deg, #2bd3d8, #0e79f2);
-
-}
 
 .top-game-banner {
 

@@ -52,11 +52,12 @@
   }
 
   .thumb{
-    width:100%;
+    width:79%;
     aspect-ratio: 1.9 / 1;
     border-radius: 18px;
     overflow:hidden;
     background: var(--surface-2);
+  margin: 0 auto;  
   }
   .thumb img{
     width:100%; height:100%; object-fit:fill; display:block;
@@ -141,9 +142,19 @@
     padding: 11px 15px;
     font-size: 14px; font-weight:600;
     cursor:pointer;
+    transition: .25s ease;
   }
   .reaction-btn img{ width:17px; height:17px; filter: invert(1); }
   .like-btn{ border-right: 1px solid var(--border); }
+  .like-btn.active img {
+    filter: brightness(0) saturate(100%) invert(58%) sepia(84%) saturate(2607%) hue-rotate(184deg) brightness(101%) contrast(101%);
+  }
+  .like-btn.active .like-count {
+    color: #00b7ff;
+  }
+  .dislike-btn.active img {
+    filter: brightness(0) saturate(100%) invert(18%) sepia(98%) saturate(7431%) hue-rotate(337deg) brightness(101%) contrast(104%);
+  }
 
   .circle-btn{
     width:42px; height:42px;
@@ -853,7 +864,7 @@
     <div class="game-card">
 
       <div class="thumb">
-        <img src="https://basket-random.pro/assets/images/1v1-lol@2x.webp" alt="Game thumbnail">
+        <img src="/assest/wide-images/1v1-lol-wide-main.webp" alt="Game thumbnail">
       </div>
 
       <h1>1v1.LOL</h1>
@@ -895,12 +906,6 @@
                       <!-- REFRESH -->
                       <button class="border-btn refresh-btn" title="Refresh">
                         <img src="/assest/icon/refresh-svgrepo-com.svg" alt="Refresh">
-                      </button>
-                      <!-- FULLSCREEN -->
-                      <button class="border-btn fullscreen-btn" title="Fullscreen">
-                        <svg fill="#ffffff" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14yq2cq" focusable="false" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
-                          <path fill-rule="evenodd" clip-rule="evenodd" d="M4 2C2.89543 2 2 2.89543 2 4V8C2 8.55228 2.44772 9 3 9C3.55228 9 4 8.55228 4 8V5.41421L7.79289 9.20711C8.18342 9.59763 8.81658 9.59763 9.20711 9.20711C9.59763 8.81658 9.59763 8.18342 9.20711 7.79289L5.41421 4H8C8.55228 4 9 3.55228 9 3C9 2.44772 8.55228 2 8 2H4ZM16 2C15.4477 2 15 2.44772 15 3C15 3.55228 15.4477 4 16 4H18.5858L14.7929 7.79289C14.4024 8.18342 14.4024 8.81658 14.7929 9.20711C15.1834 9.59763 15.8166 9.59763 16.2071 9.20711L20 5.41421V8C20 8.55228 20.4477 9 21 9C21.5523 9 22 8.55228 22 8V4C22 2.89543 21.1046 2 20 2H16ZM16 20L18.5858 20L14.7929 16.2071C14.4024 15.8166 14.4024 15.1834 14.7929 14.7929C15.1834 14.4024 15.8166 14.4024 16.2071 14.7929L20 18.5858V16C20 15.4477 20.4477 15 21 15C21.5523 15 22 15.4477 22 16V20C22 21.1046 21.1046 22 20 22L16 22C15.4477 22 15 21.5523 15 21C15 20.4477 15.4477 20 16 20ZM4 18.5858L7.79289 14.7929C8.18342 14.4024 8.81658 14.4024 9.20711 14.7929C9.59763 15.1834 9.59763 15.8166 9.20711 16.2071L5.41421 20H8C8.55228 20 9 20.4477 9 21C9 21.5523 8.55228 22 8 22H4C2.89543 22 2 21.1046 2 20V16C2 15.4477 2.44772 15 3 15C3.55228 15 4 15.4477 4 16L4 18.5858Z"></path>
-                        </svg>
                       </button>
       </div>
 
@@ -1378,49 +1383,7 @@
     </main>
     <script src="/assest/js/toph.js"></script>
     <script src="/assest/js/search.js"></script>
-    <Script>
-      const controlsBtn = document.querySelector(".controls-btn");
-      const shareBtn = document.querySelector(".share-btn");
-      const refreshBtn = document.querySelector(".refresh-btn");
-      const fullscreenBtn = document.querySelector(".fullscreen-btn");
-      const iframe = document.querySelector("iframe");
-      /* CONTROLS SCROLL */
-      controlsBtn.addEventListener("click", () => {
-        const controlsSection = document.querySelector("#controls");
-        if (controlsSection) {
-          controlsSection.scrollIntoView({
-            behavior: "smooth"
-          });
-        }
-      });
-      /* SHARE */
-      shareBtn.addEventListener("click", async () => {
-        try {
-          await navigator.share({
-            title: document.title,
-            text: "Play this game!",
-            url: window.location.href
-          });
-        } catch (err) {
-          navigator.clipboard.writeText(window.location.href);
-          shareBtn.innerHTML = "✓";
-          setTimeout(() => {
-            shareBtn.innerHTML = "🔗";
-          }, 1500);
-        }
-      });
-      /* REFRESH */
-      refreshBtn.addEventListener("click", () => {
-        iframe.src = iframe.src;
-      });
-      /* FULLSCREEN */
-      fullscreenBtn.addEventListener("click", () => {
-        const container = document.querySelector(".game-container");
-        if (container.requestFullscreen) {
-          container.requestFullscreen();
-        }
-      });
-    </Script>
+     
     <script type="module">
       import {
         initializeApp
@@ -1451,11 +1414,13 @@
       /* DB REF */
       const gameRef = ref(db, "games/" + gameId);
       /* BUTTONS */
-      const likeBtn = document.querySelector(".like-btn");
-      const dislikeBtn = document.querySelector(".dislike-btn");
+      const likeButtons = document.querySelectorAll(".like-btn");
+      const dislikeButtons = document.querySelectorAll(".dislike-btn");
+      const likeBtn = likeButtons[0];
+      const dislikeBtn = dislikeButtons[0];
       /* COUNTS */
-      const likeCount = document.querySelector(".like-count");
-      const dislikeCount = document.querySelector(".dislike-count");
+      const likeCounts = document.querySelectorAll(".like-count");
+      const dislikeCounts = document.querySelectorAll(".dislike-count");
       /* FORMATTER */
       function formatCount(num) {
         if (num >= 1000000) {
@@ -1466,45 +1431,46 @@
         }
         return num;
       }
+      function setReactionUI(type) {
+        likeButtons.forEach((btn) => btn.classList.toggle("active", type === "like"));
+        dislikeButtons.forEach((btn) => btn.classList.toggle("active", type === "dislike"));
+      }
+      function setCountText(elementList, value) {
+        elementList.forEach((element) => {
+          element.innerText = value;
+        });
+      }
       /* USER REACTION STORAGE */
       const reactionKey = "reaction-" + gameId;
       /* LOAD SAVED STATE */
       const savedReaction = localStorage.getItem(reactionKey);
       if (savedReaction === "like") {
-        likeBtn.classList.add("active");
-      }
-      if (savedReaction === "dislike") {
-        dislikeBtn.classList.add("active");
+        setReactionUI("like");
+      } else if (savedReaction === "dislike") {
+        setReactionUI("dislike");
+      } else {
+        setReactionUI("");
       }
       /* REALTIME DATABASE */
       onValue(gameRef, (snapshot) => {
         const data = snapshot.val();
         if (!data) {
-          likeCount.innerText = 0;
-          if (dislikeCount) {
-            dislikeCount.innerText = 0;
-          }
+          setCountText(likeCounts, 0);
+          setCountText(dislikeCounts, 0);
           return;
         }
-        likeCount.innerText = formatCount(data.likes || 0);
-        if (dislikeCount) {
-          dislikeCount.innerText = formatCount(data.dislikes || 0);
-        }
+        setCountText(likeCounts, formatCount(data.likes || 0));
+        setCountText(dislikeCounts, formatCount(data.dislikes || 0));
       });
       /* UPDATE REACTION */
       async function updateReaction(type) {
         const currentReaction = localStorage.getItem(reactionKey);
         if (currentReaction === type) {
-          /* REMOVE SAME REACTION */
           localStorage.removeItem(reactionKey);
-          likeBtn.classList.remove("active");
-          dislikeBtn.classList.remove("active");
+          setReactionUI("");
           runTransaction(gameRef, (data) => {
             if (data == null) {
-              return {
-                likes: 0,
-                dislikes: 0
-              };
+              return { likes: 0, dislikes: 0 };
             }
             if (type === "like") {
               data.likes = Math.max((data.likes || 0) - 1, 0);
@@ -1516,31 +1482,18 @@
           });
           return;
         }
-        /* SAVE NEW REACTION */
         localStorage.setItem(reactionKey, type);
-        likeBtn.classList.remove("active");
-        dislikeBtn.classList.remove("active");
-        if (type === "like") {
-          likeBtn.classList.add("active");
-        }
-        if (type === "dislike") {
-          dislikeBtn.classList.add("active");
-        }
+        setReactionUI(type);
         runTransaction(gameRef, (data) => {
           if (data == null) {
-            data = {
-              likes: 0,
-              dislikes: 0
-            };
+            data = { likes: 0, dislikes: 0 };
           }
-          /* REMOVE OLD */
           if (currentReaction === "like") {
             data.likes = Math.max((data.likes || 0) - 1, 0);
           }
           if (currentReaction === "dislike") {
             data.dislikes = Math.max((data.dislikes || 0) - 1, 0);
           }
-          /* ADD NEW */
           if (type === "like") {
             data.likes = (data.likes || 0) + 1;
           }
@@ -1551,11 +1504,15 @@
         });
       }
       /* EVENTS */
-      likeBtn.addEventListener("click", () => {
-        updateReaction("like");
+      likeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          updateReaction("like");
+        });
       });
-      dislikeBtn.addEventListener("click", () => {
-        updateReaction("dislike");
+      dislikeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          updateReaction("dislike");
+        });
       });
     </script>
 <script>
@@ -1800,5 +1757,123 @@ if (document.readyState === 'loading') {
         }
     })();
 </script>
+<script>/* =========================================================
+   Game Toolbar Controls — JS only
+   Fix: duplicate .controls-btn (desktop + mobile) ko handle
+   karta hai, aur popunder ki jagah ek proper controls panel
+   show karta hai.
+   ========================================================= */
+
+(function () {
+
+  // ---- 1. controls popup panel ko dynamically create karo ----
+  const popup = document.createElement('div');
+  popup.className = 'controls-popup';
+  popup.id = 'controlsPopup';
+  popup.innerHTML = `
+    <div class="arrow" id="controlsArrow"></div>
+    <h4>Controls</h4>
+    <ul>
+      <li>Move <span class="key">W A S D</span></li>
+      <li>Aim <span class="key">Mouse</span></li>
+      <li>Shoot <span class="key">Click</span></li>
+      <li>Jump <span class="key">Space</span></li>
+    </ul>
+  `;
+  document.body.appendChild(popup);
+
+  const arrow = document.getElementById('controlsArrow');
+
+  let activeBtn = null;
+
+  function closePopup() {
+    popup.classList.remove('is-open');
+    if (activeBtn) activeBtn.classList.remove('is-active');
+    activeBtn = null;
+  }
+
+  function openPopupFor(btn) {
+    const rect = btn.getBoundingClientRect();
+
+    const popupWidth = 250;
+    let left = rect.left + rect.width / 2 - popupWidth / 2;
+    left = Math.max(10, Math.min(left, window.innerWidth - popupWidth - 10));
+
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const openBelow = spaceBelow > 180;
+
+    popup.style.left = left + 'px';
+    if (openBelow) {
+      popup.style.top = (rect.bottom + 10) + 'px';
+    } else {
+      popup.style.top = (rect.top - popup.offsetHeight - 10) + 'px';
+    }
+
+    const arrowLeft = rect.left + rect.width / 2 - left - 6;
+    arrow.style.left = arrowLeft + 'px';
+
+    popup.classList.add('is-open');
+    btn.classList.add('is-active');
+    activeBtn = btn;
+  }
+
+  // ---- 2. CONTROLS button — sab instances (desktop + mobile) ----
+  document.querySelectorAll('.controls-btn').forEach(btn => {
+    btn.type = 'button'; // popunder/submit jaisa behave karne se rokta hai
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (activeBtn === btn && popup.classList.contains('is-open')) {
+        closePopup();
+      } else {
+        openPopupFor(btn);
+      }
+    });
+  });
+
+  // ---- 3. SHARE button — sab instances ----
+  document.querySelectorAll('.share-btn').forEach(btn => {
+    btn.type = 'button';
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closePopup();
+
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+      }
+    });
+  });
+
+  // ---- 4. REFRESH button — sab instances ----
+  document.querySelectorAll('.refresh-btn').forEach(btn => {
+    btn.type = 'button';
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closePopup();
+
+      // agar game <iframe id="gameFrame"> mein hai to yeh line uncomment karo:
+      // document.getElementById('gameFrame').src += '';
+    });
+  });
+
+  // ---- 5. outside click / Escape se popup band ----
+  document.addEventListener('click', function (e) {
+    if (popup.classList.contains('is-open') &&
+        !popup.contains(e.target) &&
+        !e.target.closest('.controls-btn')) {
+      closePopup();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+})();</script>
   </body>
 </html>

@@ -1420,6 +1420,13 @@ a {
     }
 }
 
+.category-show-icon{
+    animation-name: Logo_logo-buzz__KstFX;
+        animation-duration: .2s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite
+}
+
 .site-logo.Logo_superbowl__hTU7h .logo-image {
     width: 42px
 }
