@@ -8404,10 +8404,10 @@
         <span class="bottom-nav-label">Home</span>
       </a>
 
-      <a href="/search" class="bottom-nav-item">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <span class="bottom-nav-label">Search</span>
-      </a>
+      <button class="bottom-nav-item" id="openSearchBtn">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <span class="bottom-nav-label">Search</span>
+  </button>
 
       <!-- signature center element -->
       <a href="/all-games/" class="bottom-nav-item">
@@ -8427,6 +8427,41 @@
       </a>
 
     </nav>
+    <div class="search-overlay" id="searchOverlay">
+  <div class="search-topbar">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="Search games and categories">
+      <button class="clear-btn" id="clearBtn">&times;</button>
+    </div>
+    <button class="cancel-btn" id="cancelBtn">Cancel</button>
+  </div>
+
+  <!-- Default state: shown when input is empty -->
+  <div class="default-panel" id="defaultPanel">
+    <div class="pill-row">
+      <div class="pill-card">🧸 Meme & bloxy</div>
+      <div class="pill-card">♟️ Timeless classics</div>
+      <div class="pill-card">✨ Just released</div>
+    </div>
+
+    <div class="section-title">Featured</div>
+    <div class="grid-2">
+      <div class="cat-btn" data-cat="new">✨ New</div>
+      <div class="cat-btn" data-cat="trending">🔥 Trending</div>
+      <div class="cat-btn" data-cat="originals">😺 Originals</div>
+      <div class="cat-btn" data-cat="updated">🔁 Updated</div>
+      <div class="cat-btn" data-cat="multiplayer">👥 Multiplayer</div>
+      <div class="cat-btn" data-cat="leaderboards">🏆 Leaderboards</div>
+    </div>
+  </div>
+
+  <!-- Live results state: shown when typing -->
+  <div class="results-panel" id="resultsPanel">
+    <div class="result-count" id="resultCount"></div>
+    <div id="resultsList"></div>
+  </div> 
+</div>
   </div>
 
   <script>
@@ -8534,5 +8569,108 @@
     observer.observe(icon);
 })();
 </script>
+
+
+<script>  // Sample game data — replace with your real games array (or fetch from your backend/JSON)
+  const games = [ 
+  { name: "I Am Taxi Prankster Sim", category: "Driving", img: "", slug: "i-am-taxi-prankster-sim" },
+  { name: "Drive Quest", category: "Driving", img: "", slug: "drive-quest" },
+  { name: "Obby Car Challenge: Drive", category: "Driving", img: "", slug: "obby-car-challenge-drive" },
+  { name: "Line Driver", category: "Driving", img: "", slug: "line-driver" },
+  { name: "Moscow Metro Driver 3D", category: "Driving", img: "", slug: "moscow-metro-driver-3d" },
+  { name: "City Bus Driver", category: "Driving", img: "", slug: "city-bus-driver" },
+  { name: "DriveTown", category: "Driving", img: "", slug: "drivetown" },
+  { name: "Russian Car Driver ZIL 130", category: "Driving", img: "", slug: "russian-car-driver-zil-130" },
+  { name: "Dirt Rally Driver HD", category: "Driving", img: "", slug: "dirt-rally-driver-hd" },
+  { name: "Venge.io", category: "Shooting", img: "", slug: "venge-io" },
+  { name: "BoxRob 3", category: "Puzzle", img: "", slug: "boxrob-3" },
+  { name: "Steal a Brainrot", category: "Action", img: "", slug: "steal-a-brainrot" },
+  { name: "Only Up 3D Parkour", category: "Parkour", img: "", slug: "only-up-3d-parkour" },
+  { name: "99 Nights in the Forest", category: "Survival", img: "", slug: "99-nights-in-the-forest" },
+  { name: "Noob Basketball Clicker", category: "Sports", img: "", slug: "noob-basketball-clicker" }
+]; 
+
+  const openBtn = document.getElementById('openSearchBtn');
+  const overlay = document.getElementById('searchOverlay');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const input = document.getElementById('searchInput');
+  const defaultPanel = document.getElementById('defaultPanel');
+  const resultsPanel = document.getElementById('resultsPanel');
+  const resultsList = document.getElementById('resultsList');
+  const resultCount = document.getElementById('resultCount');
+
+  // 1) Open overlay on nav click
+  openBtn.addEventListener('click', () => {
+    overlay.classList.add('open');
+    setTimeout(() => input.focus(), 50); // auto-focus keyboard on mobile
+  });
+
+  // 2) Close overlay
+  cancelBtn.addEventListener('click', closeOverlay);
+  function closeOverlay() {
+    overlay.classList.remove('open');
+    input.value = '';
+    showDefaultState();
+  }
+
+  // 3) Clear button inside input
+  clearBtn.addEventListener('click', () => {
+    input.value = '';
+    input.focus();
+    showDefaultState();
+  });
+
+  // 4) Live filter as user types
+  input.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    clearBtn.style.display = query ? 'block' : 'none';
+
+    if (!query) {
+      showDefaultState();
+      return;
+    }
+
+    const matches = games.filter(g =>
+      g.name.toLowerCase().includes(query) ||
+      g.category.toLowerCase().includes(query)
+    );
+
+    renderResults(matches, query);
+  });
+
+  function showDefaultState() {
+    defaultPanel.classList.remove('hidden');
+    resultsPanel.classList.remove('open');
+  }
+
+  function renderResults(matches, query) {
+  defaultPanel.classList.add('hidden');
+  resultsPanel.classList.add('open');
+
+  if (matches.length === 0) {
+    resultCount.innerHTML = '';
+    resultsList.innerHTML = `<div class="no-results">No games found for "${query}"</div>`;
+    return;
+  }
+
+  const topCategory = matches[0].category;
+  resultCount.innerHTML = `🏷️ ${topCategory} Games <span style="color:#fff">${matches.length}</span>`;
+
+  resultsList.innerHTML = matches.map(g => `
+    <div class="result-item" data-slug="${g.slug}">
+      <img src="${g.img || 'https://placehold.co/42x42/1a1a2a/666?text=%20'}" alt="">
+      <span>${g.name}</span>
+    </div>
+  `).join('');
+
+  // Click pe game page pe navigate karein
+  document.querySelectorAll('.result-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const slug = item.dataset.slug;
+      window.location.href = `/game/${slug}`; // apna actual URL pattern yahan daalein
+    });
+  });
+}</script>
 
 </html>

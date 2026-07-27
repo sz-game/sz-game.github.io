@@ -508,3 +508,128 @@
     background-clip: text;
     color: transparent;
   }
+
+
+
+     .search-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #0b0b12;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    padding: 16px;
+    overflow-y: auto;
+  }
+  .search-overlay.open { display: flex; }
+
+  .search-topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .search-input-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1c1c2b;
+    border: 1px solid #3a3a55;
+    border-radius: 999px;
+    padding: 10px 16px;
+  }
+  .search-input-wrap svg {
+    width: 18px; height: 18px;
+    stroke: #888; fill: none; stroke-width: 2;
+  }
+  #searchInput {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 15px;
+  }
+  #searchInput::placeholder { color: #888; }
+  .clear-btn {
+    display: none;
+    background: none; border: none; color: #888;
+    font-size: 16px; cursor: pointer;
+  }
+  .cancel-btn {
+    color: #fff;
+    font-size: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Default state: featured + categories */
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px 0 12px;
+  }
+  .pill-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    margin-bottom: 24px;
+  }
+  .pill-card {
+    min-width: 140px;
+    height: 90px;
+    border-radius: 14px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-weight: 600;
+    background: linear-gradient(135deg,#5b3fa0,#2a2a55);
+    flex-shrink: 0;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .cat-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #1a1a2a;
+    border-radius: 12px;
+    padding: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Live results state */
+  .results-panel { display: none; }
+  .results-panel.open { display: block; }
+  .default-panel.hidden { display: none; }
+
+  .result-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #a78bfa;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .result-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    cursor: pointer;
+  }
+  .result-item img {
+    width: 42px; height: 42px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #333;
+  }
+  .result-item span { font-size: 15px;color: #f0f0f0 }
+  .no-results { color: #888; text-align: center; margin-top: 40px; }
