@@ -16900,8 +16900,7 @@ a {
     flex-direction: column;
     justify-content: flex-start;
     width: calc(100% - 356px);
-    padding: calc(var(--base-unit)*2);
-}
+ }
 
 @media(max-width:1279.98px) {
     .layout-wrapper {
@@ -16942,8 +16941,7 @@ a {
     height: 122px;
     display: flex;
     justify-content: center;
-    padding: calc(var(--base-unit)*2);
-}
+ }
 
 @media(min-width:1520px) {
     .game-main-container .leaderboard-container {
@@ -17069,7 +17067,7 @@ a {
 
 @media(max-width:819.98px) {
     .page-under-grid {
-        margin-top: calc(var(--base-unit)*9)
+        margin-top: 10px
     }
 }
 
