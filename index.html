@@ -8395,89 +8395,446 @@
     70%{ transform:scale(1.25); opacity:0; }
     100%{ transform:scale(1.25); opacity:0; }
   }
+
+  /* ===== SEARCH OVERLAY (same theme tokens as bottom nav) ===== */
+  .bns-overlay{
+    position:fixed;
+    inset:0;
+    background:var(--bottom-nav-bg);
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+    transform:translateY(100%);
+    transition:transform .22s ease;
+    overflow-y:auto;
+    font-family:'Segoe UI', Arial, sans-serif;
+  }
+  .bns-overlay.bns-open{ transform:translateY(0); }
+
+  .bns-search-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 14px 10px;
+    position:sticky;
+    top:0;
+    background:var(--bottom-nav-bg);
+    z-index:2;
+  }
+  .bns-pill{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--bottom-nav-card);
+    border:1px solid var(--bottom-nav-edge);
+    border-radius:999px;
+    padding:11px 16px;
+    transition:border-color .15s ease, background .15s ease;
+    min-width:0;
+  }
+  .bns-pill.bns-focused{
+    border-color:var(--bottom-nav-yellow);
+    background:var(--bottom-nav-card-2);
+  }
+  .bns-pill svg{ width:18px;height:18px;flex-shrink:0;stroke:var(--bottom-nav-muted);fill:none;stroke-width:1.8; }
+  .bns-pill input{
+    flex:1;
+    min-width:0;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--bottom-nav-text);
+    font-size:15px;
+    font-family:inherit;
+  }
+  .bns-pill input::placeholder{ color:var(--bottom-nav-muted); }
+  .bns-clear{
+    background:var(--bottom-nav-card-2);
+    border:1px solid var(--bottom-nav-edge);
+    border-radius:50%;
+    width:20px;height:20px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+    padding:0;
+  }
+  .bns-clear svg{ width:12px;height:12px;stroke:var(--bottom-nav-text);fill:none;stroke-width:2; }
+  .bns-cancel{
+    background:transparent;
+    border:none;
+    color:var(--bottom-nav-text);
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    padding:6px 2px;
+    flex-shrink:0;
+    display:none;
+    font-family:inherit;
+  }
+  .bns-cancel.bns-show{ display:block; }
+
+  .bns-content{ padding:6px 14px 100px; }
+
+  .bns-quick-row{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:26px;
+  }
+  .bns-quick-card{
+    border-radius:16px;
+    padding:16px 14px;
+    min-height:100px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    gap:6px;
+  }
+  .bns-quick-icon{ font-size:22px; line-height:1; }
+  .bns-quick-label{ font-weight:700; font-size:15px; line-height:1.15; color:#fff; text-shadow:0 1px 4px rgba(0,0,0,.4); }
+
+  .bns-section-title{ font-size:19px; font-weight:700; margin:0 0 12px; color:var(--bottom-nav-text); }
+
+  .bns-featured-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:26px;
+  }
+  .bns-featured-card{
+    background:var(--bottom-nav-card);
+    border:1px solid var(--bottom-nav-edge);
+    border-radius:14px;
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    cursor:pointer;
+    text-align:left;
+    color:inherit;
+    font:inherit;
+  }
+  .bns-featured-card svg{ width:20px;height:20px;stroke:var(--bottom-nav-yellow);fill:none;stroke-width:1.8; }
+  .bns-featured-label{ font-size:15px;font-weight:700;color:var(--bottom-nav-text); }
+
+  .bns-category-list{
+    display:flex;
+    flex-direction:column;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--bottom-nav-edge);
+    margin-bottom:10px;
+  }
+  .bns-category-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--bottom-nav-card);
+    border:none;
+    border-bottom:1px solid var(--bottom-nav-edge);
+    padding:14px;
+    cursor:pointer;
+    color:inherit;
+    font:inherit;
+    width:100%;
+  }
+  .bns-category-row:last-child{ border-bottom:none; }
+  .bns-category-left{ display:flex;align-items:center;gap:10px; }
+  .bns-category-left svg{ width:18px;height:18px;stroke:var(--bottom-nav-yellow);fill:none;stroke-width:1.8; }
+  .bns-category-label{ font-size:15px;font-weight:600;color:var(--bottom-nav-text); }
+  .bns-category-right{ display:flex;align-items:center;gap:8px; }
+  .bns-category-count{ color:var(--bottom-nav-muted);font-size:13px; }
+  .bns-category-right svg{ width:16px;height:16px;stroke:var(--bottom-nav-muted);fill:none;stroke-width:2; }
+
+  .bns-tag-row{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--bottom-nav-card-2);
+    border:1px solid rgba(255,204,0,.3);
+    border-radius:999px;
+    padding:8px 14px;
+    margin-bottom:16px;
+  }
+  .bns-tag-label{ color:var(--bottom-nav-yellow);font-size:14px;font-weight:700; }
+  .bns-tag-count{ color:var(--bottom-nav-muted);font-size:13px; }
+
+  .bns-result-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:none;
+    border:none;
+    padding:9px 4px;
+    cursor:pointer;
+    text-align:left;
+    width:100%;
+    color:inherit;
+    font:inherit;
+  }
+  .bns-thumb{ width:42px;height:42px;border-radius:10px;flex-shrink:0; }
+  .bns-result-title{ font-size:15px;font-weight:500;color:var(--bottom-nav-text); }
+
+  .bns-search-all{
+    margin-top:10px;
+    width:100%;
+    background:none;
+    border:none;
+    color:var(--bottom-nav-muted);
+    font-size:15px;
+    font-weight:600;
+    padding:12px 4px;
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+  }
+
+  .bns-no-results{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    padding:60px 20px;
+    text-align:center;
+    color:var(--bottom-nav-muted);
+  }
+  .bns-no-results svg{ width:26px;height:26px;stroke:var(--bottom-nav-muted);fill:none;stroke-width:1.8; }
+
+  [hidden]{ display:none !important; }
 </style>
-     <div class="bottom-nav-wrap mobile-only">
-    <nav class="bottom-nav-bar">
 
-      <a href="/" class="bottom-nav-item bottom-nav-active">
-        <svg viewBox="0 0 24 24"><path d="M3 11L12 3l9 8"/><path d="M5 10v10h14V10"/></svg>
-        <span class="bottom-nav-label">Home</span>
-      </a>
+<div class="bottom-nav-wrap mobile-only">
+  <nav class="bottom-nav-bar">
 
-      <button class="bottom-nav-item" id="openSearchBtn">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-    <span class="bottom-nav-label">Search</span>
-  </button>
+    <a href="/" class="bottom-nav-item bottom-nav-active">
+      <svg viewBox="0 0 24 24"><path d="M3 11L12 3l9 8"/><path d="M5 10v10h14V10"/></svg>
+      <span class="bottom-nav-label">Home</span>
+    </a>
 
-      <!-- signature center element -->
-      <a href="/all-games/" class="bottom-nav-item">
-        <div class="bottom-nav-play" title="Play">
-          <img src="/assest/icon/dice-svgrepo.svg" alt="Play">
-        </div><span class="bottom-nav-label">Random</span>
-      </a>
-
-      <a href="/all-categories/" class="bottom-nav-item">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-        <span class="bottom-nav-label">Categories</span>
-      </a>
-
-      <a href="/setting/" class="bottom-nav-item">
-        <img src="/assest/icon/settings-cog-line-svgrepo-com.svg" alt="Settings" width="21" height="21" style="filter:invert(0.6);">
-        <span class="bottom-nav-label">Settings</span>
-      </a>
-
-    </nav>
-    <div class="search-overlay" id="searchOverlay">
-  <div class="search-topbar">
-    <div class="search-input-wrap">
+    <a href="/search" class="bottom-nav-item" id="bns-search-trigger">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input type="text" id="searchInput" placeholder="Search games and categories">
-      <button class="clear-btn" id="clearBtn">&times;</button>
-    </div>
-    <button class="cancel-btn" id="cancelBtn">Cancel</button>
-  </div>
+      <span class="bottom-nav-label">Search</span>
+    </a>
 
-  <!-- Default state: shown when input is empty -->
-  <div class="default-panel" id="defaultPanel">
-    <div class="pill-row">
-      <div class="pill-card">🧸 Meme & bloxy</div>
-      <div class="pill-card">♟️ Timeless classics</div>
-      <div class="pill-card">✨ Just released</div>
-    </div>
+    <!-- signature center element -->
+    <a href="/all-games/" class="bottom-nav-item">
+      <div class="bottom-nav-play" title="Play">
+        <img src="/assest/icon/dice-svgrepo.svg" alt="Play">
+      </div><span class="bottom-nav-label">Random</span>
+    </a>
 
-    <div class="section-title">Featured</div>
-    <div class="grid-2">
-      <div class="cat-btn" data-cat="new">✨ New</div>
-      <div class="cat-btn" data-cat="trending">🔥 Trending</div>
-      <div class="cat-btn" data-cat="originals">😺 Originals</div>
-      <div class="cat-btn" data-cat="updated">🔁 Updated</div>
-      <div class="cat-btn" data-cat="multiplayer">👥 Multiplayer</div>
-      <div class="cat-btn" data-cat="leaderboards">🏆 Leaderboards</div>
-    </div>
-  </div>
+    <a href="/all-categories/" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span class="bottom-nav-label">Categories</span>
+    </a>
 
-  <!-- Live results state: shown when typing -->
-  <div class="results-panel" id="resultsPanel">
-    <div class="result-count" id="resultCount"></div>
-    <div id="resultsList"></div>
-  </div> 
+    <a href="/setting/" class="bottom-nav-item">
+      <img src="/assest/icon/settings-cog-line-svgrepo-com.svg" alt="Settings" width="21" height="21" style="filter:invert(0.6);">
+      <span class="bottom-nav-label">Settings</span>
+    </a>
+
+  </nav>
 </div>
+
+<!-- ================= SEARCH OVERLAY ================= -->
+<div class="bns-overlay" id="bns-overlay">
+  <div class="bns-search-row">
+    <div class="bns-pill" id="bns-pill">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="bns-input" type="text" placeholder="Search games and categories" autocomplete="off">
+      <button class="bns-clear" id="bns-clear" hidden aria-label="Clear">
+        <svg viewBox="0 0 24 24"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <button class="bns-cancel" id="bns-cancel">Cancel</button>
   </div>
 
-  <script>
-    // active tab ko current page ke URL se auto match karo (scoped to bottom-nav classes only)
-    document.querySelectorAll('.bottom-nav-item').forEach(item => {
-      const href = item.getAttribute('href');
-      if(href === window.location.pathname){
-        document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
-        item.classList.add('bottom-nav-active');
-      }
-      item.addEventListener('click', () => {
-        document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
-        item.classList.add('bottom-nav-active');
-      });
+  <div class="bns-content">
+    <!-- Empty / discovery state -->
+    <div id="bns-empty-state">
+      <div class="bns-quick-row">
+        <div class="bns-quick-card" style="background:linear-gradient(135deg,#5b8a3a,#3f6428)">
+          <span class="bns-quick-icon">🧢</span>
+          <span class="bns-quick-label">Meme &amp; bloxy</span>
+        </div>
+        <div class="bns-quick-card" style="background:linear-gradient(135deg,#6a4fb8,#4a3488)">
+          <span class="bns-quick-icon">🂡</span>
+          <span class="bns-quick-label">Timeless classics</span>
+        </div>
+      </div>
+
+      <h3 class="bns-section-title">Featured</h3>
+      <div class="bns-featured-grid">
+        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><path d="M12 2l1.5 5.5L19 9l-5.5 1.5L12 16l-1.5-5.5L5 9l5.5-1.5z"/></svg><span class="bns-featured-label">New</span></button>
+        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><path d="M12 2c3 4-2 6 0 10 2-2 3-1 3 1a4 4 0 01-8 0c0-3 2-4 2-4"/></svg><span class="bns-featured-label">Trending</span></button>
+        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span class="bns-featured-label">Originals</span></button>
+        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg><span class="bns-featured-label">Updated</span></button>
+        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M17 11a4 4 0 100-8"/><path d="M1 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span class="bns-featured-label">Multiplayer</span></button>
+        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v6a5 5 0 01-10 0z"/></svg><span class="bns-featured-label">Leaderboards</span></button>
+      </div>
+
+      <h3 class="bns-section-title">Categories</h3>
+      <div class="bns-category-list">
+        <button class="bns-category-row">
+          <span class="bns-category-left"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg><span class="bns-category-label">Action</span></span>
+          <span class="bns-category-right"><span class="bns-category-count">214</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+        </button>
+        <button class="bns-category-row">
+          <span class="bns-category-left"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg><span class="bns-category-label">Puzzle</span></span>
+          <span class="bns-category-right"><span class="bns-category-count">132</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+        </button>
+        <button class="bns-category-row">
+          <span class="bns-category-left"><svg viewBox="0 0 24 24"><rect x="2" y="9" width="20" height="7" rx="3"/></svg><span class="bns-category-label">Driving</span></span>
+          <span class="bns-category-right"><span class="bns-category-count">66</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Results state -->
+    <div id="bns-results-state" hidden>
+      <div class="bns-tag-row" id="bns-tag-row" hidden>
+        <span>🏷️</span>
+        <span class="bns-tag-label" id="bns-tag-label"></span>
+        <span class="bns-tag-count" id="bns-tag-count"></span>
+      </div>
+      <div id="bns-results-list"></div>
+      <div class="bns-no-results" id="bns-no-results" hidden>
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <p id="bns-no-results-text"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // active tab ko current page ke URL se auto match karo (scoped to bottom-nav classes only)
+  document.querySelectorAll('.bottom-nav-item').forEach(item => {
+    const href = item.getAttribute('href');
+    if(href === window.location.pathname){
+      document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
+      item.classList.add('bottom-nav-active');
+    }
+    item.addEventListener('click', (e) => {
+      // search item apna alag click-handler neeche rakhta hai (overlay kholta hai)
+      if(item.id === 'bns-search-trigger') return;
+      document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
+      item.classList.add('bottom-nav-active');
     });
-  </script>
+  });
+
+  // ================= SEARCH OVERLAY LOGIC =================
+  (function(){
+    var GAMES = [
+      {title:"I Am Taxi Prankster Sim", category:"Driving games", tint:"#e0a63c"},
+      {title:"Drive Quest", category:"Driving games", tint:"#c23b3b"},
+      {title:"Obby Car Challenge: Drive", category:"Driving games", tint:"#3aa0c2"},
+      {title:"Line Driver", category:"Driving games", tint:"#e8e6df"},
+      {title:"Moscow Metro Driver 3D", category:"Driving games", tint:"#555"},
+      {title:"City Bus Driver", category:"Driving games", tint:"#444"},
+      {title:"DriveTown", category:"Driving games", tint:"#4a4a4a"},
+      {title:"Russian Car Driver ZIL 130", category:"Driving games", tint:"#3d3d3d"},
+      {title:"Dirt Rally Driver HD", category:"Driving games", tint:"#2c2c2c"},
+      {title:"Block Blast Puzzle", category:"Puzzle games", tint:"#3ac27a"},
+      {title:"Merge Master 2048", category:"Puzzle games", tint:"#c2a03a"},
+      {title:"Ninja Runner X", category:"Action games", tint:"#c23a5a"},
+      {title:"Zombie Arena Royale", category:"Action games", tint:"#5a5ac2"}
+    ];
+
+    var trigger      = document.getElementById('bns-search-trigger');
+    var overlay       = document.getElementById('bns-overlay');
+    var pill          = document.getElementById('bns-pill');
+    var input         = document.getElementById('bns-input');
+    var clearBtn      = document.getElementById('bns-clear');
+    var cancelBtn     = document.getElementById('bns-cancel');
+    var emptyState    = document.getElementById('bns-empty-state');
+    var resultsState  = document.getElementById('bns-results-state');
+    var tagRow        = document.getElementById('bns-tag-row');
+    var tagLabel      = document.getElementById('bns-tag-label');
+    var tagCount      = document.getElementById('bns-tag-count');
+    var resultsList   = document.getElementById('bns-results-list');
+    var noResults     = document.getElementById('bns-no-results');
+    var noResultsText = document.getElementById('bns-no-results-text');
+
+    trigger.addEventListener('click', function(e){
+      e.preventDefault();
+      document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
+      trigger.classList.add('bottom-nav-active');
+      openSearch();
+    });
+
+    function openSearch(){
+      overlay.classList.add('bns-open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){ input.focus(); }, 50);
+    }
+
+    function closeSearch(){
+      overlay.classList.remove('bns-open');
+      document.body.style.overflow = '';
+      input.value = '';
+      render();
+    }
+
+    cancelBtn.addEventListener('click', closeSearch);
+
+    clearBtn.addEventListener('click', function(){
+      input.value = '';
+      input.focus();
+      render();
+    });
+
+    input.addEventListener('focus', function(){
+      pill.classList.add('bns-focused');
+      cancelBtn.classList.add('bns-show');
+    });
+
+    input.addEventListener('input', render);
+
+    function render(){
+      var q = input.value.trim().toLowerCase();
+      clearBtn.hidden = !q;
+
+      if(!q){
+        emptyState.hidden = false;
+        resultsState.hidden = true;
+        return;
+      }
+
+      emptyState.hidden = true;
+      resultsState.hidden = false;
+
+      var matches = GAMES.filter(function(g){
+        return g.title.toLowerCase().indexOf(q) !== -1 ||
+               g.category.toLowerCase().indexOf(q) !== -1;
+      });
+
+      if(!matches.length){
+        resultsList.innerHTML = '';
+        tagRow.hidden = true;
+        noResults.hidden = false;
+        noResultsText.textContent = 'No games match "' + input.value.trim() + '"';
+        return;
+      }
+
+      noResults.hidden = true;
+
+      var counts = {};
+      matches.forEach(function(g){ counts[g.category] = (counts[g.category]||0) + 1; });
+      var top = Object.keys(counts).sort(function(a,b){ return counts[b]-counts[a]; })[0];
+      tagRow.hidden = false;
+      tagLabel.textContent = top;
+      tagCount.textContent = counts[top];
+
+      resultsList.innerHTML = matches.map(function(g){
+        return '<button class="bns-result-row">' +
+                 '<span class="bns-thumb" style="background:' + g.tint + '"></span>' +
+                 '<span class="bns-result-title">' + g.title + '</span>' +
+               '</button>';
+      }).join('');
+    }
+  })();
+</script>
     </main>
 </body>
 <script src="/assest/js/toph.js"></script>
@@ -8569,108 +8926,5 @@
     observer.observe(icon);
 })();
 </script>
-
-
-<script>  // Sample game data — replace with your real games array (or fetch from your backend/JSON)
-  const games = [ 
-  { name: "I Am Taxi Prankster Sim", category: "Driving", img: "", slug: "i-am-taxi-prankster-sim" },
-  { name: "Drive Quest", category: "Driving", img: "", slug: "drive-quest" },
-  { name: "Obby Car Challenge: Drive", category: "Driving", img: "", slug: "obby-car-challenge-drive" },
-  { name: "Line Driver", category: "Driving", img: "", slug: "line-driver" },
-  { name: "Moscow Metro Driver 3D", category: "Driving", img: "", slug: "moscow-metro-driver-3d" },
-  { name: "City Bus Driver", category: "Driving", img: "", slug: "city-bus-driver" },
-  { name: "DriveTown", category: "Driving", img: "", slug: "drivetown" },
-  { name: "Russian Car Driver ZIL 130", category: "Driving", img: "", slug: "russian-car-driver-zil-130" },
-  { name: "Dirt Rally Driver HD", category: "Driving", img: "", slug: "dirt-rally-driver-hd" },
-  { name: "Venge.io", category: "Shooting", img: "", slug: "venge-io" },
-  { name: "BoxRob 3", category: "Puzzle", img: "", slug: "boxrob-3" },
-  { name: "Steal a Brainrot", category: "Action", img: "", slug: "steal-a-brainrot" },
-  { name: "Only Up 3D Parkour", category: "Parkour", img: "", slug: "only-up-3d-parkour" },
-  { name: "99 Nights in the Forest", category: "Survival", img: "", slug: "99-nights-in-the-forest" },
-  { name: "Noob Basketball Clicker", category: "Sports", img: "", slug: "noob-basketball-clicker" }
-]; 
-
-  const openBtn = document.getElementById('openSearchBtn');
-  const overlay = document.getElementById('searchOverlay');
-  const cancelBtn = document.getElementById('cancelBtn');
-  const clearBtn = document.getElementById('clearBtn');
-  const input = document.getElementById('searchInput');
-  const defaultPanel = document.getElementById('defaultPanel');
-  const resultsPanel = document.getElementById('resultsPanel');
-  const resultsList = document.getElementById('resultsList');
-  const resultCount = document.getElementById('resultCount');
-
-  // 1) Open overlay on nav click
-  openBtn.addEventListener('click', () => {
-    overlay.classList.add('open');
-    setTimeout(() => input.focus(), 50); // auto-focus keyboard on mobile
-  });
-
-  // 2) Close overlay
-  cancelBtn.addEventListener('click', closeOverlay);
-  function closeOverlay() {
-    overlay.classList.remove('open');
-    input.value = '';
-    showDefaultState();
-  }
-
-  // 3) Clear button inside input
-  clearBtn.addEventListener('click', () => {
-    input.value = '';
-    input.focus();
-    showDefaultState();
-  });
-
-  // 4) Live filter as user types
-  input.addEventListener('input', () => {
-    const query = input.value.trim().toLowerCase();
-    clearBtn.style.display = query ? 'block' : 'none';
-
-    if (!query) {
-      showDefaultState();
-      return;
-    }
-
-    const matches = games.filter(g =>
-      g.name.toLowerCase().includes(query) ||
-      g.category.toLowerCase().includes(query)
-    );
-
-    renderResults(matches, query);
-  });
-
-  function showDefaultState() {
-    defaultPanel.classList.remove('hidden');
-    resultsPanel.classList.remove('open');
-  }
-
-  function renderResults(matches, query) {
-  defaultPanel.classList.add('hidden');
-  resultsPanel.classList.add('open');
-
-  if (matches.length === 0) {
-    resultCount.innerHTML = '';
-    resultsList.innerHTML = `<div class="no-results">No games found for "${query}"</div>`;
-    return;
-  }
-
-  const topCategory = matches[0].category;
-  resultCount.innerHTML = `🏷️ ${topCategory} Games <span style="color:#fff">${matches.length}</span>`;
-
-  resultsList.innerHTML = matches.map(g => `
-    <div class="result-item" data-slug="${g.slug}">
-      <img src="${g.img || 'https://placehold.co/42x42/1a1a2a/666?text=%20'}" alt="">
-      <span>${g.name}</span>
-    </div>
-  `).join('');
-
-  // Click pe game page pe navigate karein
-  document.querySelectorAll('.result-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const slug = item.dataset.slug;
-      window.location.href = `/game/${slug}`; // apna actual URL pattern yahan daalein
-    });
-  });
-}</script>
 
 </html>
