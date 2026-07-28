@@ -203,7 +203,7 @@ template {
 .row {
     width: 100%;
     margin: auto;
-    padding: 20px;
+    padding: 0 20px;
 }
 .tow {
     width: 100%;

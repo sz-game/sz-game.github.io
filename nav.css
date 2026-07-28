@@ -169,7 +169,7 @@ a {
     width: var(--sidebar-width);
     height: 100vh;
     transition: visibility 0s, all var(--sidebar-width-transition-duration) ease-in-out;
-    background: var(--black-100);
+    background: var(--bg);
     content-visibility: auto;
     z-index: 5;
     position: fixed;
@@ -3261,7 +3261,7 @@ a {
 
 @media(min-width:1910px) {
     .app-header {
-        background: var(--black-70);
+        background: var(--black-80);
         border-bottom: none;
         box-shadow: none;
         height: calc(var(--safe-area-inset-top, env(safe-area-inset-top, 0)) + var(--header-height))
@@ -4154,8 +4154,8 @@ button-effect:hover{
     font-size: 16px;
     box-sizing: border-box;
     padding: calc(var(--base-unit)*1) calc(var(--base-unit)*2);
-    background: var(--brand-100);
-    color: var(--white-100);
+    background: var(--brand-0);
+    color: var(--brand-200);
     height: 34px;
     -webkit-user-select: none;
     user-select: none;
@@ -4174,7 +4174,7 @@ button-effect:hover{
 
 @media(hover:hover) {
     .contact-btn:hover:not(:disabled) {
-        background: var(--brand-80)
+        background: var(--brand-60)
     }
 }
 
