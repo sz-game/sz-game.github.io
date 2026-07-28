@@ -8508,7 +8508,7 @@
     border-radius:14px;
     padding:16px;
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     gap:20px;
     cursor:pointer;
     text-align:left;
@@ -8573,7 +8573,7 @@
     color:inherit;
     font:inherit;
   }
-  .bns-thumb{ width:42px;height:42px;border-radius:10px;flex-shrink:0; }
+  .bns-thumb{ width:42px;height:42px;border-radius:10px;flex-shrink:0;object-fit:cover;display:block; }
   .bns-result-title{ font-size:15px;font-weight:500;color:var(--bottom-nav-text); }
 
   .bns-search-all{
@@ -8612,10 +8612,10 @@
       <span class="bottom-nav-label">Home</span>
     </a>
 
-    <a href="/search" class="bottom-nav-item" id="bns-search-trigger">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <span class="bottom-nav-label">Search</span>
-    </a>
+    <a href="javascript:void(0)" class="bottom-nav-item" id="bns-search-trigger">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+  <span class="bottom-nav-label">Search</span>
+</a>
 
     <!-- signature center element -->
     <a href="/all-games/" class="bottom-nav-item">
@@ -8654,40 +8654,141 @@
     <!-- Empty / discovery state -->
     <div id="bns-empty-state">
       <div class="bns-quick-row">
-        <div class="bns-quick-card" style="background:linear-gradient(135deg,#5b8a3a,#3f6428)">
-          <span class="bns-quick-icon">🧢</span>
-          <span class="bns-quick-label">Meme &amp; bloxy</span>
-        </div>
-        <div class="bns-quick-card" style="background:linear-gradient(135deg,#6a4fb8,#4a3488)">
-          <span class="bns-quick-icon">🂡</span>
-          <span class="bns-quick-label">Timeless classics</span>
-        </div>
       </div>
 
       <h3 class="bns-section-title">Featured</h3>
       <div class="bns-featured-grid">
-        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><path d="M12 2l1.5 5.5L19 9l-5.5 1.5L12 16l-1.5-5.5L5 9l5.5-1.5z"/></svg><span class="bns-featured-label">New</span></button>
-        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><path d="M12 2c3 4-2 6 0 10 2-2 3-1 3 1a4 4 0 01-8 0c0-3 2-4 2-4"/></svg><span class="bns-featured-label">Trending</span></button>
-        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span class="bns-featured-label">Originals</span></button>
-        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg><span class="bns-featured-label">Updated</span></button>
-        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M17 11a4 4 0 100-8"/><path d="M1 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span class="bns-featured-label">Multiplayer</span></button>
-        <button class="bns-featured-card"><svg viewBox="0 0 24 24"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v6a5 5 0 01-10 0z"/></svg><span class="bns-featured-label">Leaderboards</span></button>
+        <a class="bns-featured-card" href="/category/new/"><img src="/assest/icon/sparkles-svgrepo-com.svg" alt="New Game" width="24px"><span class="bns-featured-label">New</span></a>
+        <a class="bns-featured-card" href="/category/popular/"><img src="/assest/icon/fire-svgrepo-com.svg" alt="Popular Game" width="24px"><span class="bns-featured-label">Popular</span></a>
+        <a class="bns-featured-card" href="/category/multiplayer/"><img src="/assest/icon/group-filled-persons-svgrepo-com.svg" alt="Multiplayer Game" width="24px"><span class="bns-featured-label">Multiplayer</span></a>
+        <a class="bns-featured-card" href="/category/action/"><img src="/assest/icon/flash-filled-svgrepo-com.svg" alt="Action Game" width="24px"><span class="bns-featured-label">Action</span></a>
+        <a class="bns-featured-card" href="/category/adventure/"><img src="/assest/icon/adventure-colour-svgrepo-com.svg" alt="Adventure Game" width="24px"><span class="bns-featured-label">Adventure</span></a>
+        <a class="bns-featured-card" href="/category/horror/"><img src="/assest/icon/ghost-1-svgrepo-com.svg" alt="Horror Game" width="24px"><span class="bns-featured-label">Horror</span></a>
       </div>
 
       <h3 class="bns-section-title">Categories</h3>
       <div class="bns-category-list">
-        <button class="bns-category-row">
-          <span class="bns-category-left"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg><span class="bns-category-label">Action</span></span>
-          <span class="bns-category-right"><span class="bns-category-count">214</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
-        </button>
-        <button class="bns-category-row">
-          <span class="bns-category-left"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg><span class="bns-category-label">Puzzle</span></span>
-          <span class="bns-category-right"><span class="bns-category-count">132</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
-        </button>
-        <button class="bns-category-row">
-          <span class="bns-category-left"><svg viewBox="0 0 24 24"><rect x="2" y="9" width="20" height="7" rx="3"/></svg><span class="bns-category-label">Driving</span></span>
-          <span class="bns-category-right"><span class="bns-category-count">66</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
-        </button>
+                   <a class="bns-category-row" aria-label="Arcade Games" href="/category/arcade/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/gamer-joystick-controller-svgrepo-com.svg" loading="lazy" alt="Arcade icon" width="24px">
+                    <div class="sidebar-label">Arcade</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Basketball Games" href="/category/basketball-games/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/basketball-2-svgrepo-com.svg" loading="lazy" alt="Basketball icon" width="24px">
+                    <div class="sidebar-label">Basketball</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Bike Games" href="/category/bike/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/bike-svgrepo-com.svg" loading="lazy" alt="Bike icon" width="24px">
+                    <div class="sidebar-label">Bike</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Boys Games" href="/category/boys-games/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/boy-svgrepo-com.svg" loading="lazy" alt="Boys icon" width="24px">
+                    <div class="sidebar-label">Boys</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Girls Games" href="/category/girls-games/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/girl-svgrepo-com.svg" loading="lazy" alt="Girls icon" width="24px">
+                    <div class="sidebar-label">Girls</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Car Games" href="/category/car/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/car-sport-svgrepo-com.svg" loading="lazy" alt="Car icon" width="24px">
+                    <div class="sidebar-label">Car</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Fighting Games" href="/category/fighting/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/boxing-fighter-svgrepo-com.svg" loading="lazy" alt="Fighting icon" width="24px">
+                    <div class="sidebar-label">Fighting</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            
+            <a class="bns-category-row" aria-label="Horror Games" href="/category/horror/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/ghost-1-svgrepo-com.svg" loading="lazy" alt="Horror icon" width="24px">
+                    <div class="sidebar-label">Horror</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Idle Games" href="/category/idle/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/light-bulb-idea-svgrepo-com.svg" loading="lazy" alt="Idle icon" width="24px">
+                    <div class="sidebar-label">Idle</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="IO Games" href="/category/io-games/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/light-io-svgrepo-com.svg" loading="lazy" alt="IO icon" width="24px">
+                    <div class="sidebar-label">IO</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Platformer Games" href="/category/platformer/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/layers-3-svgrepo-com.svg" loading="lazy" alt="Platformer icon" width="24px">
+                    <div class="sidebar-label">Platformer</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Puzzle Games" href="/category/puzzle/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/puzzle-svgrepo-com.svg" loading="lazy" alt="Puzzle icon" width="24px">
+                    <div class="sidebar-label">Puzzle</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Racing Games" href="/category/racing/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/racing-flag-svgrepo-com.svg" loading="lazy" alt="Racing icon" width="24px">
+                    <div class="sidebar-label">Racing</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Shooting Games" href="/category/shooting/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/gun-svgrepo-com.svg" loading="lazy" alt="Shooting icon" width="24px">
+                    <div class="sidebar-label">Shooting</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Skill Games" href="/category/skill/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/science-svgrepo-com.svg" loading="lazy" alt="Skill icon" width="24px">
+                    <div class="sidebar-label">Skill</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Sports Games" href="/category/sports/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/sports-volleyball-solid-svgrepo-com.svg" loading="lazy" alt="Sports icon" width="24px">
+                    <div class="sidebar-label">Sports</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+            <a class="bns-category-row" aria-label="Strategy Games" href="/category/strategy/">
+                <div class="bns-category-left">
+                    <img src="/assest/icon/skill-svgrepo-com.svg" loading="lazy" alt="Strategy icon" width="24px">
+                    <div class="sidebar-label">Strategy</div>
+                </div>
+                <span class="bns-category-right"><span class="bns-category-count">view</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </a>
+             
       </div>
     </div>
 
@@ -8725,20 +8826,23 @@
 
   // ================= SEARCH OVERLAY LOGIC =================
   (function(){
+    // NOTE: har game mein "img" field add ki gayi hai — apni asal thumbnail image ka
+    // path/URL yahan daalein. Agar image load nahi hoti to color box (tint) fallback
+    // ke tor par dikhega (neeche render() mein onerror handler dekhein).
     var GAMES = [
-      {title:"I Am Taxi Prankster Sim", category:"Driving games", tint:"#e0a63c"},
-      {title:"Drive Quest", category:"Driving games", tint:"#c23b3b"},
-      {title:"Obby Car Challenge: Drive", category:"Driving games", tint:"#3aa0c2"},
-      {title:"Line Driver", category:"Driving games", tint:"#e8e6df"},
-      {title:"Moscow Metro Driver 3D", category:"Driving games", tint:"#555"},
-      {title:"City Bus Driver", category:"Driving games", tint:"#444"},
-      {title:"DriveTown", category:"Driving games", tint:"#4a4a4a"},
-      {title:"Russian Car Driver ZIL 130", category:"Driving games", tint:"#3d3d3d"},
-      {title:"Dirt Rally Driver HD", category:"Driving games", tint:"#2c2c2c"},
-      {title:"Block Blast Puzzle", category:"Puzzle games", tint:"#3ac27a"},
-      {title:"Merge Master 2048", category:"Puzzle games", tint:"#c2a03a"},
-      {title:"Ninja Runner X", category:"Action games", tint:"#c23a5a"},
-      {title:"Zombie Arena Royale", category:"Action games", tint:"#5a5ac2"}
+      {title:"I Am Taxi Prankster Sim", category:"Driving games", img:"/assest/games/taxi-prankster.jpg", tint:"#e0a63c"},
+      {title:"Drive Quest", category:"Driving games", img:"/assest/games/drive-quest.jpg", tint:"#c23b3b"},
+      {title:"Obby Car Challenge: Drive", category:"Driving games", img:"/assest/games/obby-car.jpg", tint:"#3aa0c2"},
+      {title:"Line Driver", category:"Driving games", img:"/assest/games/line-driver.jpg", tint:"#e8e6df"},
+      {title:"Moscow Metro Driver 3D", category:"Driving games", img:"/assest/games/moscow-metro.jpg", tint:"#555"},
+      {title:"City Bus Driver", category:"Driving games", img:"/assest/games/city-bus.jpg", tint:"#444"},
+      {title:"DriveTown", category:"Driving games", img:"/assest/games/drivetown.jpg", tint:"#4a4a4a"},
+      {title:"Russian Car Driver ZIL 130", category:"Driving games", img:"/assest/games/zil130.jpg", tint:"#3d3d3d"},
+      {title:"Dirt Rally Driver HD", category:"Driving games", img:"/assest/games/dirt-rally.jpg", tint:"#2c2c2c"},
+      {title:"Block Blast Puzzle", category:"Puzzle games", img:"/assest/games/block-blast.jpg", tint:"#3ac27a"},
+      {title:"Merge Master 2048", category:"Puzzle games", img:"/assest/games/merge-master.jpg", tint:"#c2a03a"},
+      {title:"Ninja Runner X", category:"Action games", img:"/assest/games/ninja-runner.jpg", tint:"#c23a5a"},
+      {title:"Zombie Arena Royale", category:"Action games", img:"/assest/games/zombie-arena.jpg", tint:"#5a5ac2"}
     ];
 
     var trigger      = document.getElementById('bns-search-trigger');
@@ -8828,7 +8932,9 @@
 
       resultsList.innerHTML = matches.map(function(g){
         return '<button class="bns-result-row">' +
-                 '<span class="bns-thumb" style="background:' + g.tint + '"></span>' +
+                 '<img class="bns-thumb" src="' + g.img + '" alt="' + g.title + '" ' +
+                 'style="background:' + g.tint + '" ' +
+                 'onerror="this.onerror=null;this.removeAttribute(\'src\');this.style.background=\'' + g.tint + '\';">' +
                  '<span class="bns-result-title">' + g.title + '</span>' +
                '</button>';
       }).join('');
