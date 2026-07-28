@@ -51,9 +51,9 @@
             <a href="/">
                 <div class="site-logo">
                     <div class="logo-icon">
-                        <img src="/cartoon.png" alt="CrazyGames" class="logo-image">
+                        <img src="/cartoon.png" alt="Unblocked Games" class="logo-image">
                     </div>
-                    <img src="/logo-txt.png" alt="CrazyGames" id="logoTextSvg" class="logo-text">
+                    <img src="/logo-txt.png" alt="Unblocked Games" id="logoTextSvg" class="logo-text">
                 </div>
             </a>
             <!--/$-->
@@ -282,7 +282,7 @@
                     <div class="logo_icon-48dhd">
                         <img src="/favicon.png" alt="sitenamehere" class="logo_image-48dhd">
                     </div>
-                    <img src="/logo-txt.png" alt="CrazyGames" id="logoTextSvg" class="logo-text">
+                    <img src="/logo-txt.png" alt="Unblocked Games" id="logoTextSvg" class="logo-text">
                 </div>
             </a>
             <!--/$-->
@@ -8251,7 +8251,7 @@
                 </button>
             </div>
         </div><br><br><br>
-<style>
+      <style>
   :root{
     --bottom-nav-bg:#0a0a0d;
     --bottom-nav-card:#141417;
@@ -8332,26 +8332,13 @@
     line-height:1;
   }
 
-  .bottom-nav-item.bottom-nav-active svg{
-    stroke:var(--bottom-nav-yellow);
-    transform:translateY(-1px);
-  }
-  .bottom-nav-item.bottom-nav-active .bottom-nav-label{
-    color:var(--bottom-nav-yellow);
-  }
-  .bottom-nav-item.bottom-nav-active{
-    background:rgba(255,204,0,0.08);
-  }
-  .bottom-nav-item.bottom-nav-active::after{
-    content:"";
-    position:absolute;
-    top:2px;
-    width:16px;
-    height:3px;
-    border-radius:3px;
-    background:var(--bottom-nav-yellow);
-    box-shadow:0 0 8px var(--bottom-nav-yellow-glow);
-  }
+.bottom-nav-item.bottom-nav-active-link svg{
+  stroke:var(--bottom-nav-yellow);
+  transform:translateY(-1px);
+}
+.bottom-nav-item.bottom-nav-active-link .bottom-nav-label{
+  color:var(--bottom-nav-yellow);
+}
 
   /* center play button - the signature element */
   .bottom-nav-play{
@@ -8607,7 +8594,7 @@
 <div class="bottom-nav-wrap mobile-only">
   <nav class="bottom-nav-bar">
 
-    <a href="/" class="bottom-nav-item bottom-nav-active">
+    <a href="/" class="bottom-nav-item bottom-nav-active-link">
       <svg viewBox="0 0 24 24"><path d="M3 11L12 3l9 8"/><path d="M5 10v10h14V10"/></svg>
       <span class="bottom-nav-label">Home</span>
     </a>
@@ -8809,20 +8796,7 @@
 </div>
 
 <script>
-  // active tab ko current page ke URL se auto match karo (scoped to bottom-nav classes only)
-  document.querySelectorAll('.bottom-nav-item').forEach(item => {
-    const href = item.getAttribute('href');
-    if(href === window.location.pathname){
-      document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
-      item.classList.add('bottom-nav-active');
-    }
-    item.addEventListener('click', (e) => {
-      // search item apna alag click-handler neeche rakhta hai (overlay kholta hai)
-      if(item.id === 'bns-search-trigger') return;
-      document.querySelector('.bottom-nav-item.bottom-nav-active')?.classList.remove('bottom-nav-active');
-      item.classList.add('bottom-nav-active');
-    });
-  });
+   
 
   // ================= SEARCH OVERLAY LOGIC =================
   (function(){

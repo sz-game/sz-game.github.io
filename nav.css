@@ -1378,28 +1378,7 @@ a {
     height: auto;
     padding-top: calc(var(--base-unit)*.5)
 }
-
-@media(max-width:599.98px) {
-    .logo-text {
-        width: 54px
-    }
-}
-
-@media(max-width:420px) {
-    .logo-text {
-        display: none
-    }
-
-    .logo-text.Logo_hasBottomNav__5zDWK {
-        display: inline
-    }
-}
-
-@media(max-width:390px) {
-    .logo-text.Logo_hasBottomNav__5zDWK {
-        display: none
-    }
-}
+ 
 
 @keyframes Logo_logo-buzz__KstFX {
     50% {
