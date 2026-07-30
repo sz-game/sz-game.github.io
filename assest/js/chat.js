@@ -2,12 +2,15 @@
    Live Chat Widget — external file version (overlay name-gate).
    Usage on any page:
      <script type="module" src="chat-widget-v2.js"></script>
-   Injects its own CSS + HTML markup into the page, then wires up
-   the exact same behavior as the inline version:
+
    - Chat (messages + composer) is visible immediately on load.
    - Name gate appears as an overlay ONLY when the visitor tries
      to send a message / image / gif / like, then resumes that
      action automatically after they join.
+   - Desktop only: on mobile devices / narrow screens the widget
+     does not render at all (checked once, automatically, on load).
+   - Each incoming message shows a colored avatar with the
+     sender's first letter, name + time above the bubble.
    ============================================================ */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -17,7 +20,22 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 /* ---------------------------------------------------------
-   0) FONT (same as original inline <link> tags)
+   0) MOBILE GUARD — decide once, at load, whether to show at all
+--------------------------------------------------------- */
+function isMobileDevice(){
+  const uaMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
+  const widthMobile = window.innerWidth <= 768;
+  return uaMobile || widthMobile;
+}
+
+if(!isMobileDevice()){
+  initLiveChatWidget();
+}
+
+function initLiveChatWidget(){
+
+/* ---------------------------------------------------------
+   FONT (same as original inline <link> tags)
 --------------------------------------------------------- */
 if(!document.querySelector('link[data-lc-font]')){
   const preconnect = document.createElement('link');
@@ -28,7 +46,7 @@ if(!document.querySelector('link[data-lc-font]')){
 
   const fontLink = document.createElement('link');
   fontLink.rel = 'stylesheet';
-  fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap';
+  fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
   fontLink.setAttribute('data-lc-font', 'true');
   document.head.appendChild(fontLink);
 }
@@ -40,9 +58,10 @@ const LC_CSS = `
 :root{
   --accent: #ffffff;
   --accent-ink: #4A1B0C;
-  --dark: #1E2A38;
-  --dark-2: #16202B;
-  --bubble-me: #FF6B4A;
+  --dark: #1A2330;
+  --dark-2: #131B25;
+  --bubble-me-1: #8B5CF6;
+  --bubble-me-2: #EC4899;
   --text-light: #E8ECEF;
 }
 #lc-widget-root *{ box-sizing: border-box; }
@@ -52,7 +71,7 @@ const LC_CSS = `
   position: fixed; right: 24px; bottom: 34px; z-index: 9998;
   width: 58px; height: 58px; border-radius: 50%;
   background: var(--accent); border: none; cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
   display:flex; align-items:center; justify-content:center;
   transition: transform .15s ease;
 }
@@ -69,8 +88,8 @@ const LC_CSS = `
   width: min(390px, calc(100vw - 32px));
   height: min(660px, calc(100vh - 118px));
   display:none; flex-direction:column;
-  background: var(--dark); border-radius: 14px; overflow:hidden;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  background: var(--dark); border-radius: 16px; overflow:hidden;
+  box-shadow: 0 14px 44px rgba(0,0,0,0.5);
   transition: all .2s ease;
 }
 #lc-panel.open{ display:flex; }
@@ -78,72 +97,87 @@ const LC_CSS = `
   right:0; bottom:0; top:0; left:0; width:100%; height:100%; border-radius:0;
 }
 
-@media (max-width: 480px){
-  #lc-launcher{ right:16px; bottom:16px; width:52px; height:52px; }
-  #lc-panel{
-    right:0; left:0; bottom:0; top:0; width:100%; height:100%;
-    border-radius:0; max-height:none;
-  }
-}
-@media (max-width: 480px) and (min-width: 0px){
-  #lc-panel:not(.open){ display:none; }
-}
-
 #lc-header{
-  padding: 12px 16px; background: var(--dark-2); color: var(--text-light);
+  padding: 13px 16px; background: var(--dark-2); color: var(--text-light);
   display:flex; align-items:center; justify-content:space-between;
   font-weight:600; font-size:14px; flex-shrink:0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-#lc-header .lc-status{ display:flex; align-items:center; gap:6px; }
-#lc-header .lc-dot{ width:8px; height:8px; border-radius:50%; background:#4ADE80; }
-#lc-header .lc-header-btns{ display:flex; gap:4px; }
+#lc-header .lc-status{ display:flex; align-items:center; gap:7px; }
+#lc-header .lc-dot{
+  width:8px; height:8px; border-radius:50%; background:#4ADE80;
+  box-shadow: 0 0 0 3px rgba(74,222,128,0.18);
+}
+#lc-header .lc-header-btns{ display:flex; gap:2px; }
 #lc-header button{
-  background:none; border:none; color:var(--text-light); opacity:.7;
-  cursor:pointer; font-size:16px; line-height:1; padding:4px 6px;
+  background:none; border:none; color:var(--text-light); opacity:.65;
+  cursor:pointer; font-size:16px; line-height:1; padding:5px 7px; border-radius:6px;
+  transition: opacity .12s ease, background .12s ease;
 }
-#lc-header button:hover{ opacity:1; }
+#lc-header button:hover{ opacity:1; background: rgba(255,255,255,0.06); }
 
 #lc-messages{
-  flex:1; overflow-y:auto; padding: 14px; display:flex; flex-direction:column; gap:10px;
+  flex:1; overflow-y:auto; padding: 14px; display:flex; flex-direction:column; gap:12px;
   position:relative;
   background-color: var(--dark);
   background-image:
-    linear-gradient(rgba(22,32,43,0.87), rgba(22,32,43,0.87)),
+    linear-gradient(rgba(19,27,37,0.9), rgba(19,27,37,0.9)),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23415066' stroke-width='1.4' opacity='0.6'%3E%3Ccircle cx='20' cy='20' r='9'/%3E%3Cpath d='M45 15h20a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6H55l-6 6v-6h-4a6 6 0 0 1-6-6V21a6 6 0 0 1 6-6z'/%3E%3Cpath d='M15 60l6 6 10-10'/%3E%3Ccircle cx='95' cy='55' r='7'/%3E%3Cpath d='M80 90h18a5 5 0 0 0 5-5V75a5 5 0 0 0-5-5H83a5 5 0 0 0-5 5v10l-6 5z'/%3E%3Cpath d='M20 95a8 8 0 1 0 16 0 8 8 0 1 0-16 0z'/%3E%3C/g%3E%3C/svg%3E");
   background-size: cover, 120px 120px;
   background-position: center, 0 0;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.2) transparent;
 }
+#lc-messages::-webkit-scrollbar{ width:5px; }
+#lc-messages::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.15); border-radius:4px; }
 #lc-messages:empty::after{
   content: 'No messages yet. Be the first to write one.';
   color: rgba(255,255,255,0.6); font-size:12px; text-align:center; display:block; margin-top:20px;
 }
 
-.lc-msg-wrap{ display:flex; flex-direction:column; max-width:80%; }
-.lc-msg-wrap.me{ align-self:flex-end; align-items:flex-end; }
-.lc-msg-wrap.other{ align-self:flex-start; align-items:flex-start; }
+.lc-msg-row{ display:flex; align-items:flex-start; gap:8px; max-width:86%; }
+.lc-msg-row.other{ align-self:flex-start; }
+.lc-msg-row.me{ align-self:flex-end; }
+
+.lc-avatar{
+  width:30px; height:30px; border-radius:50%; flex-shrink:0; margin-top:1px;
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:13px; font-weight:700;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+
+.lc-msg-col{ display:flex; flex-direction:column; min-width:0; }
+.lc-msg-row.other .lc-msg-col{ align-items:flex-start; }
+.lc-msg-row.me .lc-msg-col{ align-items:flex-end; }
+
+.lc-name-row{ display:flex; align-items:baseline; gap:6px; padding:0 3px; margin-bottom:3px; }
+.lc-name-row .lc-name{ font-size:11.5px; font-weight:600; color: var(--text-light); opacity:.9; }
+.lc-name-row .lc-time{ font-size:10px; color: var(--text-light); opacity:.4; }
 
 .lc-msg{
-  padding: 8px 12px; border-radius: 14px; font-size:13px; line-height:1.4;
+  padding: 9px 13px; border-radius: 15px; font-size:13px; line-height:1.42;
   word-break: break-word; cursor:pointer; position:relative;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.25);
 }
-.lc-msg.me{ background: var(--bubble-me); color: var(--accent-ink); border-bottom-right-radius:4px; }
+.lc-msg.me{
+  background: linear-gradient(135deg, var(--bubble-me-1), var(--bubble-me-2));
+  color:#fff; border-bottom-right-radius:4px;
+}
 .lc-msg.other{ color: #14202b; border-bottom-left-radius:4px; }
-.lc-msg .lc-name{ display:block; font-size:10px; font-weight:600; opacity:.75; margin-bottom:2px; }
 .lc-msg .lc-mention{ font-weight:700; text-decoration:underline; }
-.lc-msg img.lc-img{ max-width:180px; border-radius:8px; display:block; margin-top:4px; }
+.lc-msg img.lc-img{ max-width:180px; border-radius:10px; display:block; margin-top:4px; }
 
 .lc-quote{
   border-left: 3px solid rgba(0,0,0,0.35); padding: 4px 8px; margin-bottom:6px;
-  border-radius: 4px; background: rgba(0,0,0,0.08); font-size:11.5px;
+  border-radius: 4px; background: rgba(0,0,0,0.1); font-size:11.5px;
 }
+.lc-msg.me .lc-quote{ background: rgba(255,255,255,0.16); border-left-color: rgba(255,255,255,0.5); }
 .lc-quote.lc-quote-clickable{ cursor:pointer; }
-.lc-quote.lc-quote-clickable:hover{ background: rgba(0,0,0,0.16); }
+.lc-quote.lc-quote-clickable:hover{ filter:brightness(1.15); }
 .lc-quote .lc-quote-author{ display:block; font-weight:700; font-size:11px; }
 .lc-quote .lc-quote-text{ opacity:.85; }
 
-.lc-msg-wrap.lc-highlight .lc-msg{
+.lc-msg-row.lc-highlight .lc-msg{
   animation: lc-flash 1.3s ease;
 }
 @keyframes lc-flash{
@@ -152,9 +186,9 @@ const LC_CSS = `
   100%{ box-shadow: 0 0 0 0 rgba(255,107,74,0); }
 }
 
-.lc-meta-row{ display:flex; align-items:center; gap:8px; margin-top:2px; font-size:10px; opacity:.6; color: var(--text-light); }
+.lc-meta-row{ display:flex; align-items:center; gap:9px; margin-top:4px; padding:0 3px; font-size:10px; opacity:.6; color: var(--text-light); }
 .lc-meta-row .lc-like-btn{ cursor:pointer; background:none; border:none; color:inherit; font-size:11px; padding:0; }
-.lc-meta-row .lc-like-btn.liked{ color:#FF6B4A; }
+.lc-meta-row .lc-like-btn.liked{ color:#EC4899; }
 .lc-meta-row .lc-del-btn, .lc-meta-row .lc-reply-btn{ cursor:pointer; background:none; border:none; color:inherit; font-size:10px; padding:0; text-decoration:underline; }
 .lc-meta-row .lc-reply-btn:hover, .lc-meta-row .lc-del-btn:hover{ opacity:1; color:var(--accent); }
 
@@ -165,23 +199,23 @@ const LC_CSS = `
 }
 
 #lc-suggest{
-  position:absolute; bottom:100%; left:10px; right:10px; background:#2C3B4C; border-radius:8px;
+  position:absolute; bottom:100%; left:10px; right:10px; background:#232F3E; border-radius:8px;
   margin-bottom:6px; max-height:120px; overflow-y:auto; display:none; box-shadow:0 4px 12px rgba(0,0,0,.4); z-index:6;
 }
 #lc-suggest div{ padding:7px 12px; font-size:13px; color:var(--text-light); cursor:pointer; }
-#lc-suggest div:hover{ background:#3A4C60; }
+#lc-suggest div:hover{ background:#2E3D4F; }
 
 #lc-reply-bar{
   display:none; align-items:center; justify-content:space-between; gap:8px;
-  padding:8px 12px; margin:8px 10px 0; background:#2C3B4C; border-radius:8px;
-  border-left: 3px solid var(--accent);
+  padding:8px 12px; margin:8px 10px 0; background:#232F3E; border-radius:10px;
+  border-left: 3px solid var(--bubble-me-1);
 }
 #lc-reply-bar .lc-reply-info{ font-size:11px; color:var(--text-light); overflow:hidden; }
 #lc-reply-bar .lc-reply-info b{ display:block; font-size:11px; }
 #lc-reply-bar .lc-reply-info span{ opacity:.7; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:230px; }
 #lc-reply-bar button{ background:none; border:none; color:var(--text-light); opacity:.7; cursor:pointer; font-size:16px; }
 
-#lc-form-wrap{ position:relative; background: var(--dark-2); flex-shrink:0; }
+#lc-form-wrap{ position:relative; background: var(--dark-2); flex-shrink:0; border-top: 1px solid rgba(255,255,255,0.06); }
 
 #lc-emoji-panel{
   display:none; flex-direction:column; padding: 8px 10px 0;
@@ -196,12 +230,12 @@ const LC_CSS = `
   font-size:19px; padding:4px 8px 8px; cursor:pointer; opacity:.5;
   border-bottom: 2px solid transparent; line-height:1;
 }
-#lc-emoji-tabs .lc-emoji-tab.active{ opacity:1; border-bottom-color: var(--accent); }
+#lc-emoji-tabs .lc-emoji-tab.active{ opacity:1; border-bottom-color: var(--bubble-me-1); }
 
 #lc-emoji-search-row{ padding: 8px 0; flex-shrink:0; }
 #lc-emoji-search{
   width:100%; border-radius:18px; border:none; padding:8px 12px;
-  background:#2C3B4C; color:var(--text-light); font-size:12px;
+  background:#232F3E; color:var(--text-light); font-size:12px;
 }
 #lc-emoji-search::placeholder{ color:rgba(255,255,255,0.4); }
 
@@ -217,7 +251,7 @@ const LC_CSS = `
   display:grid; grid-template-columns: repeat(8, 1fr); gap:4px; padding-bottom:6px;
 }
 .lc-emoji-section-grid span{ font-size:19px; text-align:center; cursor:pointer; padding:3px; border-radius:6px; }
-.lc-emoji-section-grid span:hover{ background:#2C3B4C; }
+.lc-emoji-section-grid span:hover{ background:#232F3E; }
 #lc-emoji-no-results{
   color: rgba(255,255,255,0.5); font-size:12px; text-align:center; padding:20px 0; display:none;
 }
@@ -225,17 +259,17 @@ const LC_CSS = `
 #lc-image-row{ display:none; padding: 8px 10px 0; gap:6px; align-items:center; }
 #lc-image-row input[type=text]{
   flex:1; border-radius:8px; border:none; padding:7px 10px; font-size:12px;
-  background:#2C3B4C; color:var(--text-light); min-width:0;
+  background:#232F3E; color:var(--text-light); min-width:0;
 }
 #lc-image-row button{
-  background: var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  background: linear-gradient(135deg, var(--bubble-me-1), var(--bubble-me-2)); color:#fff; border:none; border-radius:8px;
   padding:6px 10px; font-size:12px; font-weight:600; cursor:pointer; white-space:nowrap; flex-shrink:0;
 }
 
 #lc-gif-panel{ display:none; padding: 8px 10px 0; }
 #lc-gif-panel input[type=text]{
   width:100%; border-radius:8px; border:none; padding:7px 10px; font-size:12px;
-  background:#2C3B4C; color:var(--text-light); margin-bottom:6px;
+  background:#232F3E; color:var(--text-light); margin-bottom:6px;
 }
 #lc-gif-results{
   display:grid; grid-template-columns: repeat(3, 1fr); gap:5px; max-height:280px; overflow-y:auto;
@@ -250,37 +284,37 @@ const LC_CSS = `
 }
 #lc-form input[type=text]{
   flex:1; min-width:0; border-radius:20px; border:none; padding:9px 14px;
-  font-family:'Inter',sans-serif; font-size:13px; background:#2C3B4C; color:var(--text-light);
+  font-family:'Inter',sans-serif; font-size:13px; background:#232F3E; color:var(--text-light);
 }
 #lc-form input[type=text]::placeholder{ color:rgba(255,255,255,0.4); }
-#lc-form button{
-  background: var(--accent); color:var(--accent-ink); border:none; border-radius:50%;
+#lc-form button.lc-send{
+  background: linear-gradient(135deg, var(--bubble-me-1), var(--bubble-me-2)); color:#fff; border:none; border-radius:50%;
   width:34px; height:34px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0;
   font-size:15px;
 }
-#lc-form button:hover{ filter:brightness(1.05); }
-#lc-form button.lc-toggle-btn{ background:#2C3B4C; color:var(--text-light); font-size:12px; }
-
-@media (max-width: 360px){
-  #lc-form{ flex-wrap:wrap; }
-  #lc-form input[type=text]{ order:1; flex-basis:100%; }
+#lc-form button.lc-send:hover{ filter:brightness(1.08); }
+#lc-form button.lc-send svg{ stroke:#fff; }
+#lc-form button.lc-toggle-btn{
+  background:#232F3E; color:var(--text-light); font-size:12px; border:none; border-radius:50%;
+  width:34px; height:34px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0;
 }
+#lc-form button.lc-toggle-btn:hover{ filter:brightness(1.2); }
 
 /* Name gate is an overlay: sits on top of messages/form instead of
    replacing them, so the chat is visible immediately and the name
    prompt only appears when the visitor tries to send something. */
 #lc-name-gate{
   position:absolute; inset:0; z-index:20;
-  padding: 16px; background: rgba(30,42,56,0.97); display:none; flex-direction:column; gap:10px;
+  padding: 16px; background: rgba(19,27,37,0.97); display:none; flex-direction:column; gap:10px;
   align-items:center; justify-content:center;
 }
 #lc-name-gate p{ color:var(--text-light); font-size:13px; margin:0; text-align:center; }
 #lc-name-gate input{
   width:100%; border-radius:8px; border:none; padding:9px 12px; font-size:13px;
-  background:#2C3B4C; color:var(--text-light);
+  background:#232F3E; color:var(--text-light);
 }
 #lc-name-gate button{
-  background: var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  background: linear-gradient(135deg, var(--bubble-me-1), var(--bubble-me-2)); color:#fff; border:none; border-radius:8px;
   padding:9px; font-weight:600; font-size:13px; cursor:pointer; width:100%;
 }
 #lc-name-error{
@@ -350,7 +384,7 @@ const LC_HTML = `
       <button class="lc-toggle-btn" id="lc-gif-toggle" aria-label="Send GIF" title="GIF">GIF</button>
       <input type="text" id="lc-text-input" maxlength="300" placeholder="Type a message... (use @ to tag)">
       <button class="lc-send" id="lc-send-btn" aria-label="Send">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#4A1B0C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </div>
   </div>
@@ -404,6 +438,10 @@ function colorFor(name){
   let h = 0;
   for(let i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) % 9973;
   return PALETTE[h % PALETTE.length];
+}
+function initialFor(name){
+  const trimmed = (name || '?').trim();
+  return trimmed ? trimmed.charAt(0).toUpperCase() : '?';
 }
 
 const EMOJI_CATEGORIES = [
@@ -818,10 +856,33 @@ function renderMessages(hasNew){
     const m = item.data;
     const isMe = m.author === myName;
 
-    const wrap = document.createElement('div');
-    wrap.className = 'lc-msg-wrap ' + (isMe ? 'me' : 'other');
-    wrap.id = 'lc-msg-' + id;
-    if(id === highlightedMsgId) wrap.classList.add('lc-highlight');
+    const row = document.createElement('div');
+    row.className = 'lc-msg-row ' + (isMe ? 'me' : 'other');
+    row.id = 'lc-msg-' + id;
+    if(id === highlightedMsgId) row.classList.add('lc-highlight');
+
+    if(!isMe){
+      const avatar = document.createElement('div');
+      avatar.className = 'lc-avatar';
+      avatar.style.background = colorFor(m.author);
+      avatar.textContent = initialFor(m.author);
+      row.appendChild(avatar);
+    }
+
+    const col = document.createElement('div');
+    col.className = 'lc-msg-col';
+
+    const nameRow = document.createElement('div');
+    nameRow.className = 'lc-name-row';
+    const nameEl = document.createElement('span');
+    nameEl.className = 'lc-name';
+    nameEl.textContent = isMe ? 'You' : m.author;
+    const timeEl = document.createElement('span');
+    timeEl.className = 'lc-time';
+    timeEl.textContent = timeNow(m.ts);
+    nameRow.appendChild(nameEl);
+    nameRow.appendChild(timeEl);
+    col.appendChild(nameRow);
 
     const bubble = document.createElement('div');
     bubble.className = 'lc-msg ' + (isMe ? 'me' : 'other');
@@ -832,7 +893,6 @@ function renderMessages(hasNew){
       const clickable = m.replyTo.id ? ' lc-quote-clickable' : '';
       inner += '<div class="lc-quote' + clickable + '"><span class="lc-quote-author"></span><span class="lc-quote-text"></span></div>';
     }
-    if(!isMe) inner += '<span class="lc-name"></span>';
     if(m.text) inner += '<span class="lc-body"></span>';
     if(m.image) inner += '<img class="lc-img" src="' + m.image + '">';
     bubble.innerHTML = inner;
@@ -848,7 +908,6 @@ function renderMessages(hasNew){
         });
       }
     }
-    if(!isMe) bubble.querySelector('.lc-name').textContent = m.author;
     if(m.text) bubble.querySelector('.lc-body').innerHTML = renderText(m.text);
 
     bubble.addEventListener('click', function(e){
@@ -857,13 +916,10 @@ function renderMessages(hasNew){
       startReplyTo(m, id);
     });
 
-    wrap.appendChild(bubble);
+    col.appendChild(bubble);
 
     const meta = document.createElement('div');
     meta.className = 'lc-meta-row';
-    const time = document.createElement('span');
-    time.textContent = timeNow(m.ts);
-    meta.appendChild(time);
 
     if(!isMe){
       const likes = m.likes || [];
@@ -905,8 +961,9 @@ function renderMessages(hasNew){
       meta.appendChild(delBtn);
     }
 
-    wrap.appendChild(meta);
-    messagesBox.appendChild(wrap);
+    col.appendChild(meta);
+    row.appendChild(col);
+    messagesBox.appendChild(row);
   });
 
   if(wasNearBottom){
@@ -1035,3 +1092,5 @@ async function sendMessage(){
     await setDoc(doc(usersRef, myName), { name: myName, ownerId: clientId, lastSeen: serverTimestamp() });
   });
 }
+
+} // end initLiveChatWidget
