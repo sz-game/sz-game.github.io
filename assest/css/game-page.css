@@ -254,16 +254,19 @@
     }
 }
 
-@media(min-width:1344px) {
+@media(min-width:1344px)and (max-width:1390px) {
     .n158 {
         grid-column: 2 / span 6;
         grid-row: 1 / span 4
     }
 }
-.n158 {
+@media(min-width:1444px) {
+    .n158 {
         grid-column: 2 / span 7;
         grid-row: 1 / span 5
     }
+}
+
 .n126 {
     position: relative;
     width: 100%;
