@@ -246,3 +246,28 @@ if (mgTrack) {
   window.addEventListener('mousemove', function(e){ dragMove(e.clientX); });
   window.addEventListener('mouseup', dragEnd);
 })();
+
+
+ const learnMoreBtn = document.getElementById('learnMoreBtn');
+    const siteModalOverlay = document.getElementById('siteModalOverlay');
+    const siteModalClose = document.getElementById('siteModalClose');
+
+    learnMoreBtn.addEventListener('click', function () {
+        siteModalOverlay.classList.add('active');
+    });
+
+    siteModalClose.addEventListener('click', function () {
+        siteModalOverlay.classList.remove('active');
+    });
+
+    siteModalOverlay.addEventListener('click', function (e) {
+        if (e.target === siteModalOverlay) {
+            siteModalOverlay.classList.remove('active');
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            siteModalOverlay.classList.remove('active');
+        }
+    });

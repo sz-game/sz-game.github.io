@@ -37,6 +37,7 @@
     --font-size-h3: 1rem;
     --font-size-h5: 20px;
     --base-unit: 8px
+    --bg:#0d1117;
 }
 
 html.no-scrollbar {
