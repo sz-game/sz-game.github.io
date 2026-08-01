@@ -75,6 +75,7 @@ const LC_CSS = `
   display:flex; align-items:center; justify-content:center;
   transition: transform .15s ease;
 }
+#lc-launcher.lc-hidden{ display:none; }
 #lc-launcher:hover{ transform: scale(1.06); }
 #lc-launcher svg{ width:26px; height:26px; }
 #lc-badge{
@@ -84,9 +85,9 @@ const LC_CSS = `
 }
 
 #lc-panel{
-  position: fixed; right: 24px; bottom: 94px; z-index: 9999;
+  position: fixed; right: 24px; bottom: 34px; z-index: 9999;
   width: min(390px, calc(100vw - 32px));
-  height: min(660px, calc(100vh - 118px));
+  height: min(660px, calc(93vh - 58px));
   display:none; flex-direction:column;
   background: var(--dark); border-radius: 16px; overflow:hidden;
   box-shadow: 0 14px 44px rgba(0,0,0,0.5);
@@ -120,11 +121,11 @@ const LC_CSS = `
   flex:1; overflow-y:auto; padding: 14px; display:flex; flex-direction:column; gap:12px;
   position:relative;
   background-color: var(--dark);
-  background-image:
-    linear-gradient(rgba(19,27,37,0.9), rgba(19,27,37,0.9)),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23415066' stroke-width='1.4' opacity='0.6'%3E%3Ccircle cx='20' cy='20' r='9'/%3E%3Cpath d='M45 15h20a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6H55l-6 6v-6h-4a6 6 0 0 1-6-6V21a6 6 0 0 1 6-6z'/%3E%3Cpath d='M15 60l6 6 10-10'/%3E%3Ccircle cx='95' cy='55' r='7'/%3E%3Cpath d='M80 90h18a5 5 0 0 0 5-5V75a5 5 0 0 0-5-5H83a5 5 0 0 0-5 5v10l-6 5z'/%3E%3Cpath d='M20 95a8 8 0 1 0 16 0 8 8 0 1 0-16 0z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: cover, 120px 120px;
-  background-position: center, 0 0;
+  background-image:linear-gradient(rgba(10, 10, 10, 0.9), rgba(19,27,37,0.9)),
+   url("/assest/images/chat-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.2) transparent;
 }
@@ -709,14 +710,22 @@ let highlightTimeout = null;
 
 let hasUnseenBelow = false;
 
+// Keeps the round launcher button and the open panel from ever showing
+// at the same time: hidden while the panel is open, shown again once closed.
+function updateLauncherVisibility(){
+  launcher.classList.toggle('lc-hidden', panelOpen);
+}
+
 // Chat (messages + composer) is shown right away for everyone, name or not.
 // The name gate only appears on top of it when someone tries to send something.
 showChat();
 panel.classList.add('open');
+updateLauncherVisibility();
 
 launcher.addEventListener('click', function(){
   panelOpen = !panelOpen;
   panel.classList.toggle('open', panelOpen);
+  updateLauncherVisibility();
   if(panelOpen){
     unread = 0;
     badge.style.display = 'none';
@@ -727,6 +736,7 @@ launcher.addEventListener('click', function(){
 closeBtn.addEventListener('click', function(){
   panelOpen = false;
   panel.classList.remove('open');
+  updateLauncherVisibility();
 });
 fullscreenBtn.addEventListener('click', function(){
   panel.classList.toggle('fullscreen');

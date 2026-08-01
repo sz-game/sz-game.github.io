@@ -20,7 +20,110 @@
   <link rel="stylesheet" href="/assest/css/game-page.css" crossorigin="anonymous" data-n-g="">
   <link rel="stylesheet" href="/assest/css/navbar.css" crossorigin="anonymous" data-n-g="">
 <link rel="stylesheet" href="/assest/css/mobile-search.css" crossorigin="anonymous" data-n-g="">
- 
+ <style>#gameFrameWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.game-splash {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.splash-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assest/images/codex-1-small@2x.webp');
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px) brightness(0.6);
+  transform: scale(1.1);
+}
+
+.splash-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(60,50,150,0.55), rgba(40,30,120,0.75));
+  overflow: hidden;
+}
+.splash-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.splash-site-name {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.splash-thumb {
+  width: 130px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.6);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+.splash-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.play-now-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffdd00;
+  color: #000000;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 10px 26px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.play-now-btn:hover {
+  background: linear-gradient(90deg, #ffe223, #ffe53d);
+}
+
+.play-icon {
+  background: #fff;
+  color: #000000;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+/* Click hone ke baad slide + fade */
+.play-now-btn.slide-out {
+  transform: translateX(400%);
+  opacity: 0;
+  pointer-events: none;
+}</style>
  
 </head>
 
@@ -315,14 +418,36 @@
             <ul class="n159">
               <li class="n153 n158">
                 <div class="n156" id="gameFrameWrapper">
-                  <iframe data-testid="test_app_frame" id="test_app_frame" allowfullscreen=""
-                    allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; accelerometer; magnetometer; gyroscope; microphone *"
-                    name="gameFrame" scrolling="no"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation"
-                    data-src="https://basketball-games.xyz/10-minutes-till-dawn"
-                    style="width: 100%; height: 100%; border: none;">
-                  </iframe>
-                </div>
+
+  <!-- Custom splash screen (jab tak play na dabaya jaye) -->
+  <div id="gameSplash" class="game-splash">
+    <div class="splash-bg"></div>
+    <div class="splash-overlay"style="background-image: url('/assest/wide-images/10-minutes-till-dawn-wide-main.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;opacity: 0.3;"></div>
+
+    <div class="splash-content">
+      <div class="splash-site-name">unblockedgames.free</div>
+
+      <img class="splash-thumb" src="/assest/images/10-minutes-till-dawn-small@2x.webp" alt="10 Minutes Till Dawn" s>
+
+      <div class="splash-title">10 Minutes Till Dawn</div>
+
+      <button id="playGameBtn" class="play-now-btn">
+        <span class="play-icon">▶</span>
+        <span>Play now</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Iframe: shuru mein khali, sirf data-src mein link -->
+  <iframe id="test_app_frame" allowfullscreen=""
+    allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; accelerometer; magnetometer; gyroscope; microphone *"
+    name="gameFrame" scrolling="no"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation"
+    data-src="https://basketball-games.xyz/10-minutes-till-dawn"
+    style="width: 100%; height: 100%; border: none; display:none;">
+  </iframe>
+
+</div>
                 <div class="n152">
                   <div class="n160">
                     <div class="n161">
@@ -1396,6 +1521,22 @@
 </div>
 
   </main>
+
+  <script>document.getElementById('playGameBtn').addEventListener('click', function () {
+  const btn = this;
+  const splash = document.getElementById('gameSplash');
+  const iframe = document.getElementById('test_app_frame');
+
+  // Sirf button right slide ho ga
+  btn.classList.add('slide-out');
+
+  setTimeout(function () {
+    // Ab poori splash (bg, logo, title sab) gayab, iframe show
+    splash.style.display = 'none';
+    iframe.src = iframe.getAttribute('data-src');
+    iframe.style.display = 'block';
+  }, 600); // yeh .play-now-btn transition duration ke barabar
+});</script>
   <script type="module" src="/assest/js/chat.js"></script>
  <script type="module" src="/assest/js/live_count.js"></script>
 <script src="/assest/js/radom_games.js"></script>
