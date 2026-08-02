@@ -20,12 +20,14 @@
   <link rel="stylesheet" href="/assest/css/game-page.css" crossorigin="anonymous" data-n-g="">
   <link rel="stylesheet" href="/assest/css/navbar.css" crossorigin="anonymous" data-n-g="">
 <link rel="stylesheet" href="/assest/css/mobile-search.css" crossorigin="anonymous" data-n-g="">
- <style>#gameFrameWrapper {
+<style>
+#gameFrameWrapper {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
   border-radius: 12px;
+  background: #0a0a0a;
 }
 
 .game-splash {
@@ -41,74 +43,104 @@
 .splash-bg {
   position: absolute;
   inset: 0;
-  background-image: url('/assest/images/codex-1-small@2x.webp');
-  background-size: cover;
-  background-position: center;
-  filter: blur(6px) brightness(0.6);
-  transform: scale(1.1);
+  background: #0a0a0a;
 }
 
 .splash-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(60,50,150,0.55), rgba(40,30,120,0.75));
   overflow: hidden;
 }
-.splash-content {
+
+.splash-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1;
+}
+
+.splash-wrap {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 16px;
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   gap: 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background-color: rgba(15,15,15,0.55);
+  backdrop-filter: blur(2px);
+  padding: 34px 40px;
+  border-radius: 16px;
+  max-width: 460px;
 }
 
-.splash-site-name {
+.splash-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.splash-icon-row .line {
+  height: 1px;
+  width: 50px;
+  background: rgba(255,221,0,0.4);
+}
+
+.joystick-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.splash-title-main {
   color: #fff;
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 800;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  letter-spacing: 0.3px;
 }
 
-.splash-thumb {
-  width: 130px;
-  border-radius: 10px;
-  border: 2px solid rgba(255,255,255,0.6);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-}
-
-.splash-title {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
+.splash-subtitle {
+  color: #b9b9b9;
+  font-size: 14px;
+  font-weight: 400;
+  max-width: 360px;
+  line-height: 1.5;
 }
 
 .play-now-btn {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(90deg, #6a5cff, #8b5cff);
-  color: #fff;
-  font-weight: 700;
+  background: linear-gradient(90deg, #ffdd00, #fde232);
+  color: #000;
+  font-weight: 800;
   font-size: 16px;
-  padding: 10px 26px;
+  letter-spacing: 0.5px;
+  padding: 12px 34px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 0 25px rgba(255,221,0,0.35);
   transition: transform 0.6s ease, opacity 0.6s ease, background 0.2s ease;
 }
 
 .play-now-btn:hover {
-  background: linear-gradient(90deg, #7a6cff, #9b6cff);
+  background: linear-gradient(90deg, #ffe94d, #fff176);
 }
 
 .play-icon {
-  background: #fff;
-  color: #6a5cff;
+  background: #000;
+  color: #ffdd00;
   border-radius: 50%;
   width: 22px;
   height: 22px;
@@ -118,13 +150,65 @@
   font-size: 11px;
 }
 
-
-/* Click hone ke baad slide + fade */
 .play-now-btn.slide-out {
   transform: translateX(400%);
   opacity: 0;
   pointer-events: none;
-}</style>
+}
+
+.splash-features {
+  display: flex;
+  gap: 26px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ddd;
+  font-size: 13px;
+}
+
+.feature-item svg {
+  width: 16px;
+  height: 16px;
+}
+
+.splash-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(15,15,15,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 8px 18px;
+  border-radius: 30px;
+}
+
+.splash-badge svg {
+  width: 18px;
+  height: 18px;
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.badge-title {
+  color: #ffdd00;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.badge-sub {
+  color: #999;
+  font-size: 11px;
+}
+</style>
  
 </head>
 
@@ -421,23 +505,62 @@
                 <div class="n156" id="gameFrameWrapper">
 
   <!-- Custom splash screen (jab tak play na dabaya jaye) -->
-  <div id="gameSplash" class="game-splash">
-    <div class="splash-bg"></div>
-    <div class="splash-overlay"style="background-image: url('/assest/wide-images/10-minutes-till-dawn-wide-main.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;opacity: 0.3;"></div>
+<div id="gameSplash" class="game-splash">
+  <div class="splash-bg"></div>
+  <div class="splash-overlay" style="background-image: url('/assest/wide-images/10-minutes-till-dawn-wide-main.webp'); background-size: cover; background-position: center; background-repeat: no-repeat; opacity: 0.8;"></div>
 
+  <div class="splash-wrap">
     <div class="splash-content">
-      <div class="splash-site-name"><span style="align-items: center;"><img src="/favicon.png" alt="Unblocked Games" width="48px"> unblockedgames.free</span></div>
 
-      <img class="splash-thumb" src="/assest/images/10-minutes-till-dawn-small@2x.webp" alt="10 Minutes Till Dawn" s>
+      <!-- Joystick icon -->
+      <div class="splash-icon-row">
+        <span class="line"></span>
+        <svg class="joystick-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 8H7C4.79086 8 3 9.79086 3 12V15C3 17.2091 4.79086 19 7 19C8.5 19 9.2 18.2 10 17L10.5 16.3C10.8 15.9 11.3 15.7 11.8 15.7H12.2C12.7 15.7 13.2 15.9 13.5 16.3L14 17C14.8 18.2 15.5 19 17 19C19.2091 19 21 17.2091 21 15V12C21 9.79086 19.2091 8 17 8Z" stroke="#ffdd00" stroke-width="1.6"/>
+          <circle cx="7.5" cy="12.5" r="1.4" fill="#ffdd00"/>
+          <circle cx="17" cy="11" r="1" fill="#ffdd00"/>
+          <circle cx="15" cy="13" r="1" fill="#ffdd00"/>
+        </svg>
+        <span class="line"></span>
+      </div>
 
-      <div class="splash-title">10 Minutes Till Dawn</div>
+      <div class="splash-title-main">10 Minutes Till Dawn</div>
+      <div class="splash-subtitle">Survive the night. Upgrade your weapons. Don't get overwhelmed.</div>
 
       <button id="playGameBtn" class="play-now-btn">
         <span class="play-icon">▶</span>
-        <span>Play now</span>
+        <span>PLAY NOW</span>
       </button>
+
+      <div class="splash-features">
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4 14H11L9 22L20 9H13L15 2Z" fill="#ffdd00"/></svg>
+          <span>Instant Play</span>
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 5V11C4 16 7.5 20.5 12 22C16.5 20.5 20 16 20 11V5L12 2Z" stroke="#ffdd00" stroke-width="1.6"/><path d="M9 12L11 14L15 10" stroke="#ffdd00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Safe &amp; Secure</span>
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 8H7C4.79086 8 3 9.79086 3 12V15C3 17.2091 4.79086 19 7 19C8.5 19 9.2 18.2 10 17L10.5 16.3C10.8 15.9 11.3 15.7 11.8 15.7H12.2C12.7 15.7 13.2 15.9 13.5 16.3L14 17C14.8 18.2 15.5 19 17 19C19.2091 19 21 17.2091 21 15V12C21 9.79086 19.2091 8 17 8Z" stroke="#ffdd00" stroke-width="1.6"/>
+          </svg>
+          <span>No Downloads</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom badge -->
+    <div class="splash-badge">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 5V11C4 16 7.5 20.5 12 22C16.5 20.5 20 16 20 11V5L12 2Z" stroke="#ffdd00" stroke-width="1.6"/><path d="M9 12L11 14L15 10" stroke="#ffdd00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="badge-text">
+        <span class="badge-title">unblockedgames.free</span>
+        <span class="badge-sub">Free • Fast • Unblocked</span>
+      </div>
     </div>
   </div>
+</div>
 
   <!-- Iframe: shuru mein khali, sirf data-src mein link -->
   <iframe id="test_app_frame" allowfullscreen=""
