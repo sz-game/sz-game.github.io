@@ -11416,3 +11416,18 @@
     });
   }
 })();
+document.getElementById('playGameBtn').addEventListener('click', function () {
+  const btn = this;
+  const splash = document.getElementById('gameSplash');
+  const iframe = document.getElementById('test_app_frame');
+
+  // Sirf button right slide ho ga
+  btn.classList.add('slide-out');
+
+  setTimeout(function () {
+    // Ab poori splash (bg, logo, title sab) gayab, iframe show
+    splash.style.display = 'none';
+    iframe.src = iframe.getAttribute('data-src');
+    iframe.style.display = 'block';
+  }, 600); // yeh .play-now-btn transition duration ke barabar
+});

@@ -23,7 +23,18 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     /* AUTO GAME ID */
-    const gameId = "level-devil";
+    /* AUTO GAME ID (from URL path: /g/game-name/index.html) */
+function getGameIdFromURL() {
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  // parts example: ["g", "level-devil", "index.html"]
+  const gIndex = parts.indexOf("g");
+  if (gIndex !== -1 && parts[gIndex + 1]) {
+    return parts[gIndex + 1];
+  }
+  // fallback agar "g" folder na mile
+  return parts[parts.length - 2] || "unknown-game";
+}
+const gameId = getGameIdFromURL();
     /* DB REF */
     const gameRef = ref(db, "games/" + gameId);
     /* BUTTONS */

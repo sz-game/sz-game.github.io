@@ -4146,7 +4146,7 @@ button-effect:hover{
 .contact-btn {
     border-radius: 30px;
     transition: all .25s ease;
-    border: none;
+    border: var(--brand-60) 1px solid;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -4155,8 +4155,8 @@ button-effect:hover{
     font-size: 16px;
     box-sizing: border-box;
     padding: calc(var(--base-unit)*1) calc(var(--base-unit)*2);
-    background: var(--brand-0);
-    color: var(--brand-200);
+    background: transparent;
+    color: var(--brand-60);
     height: 34px;
     -webkit-user-select: none;
     user-select: none;
@@ -4175,7 +4175,8 @@ button-effect:hover{
 
 @media(hover:hover) {
     .contact-btn:hover:not(:disabled) {
-        background: var(--brand-60)
+        background: var(--brand-60);
+        color: var(--black-100)
     }
 }
 
