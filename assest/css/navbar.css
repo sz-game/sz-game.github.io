@@ -4261,12 +4261,45 @@ button-effect:hover{
     mask-image: url(/assest/icon/about-svgrepo-com.svg);
     margin-right: calc(var(--base-unit)*1)
 }
+.sidebar-social-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: calc(var(--base-unit)*2);
+    margin-top: calc(var(--base-unit)*2 + 8px);
+    margin-bottom: 10px
+}
+
+.sidebar-social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white-70);
+    transition: transform .2s ease, background-color .2s ease, color .2s ease
+}
+
+.sidebar-social-links a:hover,
+.sidebar-social-links a:focus-visible {
+    background-color: #3b82f6;
+    color: #fff;
+    transform: translateY(-1px)
+}
+
+.sidebar-social-links svg {
+    width: 16px;
+    height: 16px
+}
+
 .copyright {
     color: var(--white-10);
     font-size: 12px;
     font-weight: 400;
     margin-left: calc(var(--base-unit)*2);
-    margin-top: calc(var(--base-unit)*2 + 30px)
+    margin-top: calc(var(--base-unit)*2 + 10px)
 }
 
 /* Simplified sidebar footer class */
