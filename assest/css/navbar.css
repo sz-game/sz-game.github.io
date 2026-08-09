@@ -4175,13 +4175,7 @@ button-effect:hover{
     background: rgb(var(--brand-100)/70%)
 }
 
-@media(hover:hover) {
-    .contact-btn:hover:not(:disabled) {
-       background: transparent;
-    color: var(--brand-60)
-    }
-}
-
+ 
 .mail-icon {
     display: inline-block;
     background-color: currentcolor;
