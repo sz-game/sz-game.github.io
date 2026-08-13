@@ -1,14 +1,10 @@
 (function () {
-        // ===== YAHAN SE CONFIGURE KAREN =====
-        // Har category page par sirf yeh 2 lines badalni hain:
-        const categoryBase = '/c/action';   // e.g. /c/action , /c/quiz , /c/trivia
-        const totalPages = 4;              // is category ke total pages
-        const maxVisible = 3;               // ek waqt mein kitne number dikhne hain
-        // =====================================
+        const categoryBase = '/c/action';  
+        const totalPages = 4;           
+        const maxVisible = 3;          
  
         const el = document.getElementById('pagination');
  
-        // current page ko URL se khud detect kar leta hai
         function detectCurrentPage() {
             const path = window.location.pathname.replace(/\/+$/, ''); // trailing slash hata do
             const segments = path.split('/').filter(Boolean);
@@ -19,7 +15,6 @@
  
         const currentPage = detectCurrentPage();
  
-        // page number se URL banata hai
         function pageUrl(p) {
             return p <= 1 ? `${categoryBase}/` : `${categoryBase}/${p}/`;
         }
