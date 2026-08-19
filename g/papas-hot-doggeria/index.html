@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-US">
 <head>
 <meta charset="utf-8">
@@ -346,7 +346,7 @@
         <div class="desktopVersion">
           <ul class="n159">
             <li class="n153 n158">
-              <div class="n156" id="gameFrameWrapper">
+              <div class="n156" id="gameFrameWrapper" data-game="papas-hot-doggeria">
 
                 
                 <div id="gameSplash" class="game-splash">
@@ -382,8 +382,7 @@
                 <iframe id="test_app_frame" allowfullscreen=""
                   allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; accelerometer; magnetometer; gyroscope; microphone *"
                   name="gameFrame" scrolling="no"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation"
-                  data-src="iframepaste-here" style="width: 100%; height: 100%; border: none; display:none;">
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation" style="width: 100%; height: 100%; border: none; display:none;">
                 </iframe>
 
               </div>
@@ -522,7 +521,7 @@
               </svg>
               Exit
             </button>
-            <iframe id="gameFrame" data-src="iframepaste-here" allowfullscreen title="Papas Hot Doggeria"></iframe>
+            <iframe id="gameFrame" data-game="papas-hot-doggeria" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation" allowfullscreen title="Papas Hot Doggeria"></iframe>
           </div>
 
         </div>
@@ -1323,6 +1322,8 @@
 <script src="/assest/js/mobile-play.js"></script>
 <script src="/assest/js/main.js"></script>
 <script src="/assest/js/mobile-search.js"></script>
+  <script src="/assest/js/games-map.js"></script>
+  <script src="/assest/js/game-player.js"></script>
 </body>
 </html>
 
