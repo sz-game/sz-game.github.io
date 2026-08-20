@@ -664,7 +664,7 @@
   margin: clamp(1.2rem, 4vw, 2rem) 0;
   border-collapse: separate;
   border-spacing: 0;
-  table-layout: fixed;
+  table-layout: auto;   /* fixed hata diya, columns content ke hisab se adjust hongay */
   background: #1d2228;
   border: 1px solid rgba(228, 224, 221, 0.28);
   border-radius: 12px;
@@ -699,16 +699,17 @@
   overflow-wrap: anywhere;
 }
 
-/* Feature column */
+/* Pehla column thora tight rakhain (label/feature type column) */
 .game-content table th:first-child,
 .game-content table td:first-child{
-  width: 24%;
+  width: 22%;
+  min-width: 110px;
 }
 
-/* Description column */
-.game-content table th:nth-child(2),
-.game-content table td:nth-child(2){
-  width: 76%;
+/* Baqi tamam columns barabar space share karain, chahe 1 ho ya 5 */
+.game-content table th:not(:first-child),
+.game-content table td:not(:first-child){
+  width: auto;
 }
 
 /* VERTICAL LINE BETWEEN COLUMNS */
@@ -760,28 +761,28 @@
     -webkit-overflow-scrolling: touch;
     font-size: 0.92rem;
     border-radius: 10px;
+    table-layout: auto;
   }
 
   .game-content table thead,
-  .game-content table tbody{
+  .game-content table tbody,
+  .game-content table tr{
+    display: table;
     width: 100%;
+    table-layout: auto;
   }
 
   .game-content table th,
   .game-content table td{
     padding: 12px;
+    white-space: nowrap;   /* har column ko apni content ke hisab se width le jane dain */
   }
 
   .game-content table th:first-child,
   .game-content table td:first-child{
-    width: 30%;
-    min-width: 140px;
-  }
-
-  .game-content table th:nth-child(2),
-  .game-content table td:nth-child(2){
-    width: 70%;
-    min-width: 300px;
+    width: auto;
+    min-width: 120px;
+    white-space: normal;   /* pehla column phir bhi wrap ho sakta hai agar text lamba ho */
   }
 }
 
@@ -803,12 +804,7 @@
 
   .game-content table th:first-child,
   .game-content table td:first-child{
-    min-width: 125px;
-  }
-
-  .game-content table th:nth-child(2),
-  .game-content table td:nth-child(2){
-    min-width: 280px;
+    min-width: 110px;
   }
 }
  

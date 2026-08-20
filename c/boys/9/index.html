@@ -177,10 +177,12 @@
     </div>
     <nav id="mainNav" class="sidebar sidebar-desktop">
         <div class="sidebar-container" id="sidebarContainer">
-            <div class="sidebar-link sidebar-link-active">
+            <a aria-label="Home" href="/">
+            <div class="sidebar-link">
                 <img src="/assest/icon/home-smile-svgrepo-com.svg" loading="lazy" alt="Home icon">
                 <div class="sidebar-label">Home</div>
             </div>
+            </a>
             <a aria-label="Recent Games" href="/recent/">
                 <div class="sidebar-link">
                     <img src="/assest/icon/recent-svgrepo-com.svg" loading="lazy" alt="Recent icon">
@@ -236,13 +238,11 @@
                     <div class="sidebar-label">Bike</div>
                 </div>
             </a>
-            <a aria-label="Boys Games" href="/c/boys-games/">
-                <div class="sidebar-link">
-                    <img src="/assest/icon/boy-svgrepo-com.svg" loading="lazy" alt="Boys icon">
-                    <div class="sidebar-label">Boys</div>
-                </div>
-            </a>
-            <a aria-label="Girls Games" href="/c/girls-games/">
+            <div class="sidebar-link sidebar-link-active">
+                <img src="/assest/icon/boy-svgrepo-com.svg" loading="lazy" alt="Boys icon">
+                <div class="sidebar-label">Boys</div>
+            </div>
+            <a aria-label="Girls Games" href="/c/girls/">
                 <div class="sidebar-link">
                     <img src="/assest/icon/girl-svgrepo-com.svg" loading="lazy" alt="Girls icon">
                     <div class="sidebar-label">Girls</div>
@@ -459,7 +459,7 @@
         <br>
         <section>
             <div>
-                <div class="category-crumb"><a href="/" style="color: #ffdd00;">Games </a><span style="color: #fff;">»</span><a href="/c/boys-games/" style="color: #ffdd00;"> Boys Games</a></div>
+                <div class="category-crumb"><a href="/" style="color: #ffdd00;">Games </a><span style="color: #fff;">»</span><a href="/c/boys/" style="color: #ffdd00;"> Boys Games</a></div>
                 <h1>Boys Games</h1>
                 <p class="category-sub">Play exciting browser-based Boys games featuring action, adventure, racing, sports, shooting, driving, and skill-based gameplay without downloads.</p>
             </div>
@@ -609,7 +609,7 @@
                                     <path d="M9 18l6-6-6-6" />
                                 </svg></span>
                         </a>
-                        <a class="bns-category-row" aria-label="Boys Games" href="/c/boys-games/">
+                        <a class="bns-category-row" aria-label="Boys Games" href="/c/boys/">
                             <div class="bns-category-left">
                                 <img src="/assest/icon/boy-svgrepo-com.svg" loading="lazy" alt="Boys icon" width="24px">
                                 <div class="sidebar-label">Boys</div>
@@ -619,7 +619,7 @@
                                     <path d="M9 18l6-6-6-6" />
                                 </svg></span>
                         </a>
-                        <a class="bns-category-row" aria-label="Girls Games" href="/c/girls-games/">
+                        <a class="bns-category-row" aria-label="Girls Games" href="/c/girls/">
                             <div class="bns-category-left">
                                 <img src="/assest/icon/girl-svgrepo-com.svg" loading="lazy" alt="Girls icon"
                                     width="24px">
