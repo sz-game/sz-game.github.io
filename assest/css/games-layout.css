@@ -569,7 +569,7 @@
 .game-content ol{
   margin-top: 0.9em;
   margin-bottom: 0.9em;
-  padding-left: clamp(1.2rem, 4vw, 1.8rem);
+  padding-left: 0;   /* ab yahan se padding hata di, li khud sambhalega */
 }
 
 .game-content ul{
@@ -578,7 +578,7 @@
 
 .game-content ul > li{
   position: relative;
-  padding-left: 1.4em;
+  padding-left: calc(1.4em + clamp(1.2rem, 4vw, 1.8rem));
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   color: var(--card);
@@ -587,7 +587,7 @@
 .game-content ul > li::before{
   content: "";
   position: absolute;
-  left: 0;
+  left: clamp(1.2rem, 4vw, 1.8rem);
   top: 0.65em;
   width: 8px;
   height: 8px;
@@ -596,6 +596,7 @@
   transform: rotate(45deg);
 }
 
+/* Heading wali li — koi bhi extra indent nahi, bilkul flush left */
 .game-content ul > li:has(h3){
   padding-left: 0;
   margin-top: 0.2em;
@@ -606,6 +607,15 @@
   content: none;
 }
 
+.game-content ul > li:has(h3) h3{
+  margin: 0;
+  padding: 0;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--heading);
+  font-weight: 600;
+}
+
 .game-content ol{
   list-style: none;
   counter-reset: step;
@@ -614,7 +624,7 @@
 .game-content ol > li{
   counter-increment: step;
   position: relative;
-  padding-left: 2.2em;
+  padding-left: calc(2.2em + clamp(1.2rem, 4vw, 1.8rem));
   margin-top: 0.6em;
   margin-bottom: 0.6em;
 }
@@ -622,7 +632,7 @@
 .game-content ol > li::before{
   content: counter(step);
   position: absolute;
-  left: 0;
+  left: clamp(1.2rem, 4vw, 1.8rem);
   top: 0;
   width: 1.6em;
   height: 1.6em;
@@ -807,8 +817,7 @@
     min-width: 110px;
   }
 }
- 
- 
+
     .page {
       max-width: 100%;
       margin: 0 auto;

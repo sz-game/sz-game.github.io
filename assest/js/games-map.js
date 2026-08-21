@@ -23,7 +23,7 @@ window.GAME_URLS = {
   "18-wheeler-cargo-simulator-2": { url: "https://www.miniplay.com/embed/18-wheeler-cargo-simulator-2", hasOwnPlay: false },
   "18-wheeler-truck-parking": { url: "https://eggycarunblocked.shop/18-wheeler-truck-parking", hasOwnPlay: false },
   "18-wheeler-truck-parking-2": { url: "https://www.play-games.com/iframe/32036.html", hasOwnPlay: true },
-  "1v1-lol": { url: "https://yoplay.io/1v1lol.embed", hasOwnPlay: true },
+  "1v1-lol": { url: "https://basket-random.pro/adstest.html", hasOwnPlay: true },
   "2048-cupcakes": { url: "https://www.play-games.com/iframe/33047.html", hasOwnPlay: true },
   "2048-fusion": { url: "https://basketball-games.xyz/2048-fusion", hasOwnPlay: false },
   "2048-multitask": { url: "https://basketball-games.xyz/2048-multitask", hasOwnPlay: false },
