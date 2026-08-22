@@ -30,28 +30,31 @@
         icon.classList.add('animate');
     }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Pehli baar animation chalao
-                playAnimation();
-
-                // Agar pehle se interval chal raha ho to usko clear karo
-                if (intervalId) clearInterval(intervalId);
-
-                // Har 10 second baad repeat karo
-                intervalId = setInterval(playAnimation, 10000);
-            } else {
-                // Jab element screen se bahar chala jaye to interval band kar do
-                if (intervalId) {
-                    clearInterval(intervalId);
-                    intervalId = null;
+    if (icon) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    playAnimation();
+                    if (intervalId) clearInterval(intervalId);
+                    intervalId = setInterval(playAnimation, 10000);
+                } else {
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
                 }
-            }
+            });
+        }, {
+            threshold: 0.3
         });
-    }, {
-        threshold: 0.3 // 30% element visible hote hi trigger hoga
-    });
 
-    observer.observe(icon);
+        observer.observe(icon);
+    }
 })();
+
+    if (!document.querySelector('script[data-recent-games]')) {
+        const recentScript = document.createElement('script');
+        recentScript.src = '/assest/js/recent.js';
+        recentScript.dataset.recentGames = 'true';
+        document.head.appendChild(recentScript);
+    }

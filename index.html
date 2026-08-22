@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/assest/css/all.css" crossorigin="anonymous" data-n-g="">
     <link rel="stylesheet" href="/assest/css/home-special.css" crossorigin="anonymous" data-n-g="">
     <link rel="stylesheet" href="/assest/css/mobile-special.css" crossorigin="anonymous" data-n-g="">
+    <link rel="stylesheet" href="/assest/css/recent-games.css" crossorigin="anonymous" data-n-g="">
     <link rel="stylesheet" href="/assest/css/mobile-search.css" crossorigin="anonymous" data-n-g="">
     <meta name="author" content="Sarkar Games">
     <meta name="publisher" content="Sarkar Games">
@@ -329,6 +330,7 @@
   "primaryImageOfPage":"https://unblockedgames.free/images/logo.png"
 }
 </script>
+<style>.main-layout.layout-desktop { margin-top: 20px !important;}</style>
     <script src="/assest/js/site-customizer.js"></script>
 </head>
 <body>
@@ -676,7 +678,19 @@
             </div>
             <div id="search-results-grid" class="search-results-grid"></div>
         </div>
-        <br>
+        <section id="home-recent-games" class="recent-games-section" hidden aria-labelledby="home-recent-title">
+            <div class="recent-games-heading">
+                <div>
+                    <span id="home-recent-title" class="recent-games-title">Continue Playing <img src="/assest/icon/arrow-right.svg" alt="" class="title-arrow"></span>
+                </div>
+                <a class="recent-games-link" href="/recent/">View all</a>
+            </div>
+            <button class="recent-games-prev" type="button" aria-label="Previous"><img src="/assest/icon/left.svg" alt="Previous" width="20" height="20"></button>
+            <div class="recent-games-grid"></div>
+            <div class="recent-categories-grid" hidden></div>
+            <button class="recent-games-next" type="button" aria-label="Next"><img src="/assest/icon/right.svg" alt="Next" width="20" height="20"></button>
+            <p class="recent-games-empty" hidden></p>
+        </section>
         <div class="game-slider-wrap desktop-only">
             <div>
                 <span class="gm-section-title">🔥 Top <span>Games</span></span>

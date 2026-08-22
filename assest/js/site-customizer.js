@@ -54,3 +54,11 @@
     init();
   }
 })();
+
+(function () {
+  if (document.querySelector('script[data-recent-games]')) return;
+  const recentScript = document.createElement('script');
+  recentScript.src = '/assest/js/recent.js';
+  recentScript.dataset.recentGames = 'true';
+  document.head.appendChild(recentScript);
+})();
