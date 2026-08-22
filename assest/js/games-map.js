@@ -1,16 +1,3 @@
-// games-map.js
-// Har game ke 2 cheezein:
-//   url        -> embed link
-//   hasOwnPlay -> true  = iss game ka apna "Play/Play Now" button khud iframe ke andar aata hai
-//                         (is case me HUMARA splash/PLAY button HIDE ho jayega, seedha iframe load hoga)
-//              -> false = iss game me koi apna play button nahi, seedha game/canvas load ho jata hai
-//                         (is case me HUMARA splash/PLAY normal dikhega, click karne par iframe load hoga)
-//
-// NOTE: yeh flag manually set karni hogi — kisi bhi cross-origin game ke andar
-// JS se yeh automatically detect nahi ho sakta (security restriction hai).
-// Jab bhi koi naya game test karo aur usme andar dusra "Play" button dikhe,
-// to uski hasOwnPlay: true kar do.
-
 window.GAME_URLS = {
     
   "2048": { url: "https://www.rocketgames.io/embed/2048", hasOwnPlay: false },
